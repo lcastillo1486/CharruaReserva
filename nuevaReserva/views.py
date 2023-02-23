@@ -1,0 +1,145 @@
+from django.shortcuts import render, HttpResponse, redirect
+from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm
+from django.contrib import messages
+from .models import nuevaReserva, mesa
+from django.db import models
+from datetime import datetime
+from django.contrib.auth.decorators import login_required
+# Create your views here.
+
+@login_required
+def creaNuevaReserva(request):
+
+    form = nuevaReservaFoms()
+    context = {'form_reserva': form}
+
+    if request.method == 'POST':
+        form = nuevaReservaFoms(request.POST)
+        if form.is_valid():
+            a = form.save(commit=False)
+            a.estado_id = 1
+            a.save()
+            
+            return redirect('/reservasDelDia/')
+        else:
+            
+            return render(request, 'nuevaReserva.html', {'form_reserva': form})
+
+    return render(request, 'nuevaReserva.html', context)
+@login_required
+def listadoEnEspera(request):
+
+    fecha_actual = datetime.now().date()
+
+    cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
+    cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
+    cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
+
+    
+    fecha_actual = datetime.now().date()
+
+    enEspera = nuevaReserva.objects.filter(estado_id = 1).order_by('fechaReserva')
+    cuenta_enEspera = nuevaReserva.objects.filter(estado_id = 1).count()
+    return render(request, 'listadoEnEspera.html', {"listaEspera": enEspera, "totalEspera":cuenta_enEspera})
+@login_required
+def listadoDelDia(request):
+    
+    fecha_actual = datetime.now().date()
+
+    cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
+    cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
+    cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
+
+    deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).order_by('hora')
+    cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
+    return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
+    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow })
+@login_required
+def listadoEnProceso(request):
+    en_proceso = nuevaReserva.objects.filter(estado_id = 2)
+    cuenta_en_proceso = nuevaReserva.objects.filter(estado_id = 2).count()
+    return render(request, 'listadoEnProceso.html', {"listaEnProceso": en_proceso, "totalProceso":cuenta_en_proceso})
+@login_required
+def listadoCompletado(request):
+    completado = nuevaReserva.objects.filter(estado_id__gt= 1).order_by('-fechaReserva')
+    cuenta_completado = nuevaReserva.objects.filter(estado_id = 3).count()
+    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado})
+@login_required
+def editarReserva(request, id):
+
+    editCurso = nuevaReserva.objects.get(id = id)
+    form = editReservaFoms(instance=editCurso)
+
+    if editCurso.estado_id != 1:
+    
+         return HttpResponse('Esta orden ya ha sido procesada. No se puede modificar')
+
+    if request.method == 'POST':
+
+        form = editReservaFoms(request.POST,instance=editCurso)
+        if form.is_valid:
+            form.save()
+            return redirect('/reservasDelDia/') 
+
+    editCurso = nuevaReserva.objects.get(id = id)
+    form = editReservaFoms(instance=editCurso)
+
+    return render(request,'editarReserva.html',{"form":form})
+@login_required
+def cambioEstadoReserva(request, id):
+    
+    cambiaEstado = nuevaReserva.objects.get(id = id)
+    cambiaEstado.estado_id = 2
+    cambiaEstado.save()    
+    
+    return redirect('/reservasDelDia/')
+@login_required
+def cambiaEstadoAnulado(request, id):
+    cambiaEstadoAnulado = nuevaReserva.objects.get(id = id)
+    cambiaEstadoAnulado.estado_id = 3
+    cambiaEstadoAnulado.save()    
+    
+    return redirect('/reservasDelDia/')
+@login_required
+def cambiaEstadoNoShow(request, id):
+
+    cambiaEstadoShow = nuevaReserva.objects.get(id = id)
+    cambiaEstadoShow.estado_id = 4
+    cambiaEstadoShow.save()    
+    
+    return redirect('/reservasDelDia/')
+@login_required
+def cargaAsignarMesa(request, id):
+    form = asignaMesaForm()
+    reserva = nuevaReserva.objects.filter(id = id)
+    return render(request,'asignaMesa.html',{"listaReserva":reserva, 'form':form})
+
+
+
+def estadoActual(request):
+
+    fecha_actual = datetime.now().date()
+
+    cuenta_enEspera = nuevaReserva.objects.filter(fechaReserva = fecha_actual).count()
+    cuenta_en_proceso = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
+    cuenta_completado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
+    cuenta_cancelada = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
+
+    ratio_progreso = round((cuenta_en_proceso/cuenta_enEspera)*100,2)
+    ratio_completadas = round((cuenta_completado/cuenta_enEspera)*100,2)
+    ratio_faltante = round(((cuenta_en_proceso + cuenta_completado)/cuenta_enEspera)*100,2)
+
+    data = {'porcentajles': [ratio_progreso,ratio_completadas, ratio_faltante],'etiqueta':['progreso','completo','faltante']}
+
+
+    return render(request, 'estadoActual.html', {'cantidadEspera':cuenta_enEspera, 'cantidadProgreso':cuenta_en_proceso, 'cantidadCompletada':cuenta_completado,
+    'cantidadCancelada':cuenta_cancelada, 'ratioProgreso':ratio_progreso, 'ratioCompletado':ratio_completadas, 'ratioFaltante':ratio_faltante, 'data':data})
+
+
+
+
+
+
+
+    
+
