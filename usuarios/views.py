@@ -6,7 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-@login_required
+
 def registro(request):
 
     if request.method == 'GET':
