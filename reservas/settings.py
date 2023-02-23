@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'reservas.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://charruareservas_user:NFYTfvywlvSb2EVEeulyIaYRoq74TKjY@dpg-cfrd42hgp3jo1dpi6gj0-a.oregon-postgres.render.com/charruareservas',conn_max_age=600)
+    'default': dj_database_url.config(default='sqlite:////reservas/db.sqlite3')
         
     
 }
