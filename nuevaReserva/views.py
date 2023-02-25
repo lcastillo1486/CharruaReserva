@@ -50,7 +50,7 @@ def listadoDelDia(request):
     cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
 
-    deldia = nuevaReserva.objects.all().order_by('hora')
+    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual ).order_by('hora')
     cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
     'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow })
