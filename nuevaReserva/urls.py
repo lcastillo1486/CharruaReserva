@@ -13,4 +13,5 @@ urlpatterns = [
     path('cambiarEstadoAnulado/<int:id>', views.cambiaEstadoAnulado),
     path('cambiarEstadoShow/<int:id>', views.cambiaEstadoNoShow),
     path('estadoActual/', views.estadoActual),
+    path('guardarMesa/<int:id>', views.guardarMesa),
 ]
