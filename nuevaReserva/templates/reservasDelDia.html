@@ -91,7 +91,17 @@
 
                 <tbody>
                     {% for c in listaEspera %}
-                    <tr>
+                    {% if c.estado_id == 3 %}
+                        <tr style="background-color: red;">
+                    
+                    {% elif c.estado_id == 2 %}
+                        <tr style="background-color: green;">
+
+                    {% elif c.estado_id == 4 %}
+                        <tr style="background-color: yellow;">
+                    {% else %}
+                        <tr>
+                    {% endif %}
                         <td>
 
                         </td>
@@ -135,8 +145,8 @@
                         <!-- programar cambio de estado -->
                         <td><a href='/editarReserva/{{c.id}}' class="btn btn-light">Editar Reserva</a></td>
                         <td><a href='/cambiarEstadoReserva/{{c.id}}' class="btn btn-success">Atendido</a></td>
-                        <td><a href='/cambiarEstadoAnulado/{{c.id}}' class="btn btn-warning">Anulado</a></td>
-                        <td><a href='/cambiarEstadoShow/{{c.id}}' class="btn btn-danger">No show</a></td>
+                        <td><a href='/cambiarEstadoAnulado/{{c.id}}' class="btn btn-danger">Anulado</a></td>
+                        <td><a href='/cambiarEstadoShow/{{c.id}}' class="btn btn-warning">No show</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
