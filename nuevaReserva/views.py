@@ -38,7 +38,7 @@ def listadoEnEspera(request):
     
     fecha_actual = datetime.now().date()
 
-    enEspera = nuevaReserva.objects.filter(estado_id = 1).order_by('fechaReserva')
+    enEspera = nuevaReserva.objects.all()
     cuenta_enEspera = nuevaReserva.objects.filter(estado_id = 1).count()
     return render(request, 'listadoEnEspera.html', {"listaEspera": enEspera, "totalEspera":cuenta_enEspera})
 @login_required

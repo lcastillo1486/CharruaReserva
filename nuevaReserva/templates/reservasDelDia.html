@@ -29,6 +29,10 @@
         color: black;
         background-color: white;
     }
+
+    .fila-destacada{
+        background-color: yellow;
+    }
 </style>
 
 <body>
@@ -90,7 +94,7 @@
 
                 <tbody>
                     {% for c in listaEspera %}
-                    <tr>
+                    <tr {% if {{c.estado}} = 'Anulado'  %} class="fila-destacada" {% endif %}>
                         <td>
 
                         </td>
