@@ -41,15 +41,9 @@
             Total de reservas del día: {{totalDia}}
         </div>
         <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
-            <b>
-                <font color="green">Total Reservas Atendidas: {{totalAtendido}}<br></font>
-            </b>
-            <b>
-                <font color="yellow">Total Reservas anuladas: {{totalAnulado}}<br></font>
-            </b>
-            <b>
-                <font color="red">Total Reservas No Show: {{totalNoshow}}</font>
-            </b>
+            <b><font color ="green">Total Reservas Atendidas: {{totalAtendido}}<br></font></b>
+            <b><font color ="yellow">Total Reservas anuladas: {{totalAnulado}}<br></font></b>
+            <b><font color ="red">Total Reservas No Show: {{totalNoshow}}</font></b>
 
         </div>
 
@@ -72,13 +66,7 @@
                             Cantidad de Personas:
                         </th>
                         <th>
-                            Observaciones:
-                        </th>
-                        <th>
-                            Asignar Mesa:
-                        </th>
-                        <th>
-                            Mesa:
+                            Mesa y Observaciones:
                         </th>
                         <th colspan="1"></th>
                         <th colspan="1"></th>
@@ -110,24 +98,6 @@
                         <td>
                             <h4>
                                 <FONT COLOR="white">{{c.observaciones}}
-                            </h4>
-                        </td>
-                        </FONT>
-                        <td>
-                            
-                            <form action='/guardarMesa/{{c.id}}' method="POST" >
-                                {% csrf_token %}
-                                <input type="text" id="mesa" name="mesa" size="7" />
-                                <button>
-                                    GUARDAR
-                                </button>
-                            </form>             
-                            
-                        </td>
-                        
-                        <td>
-                            <h4>
-                                <FONT COLOR="white">{{c.mesa}}
                             </h4>
                         </td>
                         </FONT>

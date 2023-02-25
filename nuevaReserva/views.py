@@ -135,16 +135,6 @@ def estadoActual(request):
     return render(request, 'estadoActual.html', {'cantidadEspera':cuenta_enEspera, 'cantidadProgreso':cuenta_en_proceso, 'cantidadCompletada':cuenta_completado,
     'cantidadCancelada':cuenta_cancelada, 'ratioProgreso':ratio_progreso, 'ratioCompletado':ratio_completadas, 'ratioFaltante':ratio_faltante, 'data':data})
 
-def guardarMesa(request, id):
-    
-    if request.method == 'POST':
-        mesa = request.POST.get('mesa')
-        cambiaMesa = nuevaReserva.objects.get(id = id)
-        cambiaMesa.mesa = mesa
-        cambiaMesa.save()
-
-        return redirect('delDia') 
-
 
 
 
