@@ -70,9 +70,9 @@ def editarReserva(request, id):
     editCurso = nuevaReserva.objects.get(id = id)
     form = editReservaFoms(instance=editCurso)
 
-    if editCurso.estado_id != 1:
+    # if editCurso.estado_id != 1:
     
-         return HttpResponse('Esta reserva ya ha sido procesada. No se puede modificar')
+    #      return HttpResponse('Esta reserva ya ha sido procesada. No se puede modificar')
 
     if request.method == 'POST':
 
