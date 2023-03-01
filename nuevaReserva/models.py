@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from 
 
 # Create your models here.
 
@@ -20,6 +21,7 @@ class nuevaReserva(models.Model):
     observaciones = models.TextField (blank = True)    
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
     mesa = models.CharField(max_length=10, blank=True, null=True)
+    ids = models.AutoField()
     
 class estadoMesa(models.Model):
     estado = models.CharField(max_length=15)
