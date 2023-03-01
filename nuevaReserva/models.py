@@ -21,7 +21,7 @@ class nuevaReserva(models.Model):
     observaciones = models.TextField (blank = True)    
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
     mesa = models.CharField(max_length=10, blank=True, null=True)
-    ids = models.AutoField()
+    ids = models.AutoField(primary_key=True)
     
 class estadoMesa(models.Model):
     estado = models.CharField(max_length=15)
