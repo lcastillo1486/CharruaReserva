@@ -143,7 +143,36 @@ def guardarMesa(request, id):
         cambiaMesa.mesa = mesa
         cambiaMesa.save()
 
-        return redirect('delDia') 
+        return redirect('delDia')
+
+def muentraCena(request):
+
+    fecha_actual = datetime.now().date()
+
+    cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
+    cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
+    cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
+
+    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '17:30' ).order_by('hora')
+
+    cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
+    return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
+    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow })
+
+def muentraTarde(request):
+
+    fecha_actual = datetime.now().date()
+
+    cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
+    cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
+    cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
+
+    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '17:30' ).order_by('hora')
+
+    cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
+    return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
+    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow })
+ 
 
 
 

@@ -14,4 +14,6 @@ urlpatterns = [
     path('cambiarEstadoShow/<int:id>', views.cambiaEstadoNoShow),
     path('estadoActual/', views.estadoActual),
     path('guardarMesa/<int:id>', views.guardarMesa),
+    path('muestraCena/', views.muentraCena),
+    path('muestraTarde/', views.muentraTarde),
 ]
