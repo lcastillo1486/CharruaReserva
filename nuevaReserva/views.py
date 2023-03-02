@@ -5,6 +5,7 @@ from .models import nuevaReserva, mesa
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 # Create your views here.
 
 @login_required
