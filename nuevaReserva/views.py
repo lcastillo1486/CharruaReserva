@@ -158,9 +158,12 @@ def muentraCena(request):
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '17:30' ).order_by('hora')
 
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, estado_id = 2).aggregate(Sum('cantidadPersonas'))
+    totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
+
     cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
-    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow })
+    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas })
 
 def muentraTarde(request):
 
@@ -171,10 +174,12 @@ def muentraTarde(request):
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '17:30' ).order_by('hora')
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, estado_id = 2).aggregate(Sum('cantidadPersonas'))
+    totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
 
     cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
-    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow })
+    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas })
  
 
 
