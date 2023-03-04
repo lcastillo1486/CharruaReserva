@@ -65,7 +65,7 @@ def listadoEnProceso(request):
 @login_required
 def listadoCompletado(request):
     completado = nuevaReserva.objects.filter(estado_id__gt= 1).order_by('-fechaReserva')
-    cuenta_completado = nuevaReserva.objects.filter(estado_id = 3).count()
+    cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
     return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado})
 @login_required
 def editarReserva(request, id):
