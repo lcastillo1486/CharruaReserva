@@ -180,6 +180,40 @@ def muentraTarde(request):
     cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
     'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas })
+
+def exportaExcel(request):
+
+    fecha_actual = datetime.now().date()
+    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual ).order_by('hora')
+    
+    #crea nuevo libro
+    wb = openpyxl.Workbook()
+
+    hoja = wb.active
+
+    hoja['A1'] = 'Hora'
+    hoja['B1'] = 'Cliente'
+    hoja['C1'] = 'Cantidad Personas'
+    hoja['D1'] = 'Observaciones'
+    hoja['E1'] = 'Fecha'
+
+    row = 2
+
+    for i in deldia:
+        hoja.cell(row, 1, i.hora)
+        hoja.cell(row, 2, i.nombre)
+        hoja.cell(row, 3, i.cantidadPersonas)
+        hoja.cell(row, 4, i.observaciones)
+        hoja.cell(row, 5, fecha_actual)
+        row += 1
+    
+    response = HttpResponse(content_type = 'application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="reservasdia.xlsx"'
+
+    wb.save(response)
+
+    return response
+
  
 
 

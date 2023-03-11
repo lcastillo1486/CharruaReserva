@@ -16,4 +16,5 @@ urlpatterns = [
     path('guardarMesa/<int:id>', views.guardarMesa),
     path('muestraCena/', views.muentraCena),
     path('muestraTarde/', views.muentraTarde),
+    path('exportarExcel/', views.exportaExcel),
 ]
