@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import estadoReserva, nuevaReserva, estadoMesa, mesa
+from .models import estadoReserva, nuevaReserva
 
 # Register your models here.
 

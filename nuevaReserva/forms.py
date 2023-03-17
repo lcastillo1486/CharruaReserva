@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import nuevaReserva, mesa
+from .models import nuevaReserva
 from django import forms
 from django.forms import widgets
 
