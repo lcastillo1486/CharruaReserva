@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import nuevaReserva, mesaNo
+from .models import nuevaReserva, mesaNoo
 from django import forms
 from django.forms import widgets
 
@@ -38,5 +38,5 @@ class editReservaFoms(ModelForm):
 class asignaMesaForm(forms.ModelForm):
 
     class Meta:
-        model = mesaNo
+        model = mesaNoo
         fields = ['numero']

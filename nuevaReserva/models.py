@@ -19,8 +19,8 @@ class nuevaReserva(models.Model):
     telefono = models.CharField(validators=[telefono_regex],max_length=20, blank=True, null=True)
     observaciones = models.TextField (blank = True)    
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
-    mesa_asignada = models.CharField(max_length=10, blank=True, null=True)
-    correo = models.EmailField(max_length=254, null=True, blank= True)
+    mesa_asignadaa = models.CharField(max_length=10, blank=True, null=True)
+    # correo = models.EmailField(max_length=254, null=True, blank= True)
     
 
 class estadoMesa(models.Model):
@@ -29,7 +29,7 @@ class estadoMesa(models.Model):
     def __str__(self):
         return self.estado
 
-class mesaNo(models.Model):
+class mesaNoo(models.Model):
     numero = models.CharField(max_length=10)
     estado = models.ForeignKey(estadoMesa, on_delete=models.DO_NOTHING)
 
