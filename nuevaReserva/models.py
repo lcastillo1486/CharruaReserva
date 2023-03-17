@@ -23,6 +23,18 @@ class nuevaReserva(models.Model):
     correo = models.EmailField(max_length=254, null=True, blank= True)
     
 
+class estadoMesa(models.Model):
+    estado = models.CharField(max_length=15)
+    
+    def __str__(self):
+        return self.estado
+
+class mesa(models.Model):
+    numero = models.CharField(max_length=10)
+    estado = models.ForeignKey(estadoMesa, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.numero
 
 
 
