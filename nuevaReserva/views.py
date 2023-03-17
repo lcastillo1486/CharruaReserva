@@ -142,7 +142,7 @@ def guardarMesa(request, id):
     if request.method == 'POST':
         mesa = request.POST.get('mesa')
         cambiaMesa = nuevaReserva.objects.get(id = id)
-        cambiaMesa.mesa = mesa
+        cambiaMesa.mesa_asignada = mesa
         cambiaMesa.save()
 
         return redirect('delDia')

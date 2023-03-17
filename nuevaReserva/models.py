@@ -19,7 +19,7 @@ class nuevaReserva(models.Model):
     telefono = models.CharField(validators=[telefono_regex],max_length=20, blank=True, null=True)
     observaciones = models.TextField (blank = True)    
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
-    mesa = models.CharField(max_length=10, blank=True, null=True)
+    mesa_asignada = models.CharField(max_length=10, blank=True, null=True)
     #correo = models.EmailField(max_length=254, null=True, blank= True)
     
 
