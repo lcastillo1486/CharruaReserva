@@ -20,7 +20,7 @@ class nuevaReserva(models.Model):
     observaciones = models.TextField (blank = True)    
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
     mesa = models.CharField(max_length=10, blank=True, null=True)
-    correo = models.EmailField(max_length=254, null=True, blank= True)
+    #correo = models.EmailField(max_length=254, null=True, blank= True)
     
 
 class estadoMesa(models.Model):
