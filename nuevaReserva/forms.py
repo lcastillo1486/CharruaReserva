@@ -40,3 +40,6 @@ class asignaMesaForm(forms.ModelForm):
     class Meta:
         model = mesaNoo
         fields = ['numero']
+
+class formBuscarFechaHistori(forms.Form):
+    fechaBuscar = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='Fecha:')

@@ -21,12 +21,42 @@
         color: black;
         background-color: white;
     }
+    input {
+        background: #e4dc6e;
+        padding: 10px;
+        padding-left: 20px;
+        height: 50px;
+        font-size: 14px;
+        border-radius: 10px;
+        box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    }
 </style>
 
 <body>
-    <div style="text-align: center;">
-        <h1><b>Histórico de Reservas</b></h1>
-        Total de reserva completadas: {{totalCompletado}}
+    <div class="row">
+        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+            
+            <form action='/buscarFecha/' method="POST">
+                {% csrf_token %}
+                {{formBusca}}
+                <button type="submit" class="btn btn-warning">Buscar</button>
+
+
+            </form>
+
+
+        </div>
+
+        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+            <h1><b>Histórico de Reservas</b></h1>
+            Total de reserva completadas: {{totalCompletado}}
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+
+            
+        </div>
+
     </div>
     <div class="row">
         <div class="table-responsive py-2">
@@ -97,6 +127,9 @@
                             <FONT COLOR="white">{{c.estado}}
                         </td>
                         </FONT>
+                        {% if c.estado_id == 1 %}
+                        <td><a href='/editarReserva/{{c.id}}' class="btn btn-light">Editar Reserva</a></td>
+                        {% endif %}
                         
                     </tr>
                     {% endfor %}

@@ -17,4 +17,5 @@ urlpatterns = [
     path('muestraCena/', views.muentraCena),
     path('muestraTarde/', views.muentraTarde),
     path('exportarExcel/', views.exportaExcel),
+    path('buscarFecha/', views.buscaHistoricoFecha),
 ]

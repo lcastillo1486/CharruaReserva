@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm
+from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscarFechaHistori
 from django.contrib import messages
 from .models import nuevaReserva, mesaNoo, estadoMesa
 from django.db import models
@@ -65,7 +65,7 @@ def listadoEnProceso(request):
     return render(request, 'listadoEnProceso.html', {"listaEnProceso": en_proceso, "totalProceso":cuenta_en_proceso})
 @login_required
 def listadoCompletado(request):
-    completado = nuevaReserva.objects.filter(estado_id__gt= 1).order_by('-fechaReserva')
+    completado = nuevaReserva.objects.all().order_by('-fechaReserva')
     cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
     return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado})
 @login_required
@@ -212,6 +212,19 @@ def exportaExcel(request):
     wb.save(response)
 
     return response
+
+def buscaHistoricoFecha(request):
+
+    formBuscar = formBuscarFechaHistori(request.POST)
+    
+    if request.method == 'POST':
+        if formBuscar.is_valid():
+            b = formBuscar.cleaned_data['fechaBuscar']
+            completado = nuevaReserva.objects.filter(fechaReserva = b).order_by('-fechaReserva')
+            cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
+            return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado, "formBusca":formBuscar})
+
+
 
  
 
