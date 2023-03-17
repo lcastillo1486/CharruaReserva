@@ -16,7 +16,7 @@ class nuevaReserva(models.Model):
     fechaReserva = models.DateField()
     hora = models.TimeField()
     cantidadPersonas = models.PositiveIntegerField()
-    telefono = models.CharField(validators=[telefono_regex],max_length=20, blank=True, null=True)
+    telefono = models.CharField(max_length=20, blank=True, null=True)
     observaciones = models.TextField (blank = True)    
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
     mesa_asignadaa = models.CharField(max_length=10, blank=True, null=True)
