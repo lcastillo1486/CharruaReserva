@@ -65,9 +65,10 @@ def listadoEnProceso(request):
     return render(request, 'listadoEnProceso.html', {"listaEnProceso": en_proceso, "totalProceso":cuenta_en_proceso})
 @login_required
 def listadoCompletado(request):
+    formBuscar = formBuscarFechaHistori()
     completado = nuevaReserva.objects.all().order_by('-fechaReserva')
     cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
-    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado})
+    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado, "formBusca":formBuscar})
 @login_required
 def editarReserva(request, id):
 
