@@ -112,9 +112,6 @@ def cambiaEstadoNoShow(request, id):
     cambiaEstadoShow.save()    
     
     return redirect('/reservasDelDia/')
-@login_required
-
-
 
 def estadoActual(request):
 
