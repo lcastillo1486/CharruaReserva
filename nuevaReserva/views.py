@@ -113,10 +113,6 @@ def cambiaEstadoNoShow(request, id):
     
     return redirect('/reservasDelDia/')
 @login_required
-def cargaAsignarMesa(request, id):
-    form = asignaMesaForm()
-    reserva = nuevaReserva.objects.filter(id = id)
-    return render(request,'asignaMesa.html',{"listaReserva":reserva, 'form':form})
 
 
 
