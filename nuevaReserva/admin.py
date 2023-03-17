@@ -6,5 +6,5 @@ from .models import estadoReserva, nuevaReserva, estadoMesa, mesa
 
 admin.site.register(estadoReserva)
 admin.site.register(nuevaReserva)
-admin.site.register(estadoMesa)
-admin.site.register(mesa)
+# admin.site.register(estadoMesa)
+# admin.site.register(mesa)

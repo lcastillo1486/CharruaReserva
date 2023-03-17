@@ -37,8 +37,8 @@ class editReservaFoms(ModelForm):
             
         }
         
-class asignaMesaForm(forms.ModelForm):
+# class asignaMesaForm(forms.ModelForm):
 
-    class Meta:
-        model = mesa
-        fields = ['numero']
+#     class Meta:
+#         model = mesa
+#         fields = ['numero']
