@@ -20,7 +20,7 @@ class nuevaReserva(models.Model):
     observaciones = models.TextField (blank = True)    
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
     mesa_asignadaa = models.CharField(max_length=10, blank=True, null=True)
-    emailr = models.EmailField(max_length=254, null=True, blank= True)
+    #emailr = models.EmailField(max_length=254, null=True, blank= True)
     
 
 class estadoMesa(models.Model):
@@ -29,19 +29,19 @@ class estadoMesa(models.Model):
     def __str__(self):
         return self.estado
 
-class mesaNoo(models.Model):
-    numero = models.CharField(max_length=10)
-    estado = models.ForeignKey(estadoMesa, on_delete=models.DO_NOTHING)
+# class mesaNoo(models.Model):
+#     numero = models.CharField(max_length=10)
+#     estado = models.ForeignKey(estadoMesa, on_delete=models.DO_NOTHING)
 
-    def __str__(self):
-        return self.numero
+#     def __str__(self):
+#         return self.numero
 
-class mesa(models.Model):
-    numero = models.CharField(max_length=10)
-    estado = models.ForeignKey(estadoMesa, on_delete=models.DO_NOTHING)
+# class mesa(models.Model):
+#     numero = models.CharField(max_length=10)
+#     estado = models.ForeignKey(estadoMesa, on_delete=models.DO_NOTHING)
 
-    def __str__(self):
-        return self.numero
+#     def __str__(self):
+#         return self.numero
 
 
 
