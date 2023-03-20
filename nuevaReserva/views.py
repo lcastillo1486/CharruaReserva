@@ -230,9 +230,9 @@ def exportaExcelHistorico(request):
     completado = nuevaReserva.objects.all().order_by('-fechaReserva')
     
     #crea nuevo libro
-    wb = openpyxl.Workbook()
+    wb1 = openpyxl.Workbook()
 
-    hoja = wb.active
+    hoja = wb1.active
 
     hoja['A1'] = 'Cliente'
     hoja['B1'] = 'Teléfono'
@@ -248,7 +248,7 @@ def exportaExcelHistorico(request):
     for i in completado:
         hoja.cell(row, 1, i.nombre)
         hoja.cell(row, 2, i.telefono)
-        hoja.cell(row, 3, i.mailr)
+        hoja.cell(row, 3, i.emailr)
         hoja.cell(row, 4, i.fechaReserva)
         hoja.cell(row, 5, i.hora)
         hoja.cell(row, 6, i.cantidadPersonas)
@@ -257,9 +257,9 @@ def exportaExcelHistorico(request):
         row += 1
     
     response = HttpResponse(content_type = 'application/vnd.ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="Historico_Reservas.xlsx"'
+    response['Content-Disposition'] = 'attachment; filename="HistoricoReservas.xlsx"'
 
-    wb.save(response)
+    wb1.save(response)
 
     return response
 
