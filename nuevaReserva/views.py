@@ -225,6 +225,44 @@ def buscaHistoricoFecha(request):
             cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
             return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado, "formBusca":formBuscar})
 
+def exportaExcelHistorico(request):
+
+    completado = nuevaReserva.objects.all().order_by('-fechaReserva')
+    
+    #crea nuevo libro
+    wb = openpyxl.Workbook()
+
+    hoja = wb.active
+
+    hoja['A1'] = 'Cliente'
+    hoja['B1'] = 'Teléfono'
+    hoja['C1'] = 'Correo'
+    hoja['D1'] = 'Fecha de Reserva'
+    hoja['E1'] = 'Hora'
+    hoja['F1'] = 'Cantidad de Personas'
+    hoja['G1'] = 'Observaciones'
+    hoja['H1'] = 'Estado'
+
+    row = 2
+
+    for i in completado:
+        hoja.cell(row, 1, i.nombre)
+        hoja.cell(row, 2, i.telefono)
+        hoja.cell(row, 3, i.mailr)
+        hoja.cell(row, 4, i.fechaReserva)
+        hoja.cell(row, 5, i.hora)
+        hoja.cell(row, 6, i.cantidadPersonas)
+        hoja.cell(row, 7, i.observaciones)
+        hoja.cell(row, 8, i.estado)
+        row += 1
+    
+    response = HttpResponse(content_type = 'application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="Historico_Reservas.xlsx"'
+
+    wb.save(response)
+
+    return response
+
 
 
  

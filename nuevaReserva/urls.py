@@ -18,4 +18,5 @@ urlpatterns = [
     path('muestraTarde/', views.muentraTarde),
     path('exportarExcel/', views.exportaExcel),
     path('buscarFecha/', views.buscaHistoricoFecha),
+    path('exportarExcelHist/', views.exportaExcelHistorico),
 ]
