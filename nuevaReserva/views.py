@@ -253,7 +253,7 @@ def exportaExcelHistorico(request):
         hoja.cell(row, 5, i.hora)
         hoja.cell(row, 6, i.cantidadPersonas)
         hoja.cell(row, 7, i.observaciones)
-        hoja.cell(row, 8, i.estado)
+        hoja.cell(row, 8, str(i.estado))
         row += 1
     
     response = HttpResponse(content_type = 'application/vnd.ms-excel')
