@@ -22,10 +22,10 @@ class Migration(migrations.Migration):
             name='nombre',
             field=models.CharField(max_length=50),
         ),
-        migrations.AlterField(
+         migrations.AlterField(
             model_name='nuevareserva',
             name='telefono',
-            field=models.CharField(blank=True, max_length=20, null=True, validators=[django.core.validators.RegexValidator(message='Formato incorrecto', regex='^\\+?1?\\d{9,15}$')]),
+            field=models.CharField(blank=True, max_length=20, null=True),
         ),
         migrations.CreateModel(
             name='mesaNoo',
