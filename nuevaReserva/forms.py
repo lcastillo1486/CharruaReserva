@@ -61,6 +61,6 @@ class formIncidencia(ModelForm):
         labels = {
             'fecha_incidencia':'Fecha de incidencia:',
             'mesa_incidencia':'Mesa de incidencia:',
-            'mozo_incidencia':'Mozo de incidencia',
+            'mozo_incidencia':'Mozo de incidencia:',
             'detalle_incidencia':'Detalle de incidencia:'
         }
