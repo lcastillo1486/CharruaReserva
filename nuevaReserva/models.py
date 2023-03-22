@@ -43,6 +43,11 @@ class mesa(models.Model):
     def __str__(self):
         return self.numero
 
-
+class incidencia(models.Model):
+    fecha_incidencia = models.DateField()
+    mesa_incidencia = models.CharField(max_length=10, blank=True, null=True)
+    mozo_incidencia = models.CharField(max_length=50, blank=True, null=True)
+    detalle_incidencia = models.TextField (blank = False, null= False)
+    fecha_registro = models.DateField(auto_now_add=True)
 
     
