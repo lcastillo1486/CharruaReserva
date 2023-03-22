@@ -118,7 +118,7 @@ def cargaAsignarMesa(request, id):
     form = asignaMesaForm()
     reserva = nuevaReserva.objects.filter(id = id)
     return render(request,'asignaMesa.html',{"listaReserva":reserva, 'form':form})
-
+@login_required
 def estadoActual(request):
 
     fecha_actual = datetime.now().date()
@@ -137,7 +137,7 @@ def estadoActual(request):
 
     return render(request, 'estadoActual.html', {'cantidadEspera':cuenta_enEspera, 'cantidadProgreso':cuenta_en_proceso, 'cantidadCompletada':cuenta_completado,
     'cantidadCancelada':cuenta_cancelada, 'ratioProgreso':ratio_progreso, 'ratioCompletado':ratio_completadas, 'ratioFaltante':ratio_faltante, 'data':data})
-
+@login_required
 def guardarMesa(request, id):
     
     if request.method == 'POST':
@@ -147,7 +147,7 @@ def guardarMesa(request, id):
         cambiaMesa.save()
 
         return redirect('delDia')
-
+@login_required
 def muentraCena(request):
 
     fecha_actual = datetime.now().date()
@@ -164,7 +164,7 @@ def muentraCena(request):
     cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
     'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas })
-
+@login_required
 def muentraTarde(request):
 
     fecha_actual = datetime.now().date()
@@ -180,7 +180,7 @@ def muentraTarde(request):
     cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
     'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas })
-
+@login_required
 def exportaExcel(request):
 
     fecha_actual = datetime.now().date()
@@ -213,7 +213,7 @@ def exportaExcel(request):
     wb.save(response)
 
     return response
-
+@login_required
 def buscaHistoricoFecha(request):
 
     formBuscar = formBuscarFechaHistori(request.POST)
@@ -224,7 +224,7 @@ def buscaHistoricoFecha(request):
             completado = nuevaReserva.objects.filter(fechaReserva = b).order_by('-fechaReserva')
             cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
             return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado, "formBusca":formBuscar})
-
+@login_required
 def exportaExcelHistorico(request):
 
     completado = nuevaReserva.objects.all().order_by('-fechaReserva')
@@ -262,7 +262,7 @@ def exportaExcelHistorico(request):
     wb1.save(response)
 
     return response
-
+@login_required
 def agregarIncidencia(request):
 
     bi = incidencia.objects.all().order_by('-fecha_incidencia')
@@ -279,7 +279,7 @@ def agregarIncidencia(request):
             return render(request, 'incidencia.html', {'form_inciden':form, 'formBuscarInciden':form_buscar, 'listadoInciden':bi})
     
     return render(request, 'incidencia.html', {'form_inciden':form, 'formBuscarInciden':form_buscar, 'listadoInciden':bi})
-
+@login_required
 def buscarIncidencias(request):
 
     form = formIncidencia()
