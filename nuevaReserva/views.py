@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscarFechaHistori
+from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscarFechaHistori, formIncidencia, formBuscarIncidencia
 from django.contrib import messages
-from .models import nuevaReserva, mesaNoo, estadoMesa
+from .models import nuevaReserva, mesaNoo, estadoMesa, incidencia
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
@@ -262,6 +262,37 @@ def exportaExcelHistorico(request):
     wb1.save(response)
 
     return response
+
+def agregarIncidencia(request):
+
+    bi = incidencia.objects.all().order_by('-fecha_incidencia')
+    form = formIncidencia()
+    form_buscar = formBuscarIncidencia()
+
+    if request.method == 'POST':
+        form = formIncidencia(request.POST)
+        if form.is_valid():
+            form.save() 
+            return redirect('/libroIncidencias/')
+        else:
+            
+            return render(request, 'incidencia.html', {'form_inciden':form, 'formBuscarInciden':form_buscar, 'listadoInciden':bi})
+    
+    return render(request, 'incidencia.html', {'form_inciden':form, 'formBuscarInciden':form_buscar, 'listadoInciden':bi})
+
+def buscarIncidencias(request):
+
+    form = formIncidencia()
+    form_buscar = formBuscarIncidencia()
+
+    form_buscar = formBuscarIncidencia(request.POST)
+    if request.method == 'POST':
+        if form_buscar.is_valid():
+            b = form_buscar.cleaned_data['fechaBIncidencia']
+            bi = incidencia.objects.filter(fecha_incidencia = b).order_by('-fecha_incidencia')
+            return render(request, 'incidencia.html', {'form_inciden':form, 'formBuscarInciden':form_buscar, 'listadoInciden':bi})
+    else:
+        return redirect('/libroIncidencias/')
 
 
 
