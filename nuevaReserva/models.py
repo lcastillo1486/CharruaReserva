@@ -50,4 +50,51 @@ class incidencia(models.Model):
     detalle_incidencia = models.TextField (blank = False, null= False)
     fecha_registro = models.DateField(auto_now_add=True)
 
+class mozosPlaza(models.Model):
+    nombre_mozo = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nombre_mozo
+
+class anfitriona(models.Model):
+    nombre_anfitriona = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nombre_anfitriona
+    
+
+class plazaAlmuerzo(models.Model):
+    fecha_dia = models.DateField(auto_now_add=True)
+    mozo_nombre = models.CharField(max_length=50, null= True, blank= True )
+    m1 = models.CharField(max_length=20, null= True, blank= True)
+    r1 = models.CharField(max_length=20, null= True, blank= True)
+    m2 = models.CharField(max_length=20, null= True, blank= True)
+    r2 = models.CharField(max_length=20, null= True, blank= True)
+    m3 = models.CharField(max_length=20, null= True, blank= True)
+    r3 = models.CharField(max_length=20, null= True, blank= True)
+    m4 = models.CharField(max_length=20, null= True, blank= True)
+    r4 = models.CharField(max_length=20, null= True, blank= True)
+    m5 = models.CharField(max_length=20, null= True, blank= True)
+    r5 = models.CharField(max_length=20, null= True, blank= True)
+    total = models.CharField(max_length=20, null= True, blank= True)
+    plaza = models.CharField(max_length=20, null= True, blank= True)
+    nombre_anfitriona = models.CharField(max_length=50, null= True, blank= True)
+
+class plazaCena(models.Model):
+    fecha_dia = models.DateField(auto_now_add=True)
+    mozo_nombre = models.CharField(max_length=50, null= True, blank= True )
+    m1 = models.CharField(max_length=20, null= True, blank= True)
+    r1 = models.CharField(max_length=20, null= True, blank= True)
+    m2 = models.CharField(max_length=20, null= True, blank= True)
+    r2 = models.CharField(max_length=20, null= True, blank= True)
+    m3 = models.CharField(max_length=20, null= True, blank= True)
+    r3 = models.CharField(max_length=20, null= True, blank= True)
+    m4 = models.CharField(max_length=20, null= True, blank= True)
+    r4 = models.CharField(max_length=20, null= True, blank= True)
+    m5 = models.CharField(max_length=20, null= True, blank= True)
+    r5 = models.CharField(max_length=20, null= True, blank= True)
+    total = models.CharField(max_length=20, null= True, blank= True)
+    plaza = models.CharField(max_length=20, null= True, blank= True)
+    nombre_anfitriona = models.CharField(max_length=50, null= True, blank= True)
+
     
