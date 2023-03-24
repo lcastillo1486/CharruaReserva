@@ -49,6 +49,10 @@ class formBuscarFechaHistori(forms.Form):
 class formBuscarIncidencia(forms.Form):
     fechaBIncidencia = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='')
 
+class formBuscarPLaza(forms.Form):
+    fechaPlaza = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='')
+
+
 class formIncidencia(ModelForm):
 
     class Meta:
@@ -64,3 +68,4 @@ class formIncidencia(ModelForm):
             'mozo_incidencia':'Mozo de incidencia:',
             'detalle_incidencia':'Detalle de incidencia:'
         }
+

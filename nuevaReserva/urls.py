@@ -21,4 +21,9 @@ urlpatterns = [
     path('exportarExcelHist/', views.exportaExcelHistorico),
     path('libroIncidencias/', views.agregarIncidencia),
     path('buscaIncidencias/', views.buscarIncidencias),
+     path('verPlaza/', views.verPlaza),
+    path('guardarPlazaAlmuerzo/', views.guardaPlazaAlm),
+    path('guardarPlazaCena/', views.guardaPlazaCena),
+    path('historicoPlazas/', views.guardaPlazaCena),
+
 ]
