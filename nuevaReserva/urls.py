@@ -24,6 +24,6 @@ urlpatterns = [
      path('verPlaza/', views.verPlaza),
     path('guardarPlazaAlmuerzo/', views.guardaPlazaAlm),
     path('guardarPlazaCena/', views.guardaPlazaCena),
-    path('historicoPlazas/', views.guardaPlazaCena),
+    path('historicoPlazas/', views.verHistoricoPlaza),
 
 ]

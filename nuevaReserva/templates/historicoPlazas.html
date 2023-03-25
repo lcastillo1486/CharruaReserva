@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+
+<style>
+    body {
+        background: #27130c;
+        color: white;
+    }
+
+    thead {
+        color: black;
+        background-color: white;
+    }
+
+    td {
+        border-right: 1px solid white;
+    }
+    input {
+        background: #e4dc6e;
+        padding: 10px;
+        padding-left: 20px;
+        height: 50px;
+        font-size: 14px;
+        border-radius: 10px;
+        box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    }
+</style>
+
+<body>
+
+    <div class="row">
+        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+
+            <form action='/historicoPlazas/' method="POST">
+                {% csrf_token %}
+                {{form_buscar}}
+                <button type="submit" class="btn btn-warning">Buscar</button>
+
+
+            </form>
+
+        </div>
+        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+
+            <h1><b>Historico de Plazas</b></h1>
+
+        </div>
+        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+
+
+
+        </div>
+    </div>
+<br><br>
+    <div class="row">
+        <h3><b>Turno: Almuerzo</b></h3>
+        <div class="table-responsive py-2">
+            
+                <table class="table table-striped">
+                    <thead align="center">
+                        <tr>
+                            <th>
+                                Mozo
+                            </th>
+                            <th>
+                                M1
+                            </th>
+                            <th>
+                                R1
+                            </th>
+                            <th>
+                                M2
+                            </th>
+                            <th>
+                                R2
+                            </th>
+                            <th>
+                                M3
+                            </th>
+                            <th>
+                                R3
+                            </th>
+                            <th>
+                                M4
+                            </th>
+                            <th>
+                                R4
+                            </th>
+                            <th>
+                                M5
+                            </th>
+                            <th>
+                                R5
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                            <th>
+                                N° Plaza
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            {% for c in listadoplaza %}
+                            <td align="center">
+                                <font color ="white">{{c.mozo_nombre}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.m1|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.r1|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.m2|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.r2|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.m3|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.r3|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.m4|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.r4|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.m5|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.r5|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.total|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{c.plaza|default:0}}</font>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h3>Anfitriona : {{anfi_dia}}</h3>
+                <div style="background-color: yellow; text-align: right; color: yellow; margin-right: 0px;">.</div><br><br>
+                <div class="row">
+                    <h3><b>Turno: Cena</b></h3>
+                    <div class="table-responsive py-2">
+                        
+                            <table class="table table-striped">
+                                <thead align="center">
+                                    <tr>
+                                        <th>
+                                            Mozo
+                                        </th>
+                                        <th>
+                                            M1
+                                        </th>
+                                        <th>
+                                            R1
+                                        </th>
+                                        <th>
+                                            M2
+                                        </th>
+                                        <th>
+                                            R2
+                                        </th>
+                                        <th>
+                                            M3
+                                        </th>
+                                        <th>
+                                            R3
+                                        </th>
+                                        <th>
+                                            M4
+                                        </th>
+                                        <th>
+                                            R4
+                                        </th>
+                                        <th>
+                                            M5
+                                        </th>
+                                        <th>
+                                            R5
+                                        </th>
+                                        <th>
+                                            Total
+                                        </th>
+                                        <th>
+                                            N° Plaza
+                                        </th>
+            
+                                    </tr>
+                                </thead>
+                                <tbody>
+            
+                                    <tr>
+                                        {% for c in listadoplazacena %}
+                                        <td align="center">
+                                            <font color ="white">{{c.mozo_nombre}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.m1|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.r1|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.m2|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.r2|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.m3|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.r3|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.m4|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.r4|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.m5|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.r5|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.total|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{c.plaza|default:0}}</font>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                   
+                                </tbody>
+                            </table>
+                            <h3>Anfitriona : {{anfi_noche}}</h3>
+
+
+
+
+
+
+
+
+</body>
+{% endblock %}
+
+</html>
