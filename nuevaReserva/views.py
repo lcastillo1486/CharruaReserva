@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscarFechaHistori, formIncidencia, formBuscarIncidencia, formBuscarPLaza
 from django.contrib import messages
-from .models import nuevaReserva, mesaNoo, estadoMesa, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaAlmuerzo, anfitriona, plazaCena
+from .models import nuevaReserva, mesaNoo, estadoMesa, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
@@ -876,10 +876,16 @@ def verHistoricoPlaza(request):
             b = form_buscar.cleaned_data['fechaPlaza']
             bi = plazaAlmuerzo.objects.filter(fecha_dia = b)
             anfi_dia = plazaAlmuerzo.objects.filter(fecha_dia = b).first()
-            nombre_anfi_dia = anfi_dia.nombre_anfitriona
+            if not anfi_dia is None:
+                nombre_anfi_dia = anfi_dia.nombre_anfitriona
+            else: 
+                nombre_anfi_dia = ""
             ci = plazaCena.objects.filter(fecha_dia = b)
             anfi_noche = plazaCena.objects.filter(fecha_dia = b).first()
-            nombre_anfi_cena = anfi_noche.nombre_anfitriona
+            if not anfi_noche is None:
+                nombre_anfi_cena = anfi_noche.nombre_anfitriona
+            else:
+                nombre_anfi_cena = ""
 
             return render(request, 'historicoPlazas.html', {'form_buscar':form,'formBuscarInciden':form_buscar, 'listadoplaza':bi, 'listadoplazacena':ci,'anfi_dia':nombre_anfi_dia, 'anfi_noche': nombre_anfi_cena})
 
