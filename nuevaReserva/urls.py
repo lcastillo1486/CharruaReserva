@@ -21,10 +21,10 @@ urlpatterns = [
     path('exportarExcelHist/', views.exportaExcelHistorico),
     path('libroIncidencias/', views.agregarIncidencia),
     path('buscaIncidencias/', views.buscarIncidencias),
-    path('verPlaza/', views.verPlaza),
-    path('guardarPlazaAlmuerzo/', views.guardaPlazaAlm),
+    path('verPlaza/', views.verPlaza, name ='verPlaza'),
+    path('guardarPlazaAlmuerzo/', views.guardaPlazaAlm, name='guardaalmuerzo'),
     path('guardarPlazaCena/', views.guardaPlazaCena),
-    path('historicoPlazas/', views.verHistoricoPlaza),
+    path('historicoPlazas/', views.verHistoricoPlaza, name ='historicoP'),
     path('mesaManAlm/<str:nmesa>', views.controlMesaManAlm),
     path('mesaManCen/<str:nmesa>', views.controlMesaManCen),
 
