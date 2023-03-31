@@ -97,4 +97,22 @@ class plazaCena(models.Model):
     plaza = models.CharField(max_length=20, null= True, blank= True)
     nombre_anfitriona = models.CharField(max_length=50, null= True, blank= True)
 
+class plazaAlmuerzoMan(models.Model):
+    fecha_dia = models.DateField(auto_now_add=True)
+    n1 = models.CharField(max_length=20, null= True, blank= True)
+    n2 = models.CharField(max_length=20, null= True, blank= True)
+    n3 = models.CharField(max_length=20, null= True, blank= True)
+    n4 = models.CharField(max_length=20, null= True, blank= True)
+    n5 = models.CharField(max_length=20, null= True, blank= True)
+    plaza = models.CharField(max_length=20, null= True, blank= True)
+
+class plazaCenaMan(models.Model):
+    fecha_dia = models.DateField(auto_now_add=True)
+    n1 = models.CharField(max_length=20, null= True, blank= True)
+    n2 = models.CharField(max_length=20, null= True, blank= True)
+    n3 = models.CharField(max_length=20, null= True, blank= True)
+    n4 = models.CharField(max_length=20, null= True, blank= True)
+    n5 = models.CharField(max_length=20, null= True, blank= True)
+    plaza = models.CharField(max_length=20, null= True, blank= True)
+
     
