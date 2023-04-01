@@ -81,10 +81,16 @@
                                 R1
                             </th>
                             <th>
+                                N1
+                            </th>
+                            <th>
                                 M2
                             </th>
                             <th>
                                 R2
+                            </th>
+                            <th>
+                                N2
                             </th>
                             <th>
                                 M3
@@ -93,10 +99,16 @@
                                 R3
                             </th>
                             <th>
+                                N3
+                            </th>
+                            <th>
                                 M4
                             </th>
                             <th>
                                 R4
+                            </th>
+                            <th>
+                                N4
                             </th>
                             <th>
                                 M5
@@ -105,8 +117,15 @@
                                 R5
                             </th>
                             <th>
-                                Total
+                                N5
                             </th>
+                            <th>
+                                Total Rva.
+                            </th>
+                            <th>
+                                Total Sin  Rva.
+                            </th>
+                            
                             <th>
                                 N° Plaza
                             </th>
@@ -116,48 +135,68 @@
                     <tbody>
 
                         <tr>
-                            {% for c in listadoplaza %}
+                            {% for d, c  in data %}
+
                             <td align="center">
                                 <font color ="white">{{c.mozo_nombre}}</font>
                             </td>
                             <td align="center">
                                 <font color ="white">{{c.m1|default:0}}</font>
                             </td>
-                            <td align="center">
+                            <td align="center" style="background-color: rgb(124, 180, 182);">
                                 <font color ="white">{{c.r1|default:0}}</font>
+                            </td>
+                            <td align="center" style="color: white; background-color: #c0c0c0;">
+                                <font color ="white">{{d.n1|default:0}}</font>
                             </td>
                             <td align="center">
                                 <font color ="white">{{c.m2|default:0}}</font>
                             </td>
-                            <td align="center">
+                            <td align="center" style="background-color: rgb(124, 180, 182);">
                                 <font color ="white">{{c.r2|default:0}}</font>
+                            </td>
+                            <td align="center" style="color: white; background-color: #c0c0c0;">
+                                <font color ="white">{{d.n2|default:0}}</font>
                             </td>
                             <td align="center">
                                 <font color ="white">{{c.m3|default:0}}</font>
                             </td>
-                            <td align="center">
+                            <td align="center" style="background-color: rgb(124, 180, 182);">
                                 <font color ="white">{{c.r3|default:0}}</font>
+                            </td>
+                            <td align="center" style="color: white; background-color: #c0c0c0;">
+                                <font color ="white">{{d.n3|default:0}}</font>
                             </td>
                             <td align="center">
                                 <font color ="white">{{c.m4|default:0}}</font>
                             </td>
-                            <td align="center">
+                            <td align="center" style="background-color: rgb(124, 180, 182);">
                                 <font color ="white">{{c.r4|default:0}}</font>
+                            </td>
+                            <td align="center" style="color: white; background-color: #c0c0c0;">
+                                <font color ="white">{{d.n4|default:0}}</font>
                             </td>
                             <td align="center">
                                 <font color ="white">{{c.m5|default:0}}</font>
                             </td>
-                            <td align="center">
+                            <td align="center" style="background-color: rgb(124, 180, 182);">
                                 <font color ="white">{{c.r5|default:0}}</font>
+                            </td>
+                            <td align="center" style="color: white; background-color: #c0c0c0;">
+                                <font color ="white">{{d.n5|default:0}}</font>
                             </td>
                             <td align="center">
                                 <font color ="white">{{c.total|default:0}}</font>
+                            </td>
+                            <td align="center">
+                                <font color ="white">{{d.n1|add:d.n2|add:d.n3|add:d.n4|add:d.n5}}</font>
                             </td>
                             <td align="center">
                                 <font color ="white">{{c.plaza|default:0}}</font>
                             </td>
                         </tr>
                         {% endfor %}
+
                     </tbody>
                 </table>
                 <h3>Anfitriona : {{anfi_dia}}</h3>
@@ -179,10 +218,16 @@
                                             R1
                                         </th>
                                         <th>
+                                            N1
+                                        </th>
+                                        <th>
                                             M2
                                         </th>
                                         <th>
                                             R2
+                                        </th>
+                                        <th>
+                                            N2
                                         </th>
                                         <th>
                                             M3
@@ -191,10 +236,16 @@
                                             R3
                                         </th>
                                         <th>
+                                            N3
+                                        </th>
+                                        <th>
                                             M4
                                         </th>
                                         <th>
                                             R4
+                                        </th>
+                                        <th>
+                                            N4
                                         </th>
                                         <th>
                                             M5
@@ -203,7 +254,13 @@
                                             R5
                                         </th>
                                         <th>
-                                            Total
+                                            N5
+                                        </th>
+                                        <th>
+                                            Total Rva.
+                                        </th>
+                                        <th>
+                                            Total Sin Rva.
                                         </th>
                                         <th>
                                             N° Plaza
@@ -214,42 +271,60 @@
                                 <tbody>
             
                                     <tr>
-                                        {% for c in listadoplazacena %}
+                                        {% for c, d in datac %}
                                         <td align="center">
                                             <font color ="white">{{c.mozo_nombre}}</font>
                                         </td>
                                         <td align="center">
                                             <font color ="white">{{c.m1|default:0}}</font>
                                         </td>
-                                        <td align="center">
+                                        <td align="center" style="background-color: rgb(124, 180, 182);">
                                             <font color ="white">{{c.r1|default:0}}</font>
+                                        </td>
+                                        <td align="center" style="color: white; background-color: #c0c0c0;">
+                                            <font color ="white">{{d.n1|default:0}}</font>
                                         </td>
                                         <td align="center">
                                             <font color ="white">{{c.m2|default:0}}</font>
                                         </td>
-                                        <td align="center">
+                                        <td align="center" style="background-color: rgb(124, 180, 182);">
                                             <font color ="white">{{c.r2|default:0}}</font>
+                                        </td>
+                                        <td align="center" style="color: white; background-color: #c0c0c0;">
+                                            <font color ="white">{{d.n2|default:0}}</font>
                                         </td>
                                         <td align="center">
                                             <font color ="white">{{c.m3|default:0}}</font>
                                         </td>
-                                        <td align="center">
+                                        <td align="center" style="background-color: rgb(124, 180, 182);">
                                             <font color ="white">{{c.r3|default:0}}</font>
+                                        </td>
+                                        <td align="center" style="color: white; background-color: #c0c0c0;">
+                                            <font color ="white">{{d.n3|default:0}}</font>
                                         </td>
                                         <td align="center">
                                             <font color ="white">{{c.m4|default:0}}</font>
                                         </td>
-                                        <td align="center">
+                                        <td align="center" style="background-color: rgb(124, 180, 182);">
                                             <font color ="white">{{c.r4|default:0}}</font>
+                                        </td>
+                                        <td align="center" style="color: white; background-color: #c0c0c0;">
+                                            <font color ="white">{{d.n4|default:0}}</font>
                                         </td>
                                         <td align="center">
                                             <font color ="white">{{c.m5|default:0}}</font>
                                         </td>
-                                        <td align="center">
+                                        <td align="center" style="background-color: rgb(124, 180, 182);">
                                             <font color ="white">{{c.r5|default:0}}</font>
+                                        </td>
+                                        <td align="center" style="color: white; background-color: #c0c0c0;">
+                                            <font color ="white">{{d.n5|default:0}}</font>
                                         </td>
                                         <td align="center">
                                             <font color ="white">{{c.total|default:0}}</font>
+                                        </td>
+                                        <td align="center">
+                                            <font color ="white">{{d.n1|add:d.n2|add:d.n3|add:d.n4|add:d.n5}}</font>
                                         </td>
                                         <td align="center">
                                             <font color ="white">{{c.plaza|default:0}}</font>

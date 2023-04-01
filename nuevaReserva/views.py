@@ -1308,7 +1308,14 @@ def verHistoricoPlaza(request):
             else:
                 nombre_anfi_cena = ""
 
-            return render(request, 'historicoPlazas.html', {'form_buscar':form,'formBuscarInciden':form_buscar, 'listadoplaza':bi, 'listadoplazacena':ci,'anfi_dia':nombre_anfi_dia, 'anfi_noche': nombre_anfi_cena})
+            n_manual = plazaAlmuerzoMan.objects.filter(fecha_dia = b)
+            n_manualc = plazaCenaMan.objects.filter(fecha_dia = b)  
+
+            data = zip(n_manual,bi)
+            datac = zip(ci,n_manualc)
+
+
+            return render(request, 'historicoPlazas.html', {'listadoManual':n_manual,'listadoplaza': bi,'form_buscar': form, 'formBuscarInciden': form_buscar, 'listadoplazacena': ci, 'anfi_dia': nombre_anfi_dia, 'anfi_noche': nombre_anfi_cena, 'data':data, 'datac':datac})
 
     return render(request, 'historicoPlazas.html',{'form_buscar':form})
 
