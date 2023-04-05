@@ -271,63 +271,63 @@
                                 <tbody>
             
                                     <tr>
-                                        {% for c, d in datac %}
+                                        {% for h, i in datac %}
                                         <td align="center">
-                                            <font color ="white">{{c.mozo_nombre}}</font>
+                                            <font color ="white">{{h.mozo_nombre}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{c.m1|default:0}}</font>
+                                            <font color ="white">{{h.m1|default:0}}</font>
                                         </td>
                                         <td align="center" style="background-color: green;">
-                                            <font color ="white">{{c.r1|default:0}}</font>
+                                            <font color ="white">{{h.r1|default:0}}</font>
                                         </td>
                                         <td align="center" style="color: white; background-color: red;">
-                                            <font color ="white">{{d.n1|default:0}}</font>
+                                            <font color ="white">{{i.n1|default:0}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{c.m2|default:0}}</font>
+                                            <font color ="white">{{h.m2|default:0}}</font>
                                         </td>
                                         <td align="center" style="background-color: green;">
-                                            <font color ="white">{{c.r2|default:0}}</font>
+                                            <font color ="white">{{h.r2|default:0}}</font>
                                         </td>
                                         <td align="center" style="color: white; background-color: red;">
-                                            <font color ="white">{{d.n2|default:0}}</font>
+                                            <font color ="white">{{i.n2|default:0}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{c.m3|default:0}}</font>
+                                            <font color ="white">{{h.m3|default:0}}</font>
                                         </td>
                                         <td align="center" style="background-color: green;">
-                                            <font color ="white">{{c.r3|default:0}}</font>
+                                            <font color ="white">{{h.r3|default:0}}</font>
                                         </td>
                                         <td align="center" style="color: white; background-color: red;">
-                                            <font color ="white">{{d.n3|default:0}}</font>
+                                            <font color ="white">{{i.n3|default:0}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{c.m4|default:0}}</font>
+                                            <font color ="white">{{h.m4|default:0}}</font>
                                         </td>
                                         <td align="center" style="background-color: green;">
-                                            <font color ="white">{{c.r4|default:0}}</font>
+                                            <font color ="white">{{h.r4|default:0}}</font>
                                         </td>
                                         <td align="center" style="color: white; background-color: red;">
-                                            <font color ="white">{{d.n4|default:0}}</font>
+                                            <font color ="white">{{i.n4|default:0}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{c.m5|default:0}}</font>
+                                            <font color ="white">{{h.m5|default:0}}</font>
                                         </td>
                                         <td align="center" style="background-color: green;">
-                                            <font color ="white">{{c.r5|default:0}}</font>
+                                            <font color ="white">{{h.r5|default:0}}</font>
                                         </td>
                                         <td align="center" style="color: white; background-color: red;">
-                                            <font color ="white">{{d.n5|default:0}}</font>
+                                            <font color ="white">{{i.n5|default:0}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{c.total|default:0}}</font>
+                                            <font color ="white">{{h.total|default:0}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{d.n1|add:d.n2|add:d.n3|add:d.n4|add:d.n5}}</font>
+                                            <font color ="white">{{i.n1|add:i.n2|add:i.n3|add:i.n4|add:i.n5}}</font>
                                         </td>
                                         <td align="center">
-                                            <font color ="white">{{c.plaza|default:0}}</font>
+                                            <font color ="white">{{h.plaza|default:0}}</font>
                                         </td>
                                     </tr>
                                     {% endfor %}
