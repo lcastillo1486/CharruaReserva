@@ -1696,7 +1696,7 @@ def verHistoricoPlaza(request):
                 guardarp8c.r2 = mesa36c
                 guardarp8c.r3 = mesa37c
                 guardarp8c.r4 = mesa38c
-                guardarp8c.r4 = mesa39c
+                guardarp8c.r5 = mesa39c
                 guardarp8c.total = tota_plaza8c
                 guardarp8c.save()
 
