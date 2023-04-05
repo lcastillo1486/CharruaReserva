@@ -34,27 +34,29 @@
 
 <body>
     <div class="row">
-        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
             
             <form action='/buscarFecha/' method="POST">
                 {% csrf_token %}
+                <button type="submit" style="width: 40px; height: 40px; text-align: center;" name ="menos" class="btn btn-warning">-</button>
+                <button type="submit" style="width: 40px; height: 40px; text-align: center;" name="mas" class="btn btn-warning">+</button>
                 {{formBusca}}
+                <style>
+                    input[type="date"] {
+                        width: 250px;
+                        height: 70px;
+                    }
+                </style>
                 <button type="submit" class="btn btn-warning">Buscar</button>
-
-
             </form>
-
-
         </div>
 
-        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
             <h1><b>Histórico de Reservas</b></h1>
             Total de reserva completadas: {{totalCompletado}}
         </div>
 
-        <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
-            <a href='/exportarExcelHist/' class="btn btn-secondary">Exportar a Excel</a><br><br>
-            
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">   
         </div>
 
     </div>
@@ -90,7 +92,7 @@
                         <th>
                             Estado:
                         </th>
-                        <th colspan="2"></th>
+                        <th colspan="2"><a href='/exportarExcelHist/' class="btn btn-secondary">Exportar a Excel</a></th>
 
                     </tr>
                 </thead>

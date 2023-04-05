@@ -3,7 +3,7 @@ from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscar
 from django.contrib import messages
 from .models import nuevaReserva, mesaNoo, estadoMesa, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena, plazaAlmuerzoMan, plazaCenaMan
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta, date
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 import openpyxl
@@ -65,10 +65,11 @@ def listadoEnProceso(request):
     return render(request, 'listadoEnProceso.html', {"listaEnProceso": en_proceso, "totalProceso":cuenta_en_proceso})
 @login_required
 def listadoCompletado(request):
+    fecha_actual = datetime.now().date()
     formBuscar = formBuscarFechaHistori()
-    completado = nuevaReserva.objects.all().order_by('-fechaReserva')
-    cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
-    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado, "formBusca":formBuscar})
+    completado = nuevaReserva.objects.filter(fechaReserva = fecha_actual).order_by('-fechaReserva')
+    cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
+    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
 @login_required
 def editarReserva(request, id):
 
@@ -217,13 +218,28 @@ def exportaExcel(request):
 def buscaHistoricoFecha(request):
 
     formBuscar = formBuscarFechaHistori(request.POST)
-    
+
     if request.method == 'POST':
         if formBuscar.is_valid():
             b = formBuscar.cleaned_data['fechaBuscar']
-            completado = nuevaReserva.objects.filter(fechaReserva = b).order_by('-fechaReserva')
-            cuenta_completado = nuevaReserva.objects.filter(estado_id = 2).count()
-            return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado":cuenta_completado, "formBusca":formBuscar})
+            if 'menos' in request.POST:
+                  completado = nuevaReserva.objects.filter(fechaReserva=(b-timedelta(days=1))).order_by('-fechaReserva')
+                  cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
+                  fecha_menos = b-timedelta(days=1)
+                  formBuscar = formBuscarFechaHistori(initial= {'fechaBuscar': fecha_menos.strftime('%Y-%m-%d')})
+                  return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
+            if 'mas' in request.POST:
+                  completado = nuevaReserva.objects.filter(fechaReserva=(b+timedelta(days=1))).order_by('-fechaReserva')
+                  cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
+                  fecha_menos = b+timedelta(days=1)
+                  formBuscar = formBuscarFechaHistori(initial= {'fechaBuscar': fecha_menos.strftime('%Y-%m-%d')})
+                  return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
+            else:
+                  
+                completado = nuevaReserva.objects.filter(fechaReserva=b).order_by('-fechaReserva')
+                cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
+                return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
+
 @login_required
 def exportaExcelHistorico(request):
 

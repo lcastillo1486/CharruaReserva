@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from .models import nuevaReserva, mesaNoo, incidencia
 from django import forms
 from django.forms import widgets
+from datetime import date
 
 class nuevaReservaFoms(ModelForm):
     
@@ -44,7 +45,7 @@ class asignaMesaForm(forms.ModelForm):
         fields = ['numero']
 
 class formBuscarFechaHistori(forms.Form):
-    fechaBuscar = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='Fecha:')
+    fechaBuscar = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'value': date.today().strftime('%Y-%m-%d')}), label='')
 
 class formBuscarIncidencia(forms.Form):
     fechaBIncidencia = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='')
