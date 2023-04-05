@@ -1557,7 +1557,7 @@ def verHistoricoPlaza(request):
                 guardarp2c = plazaCena.objects.get(fecha_dia=b, plaza='Plaza2')
 
                 guardarp2c.r1 = mesa4c
-                guardarp2c.r2 = mesa4c
+                guardarp2c.r2 = mesa5c
                 guardarp2c.r3 = mesa10c
                 guardarp2c.r4 = mesa11c
                 guardarp2c.r5 = mesa12c
@@ -1641,7 +1641,7 @@ def verHistoricoPlaza(request):
                 mesa32c = nuevaReserva.objects.filter(
                     fechaReserva=b, mesa_asignadaa='32', hora__gt='17:30').count()
 
-                tota_plaza6c = mesa22c + mesa30c + mesa31c + mesa31c
+                tota_plaza6c = mesa22c + mesa30c + mesa31c + mesa32c
 
                 guardarp6c = plazaCena.objects.get(
                     fecha_dia=b, plaza='Plaza6')
