@@ -45,7 +45,7 @@ class asignaMesaForm(forms.ModelForm):
         fields = ['numero']
 
 class formBuscarFechaHistori(forms.Form):
-    fechaBuscar = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'value': date.today().strftime('%Y-%m-%d')}), label='')
+    fechaBuscar = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='', initial=date.today().strftime('%Y-%m-%d'))
 
 class formBuscarIncidencia(forms.Form):
     fechaBIncidencia = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='')
