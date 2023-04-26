@@ -223,22 +223,27 @@ def buscaHistoricoFecha(request):
         if formBuscar.is_valid():
             b = formBuscar.cleaned_data['fechaBuscar']
             if 'menos' in request.POST:
+                  c = b-timedelta(days=1)
                   completado = nuevaReserva.objects.filter(fechaReserva=(b-timedelta(days=1))).order_by('-fechaReserva')
+                  cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=c).count()
                   cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
                   fecha_menos = b-timedelta(days=1)
                   formBuscar = formBuscarFechaHistori(initial= {'fechaBuscar': fecha_menos.strftime('%Y-%m-%d')})
-                  return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
+                  return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia})
             if 'mas' in request.POST:
+                  c = b+timedelta(days=1)
                   completado = nuevaReserva.objects.filter(fechaReserva=(b+timedelta(days=1))).order_by('-fechaReserva')
                   cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
+                  cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=c).count()
                   fecha_menos = b+timedelta(days=1)
                   formBuscar = formBuscarFechaHistori(initial= {'fechaBuscar': fecha_menos.strftime('%Y-%m-%d')})
-                  return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
+                  return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia})
             else:
                   
                 completado = nuevaReserva.objects.filter(fechaReserva=b).order_by('-fechaReserva')
                 cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
-                return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
+                cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=b).count()
+                return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia})
 
 @login_required
 def exportaExcelHistorico(request):
