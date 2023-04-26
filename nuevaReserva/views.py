@@ -69,7 +69,8 @@ def listadoCompletado(request):
     formBuscar = formBuscarFechaHistori()
     completado = nuevaReserva.objects.filter(fechaReserva = fecha_actual).order_by('-fechaReserva')
     cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
-    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar})
+    cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=fecha_actual).count()
+    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia})
 @login_required
 def editarReserva(request, id):
 
