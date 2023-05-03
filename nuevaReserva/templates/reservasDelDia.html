@@ -50,6 +50,10 @@
             Total de reservas del día: {{totalDia}}
         </div>
         <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+
+            <b>
+                <font color="white"><h3>Total Clientes: {{totalPersonas|default:0}}</h3><br></font>
+            </b>
             <b>
                 <font color="green">Total Reservas Atendidas: {{totalAtendido}}<br></font>
             </b>
@@ -58,10 +62,6 @@
             </b>
             <b>
                 <font color="yellow">Total Reservas No Show: {{totalNoshow}}<br></font>
-            </b>
-
-            <b>
-                <font color="white">Total Clientes Atendidos: {{totalPersonas|default:0}}</font>
             </b>
 
         </div>

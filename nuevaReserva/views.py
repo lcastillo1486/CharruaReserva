@@ -54,7 +54,7 @@ def listadoDelDia(request):
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual ).order_by('hora')
     cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
-    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, estado_id = 2).aggregate(Sum('cantidadPersonas'))
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual).aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
     'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas})
@@ -70,7 +70,7 @@ def listadoCompletado(request):
     completado = nuevaReserva.objects.filter(fechaReserva = fecha_actual).order_by('-fechaReserva')
     cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
     cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=fecha_actual).count()
-    totalClientesAten = nuevaReserva.objects.filter(estado_id=2, fechaReserva=fecha_actual).aggregate(Sum('cantidadPersonas'))
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva=fecha_actual).aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
     return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
                                                      "totalClientes":totalpersonas})
@@ -233,7 +233,7 @@ def buscaHistoricoFecha(request):
                   cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
                   fecha_menos = b-timedelta(days=1)
                   formBuscar = formBuscarFechaHistori(initial= {'fechaBuscar': fecha_menos.strftime('%Y-%m-%d')})
-                  totalClientesAten = nuevaReserva.objects.filter(estado_id=2, fechaReserva=c).aggregate(Sum('cantidadPersonas'))
+                  totalClientesAten = nuevaReserva.objects.filter(fechaReserva=c).aggregate(Sum('cantidadPersonas'))
                   totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
                   return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
                                                                    "totalClientes":totalpersonas})
@@ -244,7 +244,7 @@ def buscaHistoricoFecha(request):
                   cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=c).count()
                   fecha_menos = b+timedelta(days=1)
                   formBuscar = formBuscarFechaHistori(initial= {'fechaBuscar': fecha_menos.strftime('%Y-%m-%d')})
-                  totalClientesAten = nuevaReserva.objects.filter(estado_id=2, fechaReserva=c).aggregate(Sum('cantidadPersonas'))
+                  totalClientesAten = nuevaReserva.objects.filter(fechaReserva=c).aggregate(Sum('cantidadPersonas'))
                   totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
                   return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
                                                                    "totalClientes":totalpersonas})
@@ -253,7 +253,7 @@ def buscaHistoricoFecha(request):
                 completado = nuevaReserva.objects.filter(fechaReserva=b).order_by('-fechaReserva')
                 cuenta_completado = nuevaReserva.objects.filter(estado_id=2).count()
                 cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=b).count()
-                totalClientesAten = nuevaReserva.objects.filter(estado_id=2, fechaReserva=b).aggregate(Sum('cantidadPersonas'))
+                totalClientesAten = nuevaReserva.objects.filter(fechaReserva=b).aggregate(Sum('cantidadPersonas'))
                 totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
                 return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
                                                                  "totalClientes":totalpersonas})
