@@ -7,11 +7,17 @@ from datetime import datetime, timedelta, date
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 import openpyxl
+from django.template.defaultfilters import floatformat
+import requests
+import random
+import string
+import re
+import time
 # Create your views here.
 
 @login_required
 def creaNuevaReserva(request):
-
+    fecha_actual = datetime.now().date()
     form = nuevaReservaFoms()
     context = {'form_reserva': form}
 
@@ -22,12 +28,95 @@ def creaNuevaReserva(request):
             a.estado_id = 1
             a.save()
             
+             ## Preparar envío por whatsapp al cliente
+            cliente = a.nombre
+            fecha_reserva = a.fechaReserva.strftime('%d/%m/%Y')
+            hora_reserva = a.hora.strftime('%I:%M %p')
+            personas = a.cantidadPersonas
+            telwhat = a.telefono
+            if not telwhat is None:
+            ## Quitar de las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
+            ## y se gana el sueldo facilmente. 
+                telwhat = re.sub(r'[^\d]+', '', telwhat)
+                telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
+                #print(telwhat)
+                mensaje = f"""Estimado/a: *{cliente}*. 
+Su reserva ha sido confirmada.\n 
+*Fecha de la reservación: {fecha_reserva}* 
+*Hora de la reservación: {hora_reserva}*
+*Cantidad de personas: {personas}*\n 
+Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
+¡Estamos ansiosos por darle la bienvenida!
+Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Muchas gracias por elegirnos.
+Te esperamos en *El Charrúa*"""
+                # mensaje = 'Su reserva ha sido confirmada, muchas gracias por elegirnos.Te esperamos en El Charrúa. '
+
+                letras = string.ascii_lowercase
+                uid_custom = ''.join(random.choice(letras) for i in range(6))  
+
+                url = 'https://www.waboxapp.com/api/send/chat'
+                data = {
+                    'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
+                    'uid': '51915219271',
+                    'to': telwhat,
+                    'custom_uid':uid_custom,
+                    'text': mensaje
+                }
+            
+                response = requests.post(url, data = data)
+                #print(response.content)
+
+            cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
+            #print(cuenta_listadia)
+            if cuenta_listadia == 1:
+                envioRecordatorio()
+                       
             return redirect('/reservasDelDia/')
         else:
-            
+
             return render(request, 'nuevaReserva.html', {'form_reserva': form})
 
     return render(request, 'nuevaReserva.html', context)
+
+def envioRecordatorio():
+    fecha_actual = datetime.now().date()
+    listado_envio = nuevaReserva.objects.filter(fechaReserva=fecha_actual)
+    for telefono in listado_envio:
+      telwhat = telefono.telefono
+      if not telwhat is None:
+            ## Quitar de las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
+            ## y se gana el sueldo facilmente. 
+                telwhat = re.sub(r'[^\d]+', '', telwhat)
+                telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
+                cliente = telefono.nombre 
+                hora_reserva = telefono.hora
+                personas = telefono.cantidadPersonas
+                mensaje = f"""Estimado/a: *{cliente}*. 
+Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n 
+*Hora de la reservación: {hora_reserva}*
+*Cantidad de personas: {personas}*\n 
+Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
+¡Estamos ansiosos por darle la bienvenida!
+Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Muchas gracias por elegirnos.
+Te esperamos en *El Charrúa*"""
+                #mensaje = 'Su reserva ha sido confirmada, muchas gracias por elegirnos.Te esperamos en El Charrúa. '
+
+                letras = string.ascii_lowercase
+                uid_custom = ''.join(random.choice(letras) for i in range(6))  
+
+                url = 'https://www.waboxapp.com/api/send/chat'
+                data = {
+                    'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
+                    'uid': '51915219271',
+                    'to': telwhat,
+                    'custom_uid':uid_custom,
+                    'text': mensaje
+                }
+            
+                response = requests.post(url, data = data)
+                time.sleep(3)
 @login_required
 def listadoEnEspera(request):
 
