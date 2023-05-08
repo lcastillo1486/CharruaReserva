@@ -58,7 +58,7 @@ Te esperamos en *El Charrúa*"""
                 url = 'https://www.waboxapp.com/api/send/chat'
                 data = {
                     'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
-                    'uid': '51915219271',
+                    'uid': '51994043376',
                     'to': telwhat,
                     'custom_uid':uid_custom,
                     'text': mensaje
@@ -109,7 +109,7 @@ Te esperamos en *El Charrúa*"""
                 url = 'https://www.waboxapp.com/api/send/chat'
                 data = {
                     'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
-                    'uid': '51915219271',
+                    'uid': '51994043376',
                     'to': telwhat,
                     'custom_uid':uid_custom,
                     'text': mensaje
