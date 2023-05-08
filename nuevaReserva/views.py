@@ -117,6 +117,7 @@ Te esperamos en *El Charrúa*"""
             
                 response = requests.post(url, data = data)
                 time.sleep(3)
+                
 @login_required
 def listadoEnEspera(request):
 
