@@ -21,6 +21,7 @@ class nuevaReserva(models.Model):
     estado = models.ForeignKey(estadoReserva, on_delete=models.DO_NOTHING)
     mesa_asignadaa = models.CharField(max_length=10, blank=True, null=True) 
     emailr = models.EmailField(max_length=254, null=True, blank= True)
+    origen_reserva = models.CharField(max_length=100)
     
 
 class estadoMesa(models.Model):
