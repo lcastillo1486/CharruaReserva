@@ -9,7 +9,7 @@ class nuevaReservaFoms(ModelForm):
     class Meta:
         model = nuevaReserva
         exclude = ('estado', 'apellido', 'mesa',)
-        fields = ['nombre', 'fechaReserva', 'hora','cantidadPersonas','telefono','emailr','observaciones']
+        fields = ['nombre', 'fechaReserva', 'hora','cantidadPersonas','telefono','emailr','origen_reserva','observaciones']
         widgets = {
             'hora' : forms.TimeInput(format='%H:%M'),
             'fechaReserva': widgets.DateInput(attrs={'type': 'date'})
@@ -18,7 +18,8 @@ class nuevaReservaFoms(ModelForm):
             'fechaReserva': 'Fecha de la reserva:',
             'cantidadPersonas': 'Cantidad de personas:',
             'nombre': 'Nombres y Apellidos',
-            'emailr': 'Correo'
+            'emailr': 'Correo',
+            'origen_reserva': 'Origen Reserva:'
         }
 
 class editReservaFoms(ModelForm):
@@ -26,7 +27,7 @@ class editReservaFoms(ModelForm):
     class Meta:
         model = nuevaReserva
         exclude = ('apellido', 'mesa',)
-        fields = ['nombre', 'fechaReserva', 'hora','cantidadPersonas','telefono','emailr','observaciones', 'estado'] 
+        fields = ['nombre', 'fechaReserva', 'hora','cantidadPersonas','telefono','emailr','origen_reserva','observaciones', 'estado'] 
         widgets = {
             'hora' : forms.TimeInput(format='%H:%M')
         }
@@ -34,7 +35,8 @@ class editReservaFoms(ModelForm):
             'fechaReserva': 'Fecha de la reserva:',
             'cantidadPersonas': 'Cantidad de personas:',
             'nombre': 'Nombres y Apellidos',
-            'emailr': 'Correo'
+            'emailr': 'Correo',
+            'origen_reserva': 'Origen Reserva:'
             
         }
         
