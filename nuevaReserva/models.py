@@ -78,7 +78,7 @@ class plazaAlmuerzo(models.Model):
     m5 = models.CharField(max_length=20, null= True, blank= True)
     r5 = models.CharField(max_length=20, null= True, blank= True)
     total = models.CharField(max_length=20, null= True, blank= True)
-    plaza = models.CharField(max_length=20, null= True, blank= True)
+    plaza = models.CharField(max_length=20, null= True, blank= True) 
     nombre_anfitriona = models.CharField(max_length=50, null= True, blank= True)
 
 class plazaCena(models.Model):
