@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import nuevaReserva, mesaNoo, incidencia
+from .models import nuevaReserva, mesaNoo, incidencia, incidenciaLog
 from django import forms
 from django.forms import widgets
 from datetime import date
@@ -72,3 +72,19 @@ class formIncidencia(ModelForm):
             'detalle_incidencia':'Detalle de incidencia:'
         }
 
+class formIncidenciaLog(ModelForm):
+
+    class Meta:
+        model = incidenciaLog
+        fields = '__all__'
+        exclude = ('fecha_registro',)
+        widgets = {
+            'fecha_incidencia': widgets.DateInput(attrs={'type': 'date'})
+        }
+        labels = {
+            'fecha_incidencia':'Fecha de incidencia:',
+            'detalle_incidencia':'Detalle de incidencia:'
+        }
+
+class formBuscarIncidenciaLog(forms.Form):
+    fechaBIncidenciaLog = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='')

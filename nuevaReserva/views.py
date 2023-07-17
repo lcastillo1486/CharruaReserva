@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscarFechaHistori, formIncidencia, formBuscarIncidencia, formBuscarPLaza
+from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscarFechaHistori, formIncidencia, formBuscarIncidencia, formBuscarPLaza, formIncidenciaLog, formBuscarIncidenciaLog
 from django.contrib import messages
-from .models import nuevaReserva, mesaNoo, estadoMesa, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena, plazaAlmuerzoMan, plazaCenaMan
+from .models import nuevaReserva, mesaNoo, estadoMesa, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena, plazaAlmuerzoMan, plazaCenaMan, incidenciaLog
 from django.db import models
 from datetime import datetime, timedelta, date
 from django.contrib.auth.decorators import login_required
@@ -417,7 +417,7 @@ def buscarIncidencias(request):
             return render(request, 'incidencia.html', {'form_inciden':form, 'formBuscarInciden':form_buscar, 'listadoInciden':bi})
     else:
         return redirect('/libroIncidencias/')
-
+@login_required
 def verPlaza(request):
     fecha_actual = datetime.now().date()
 
@@ -1025,7 +1025,7 @@ def verPlaza(request):
                                           'mezajpc': mesajpc, 'mezaJPnc': resultnpJPc,'totalplaza9c': tota_plaza9c, 'mozoNombre9c': mozoplaza9c, 
                                           'mezabeluac': mesabeluac, 'mezaBELUAnc': resultnpBELUAc, 'totalplaza10c': tota_plaza10c, 'mozoNombre10c': mozoplaza10c, 
                                           'estadoc': estadoc, 'anfialmuerzoc': nombre_anfic, 'listaAnfitrionasc':anfitrionasc})
-
+@login_required
 def guardaPlazaAlm(request):
     fecha_actual = datetime.now().date()
     hora_actual = datetime.now().strftime('%H:%M')
@@ -1217,7 +1217,7 @@ def guardaPlazaAlm(request):
         plaza_dia.save()
 
         return controlMesaManAlm(request, 1)
-
+@login_required
 def guardaPlazaCena(request):
     fecha_actual = datetime.now().date()
     hora_actual = datetime.now().strftime('%H:%M')
@@ -1410,7 +1410,7 @@ def guardaPlazaCena(request):
 
         return controlMesaManCen(request, 1)
 
-
+@login_required
 def verHistoricoPlaza(request):
 
     form = formBuscarPLaza()
@@ -1861,7 +1861,7 @@ def verHistoricoPlaza(request):
             return render(request, 'historicoPlazas.html', {'listadoManual':n_manual,'listadoplaza': bi,'form_buscar': form, 'formBuscarInciden': form_buscar, 'listadoplazacena': ci, 'anfi_dia': nombre_anfi_dia, 'anfi_noche': nombre_anfi_cena, 'data':data, 'datac':datac})
 
     return render(request, 'historicoPlazas.html', {'form_buscar': form})
-
+@login_required
 def controlMesaManAlm(request, nmesa):
 
     fecha_actual = datetime.now().date()
@@ -2130,7 +2130,7 @@ def controlMesaManAlm(request, nmesa):
            guardan1.save()
 
     return redirect('verPlaza')
-
+@login_required
 def controlMesaManCen(request, nmesa):
      
     fecha_actual = datetime.now().date()
@@ -2398,9 +2398,38 @@ def controlMesaManCen(request, nmesa):
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
     return redirect('verPlaza')
+@login_required
+def agregarIncidenciaLog(request):
 
+    bi = incidenciaLog.objects.all().order_by('-fecha_incidencia')
+    form = formIncidenciaLog()
+    form_buscar = formBuscarIncidenciaLog()
 
+    if request.method == 'POST':
+        form = formIncidenciaLog(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/libroIncidenciasLog/')
+        else:
 
+            return render(request, 'incidenciaLog.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
+
+    return render(request, 'incidenciaLog.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
+@login_required     
+def buscarIncidenciasLog(request):
+
+    form = formIncidenciaLog()
+    form_buscar = formBuscarIncidenciaLog()
+
+    form_buscar = formBuscarIncidenciaLog(request.POST)
+    if request.method == 'POST':
+        if form_buscar.is_valid():
+            b = form_buscar.cleaned_data['fechaBIncidenciaLog']
+            bi = incidenciaLog.objects.filter(
+                fecha_incidencia=b).order_by('-fecha_incidencia')
+            return render(request, 'incidenciaLog.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
+    else:
+        return redirect('/libroIncidenciasLog/')
 
 
 

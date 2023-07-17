@@ -116,4 +116,7 @@ class plazaCenaMan(models.Model):
     n5 = models.CharField(max_length=20, null= True, blank= True)
     plaza = models.CharField(max_length=20, null= True, blank= True)
 
-    
+class incidenciaLog(models.Model):
+    fecha_incidencia = models.DateField()
+    detalle_incidencia = models.TextField (blank = False, null= False)
+    fecha_registro = models.DateField(auto_now_add=True)   

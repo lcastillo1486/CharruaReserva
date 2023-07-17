@@ -27,5 +27,7 @@ urlpatterns = [
     path('historicoPlazas/', views.verHistoricoPlaza, name ='historicoP'),
     path('mesaManAlm/<str:nmesa>', views.controlMesaManAlm),
     path('mesaManCen/<str:nmesa>', views.controlMesaManCen),
+    path('libroIncidenciasLog/', views.agregarIncidenciaLog),
+    path('buscaIncidenciasLog/', views.buscarIncidenciasLog),
 
 ]
