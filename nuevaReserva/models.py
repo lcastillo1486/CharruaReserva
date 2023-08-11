@@ -50,6 +50,7 @@ class incidencia(models.Model):
     mozo_incidencia = models.CharField(max_length=50, blank=True, null=True)
     detalle_incidencia = models.TextField (blank = False, null= False)
     fecha_registro = models.DateField(auto_now_add=True)
+    id_reservacion = models.CharField(max_length=20, blank=True, null=True)
 
 class mozosPlaza(models.Model):
     nombre_mozo = models.CharField(max_length=50)

@@ -29,5 +29,7 @@ urlpatterns = [
     path('mesaManCen/<str:nmesa>', views.controlMesaManCen),
     path('libroIncidenciasLog/', views.agregarIncidenciaLog),
     path('buscaIncidenciasLog/', views.buscarIncidenciasLog),
+    path('agregarIncidReser/<int:id>', views.agregarIncidenciaReserva),
+    path('guardarIncidReser/', views.guardarIncidenciaReserva),
 
 ]

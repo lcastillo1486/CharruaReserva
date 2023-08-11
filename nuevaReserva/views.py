@@ -2430,7 +2430,35 @@ def buscarIncidenciasLog(request):
             return render(request, 'incidenciaLog.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
     else:
         return redirect('/libroIncidenciasLog/')
+@login_required
+def agregarIncidenciaReserva(request, id):
 
+    bi = incidencia.objects.all().order_by('-fecha_incidencia')
+    form = formIncidencia()
+    form_buscar = formBuscarIncidencia()
+    id_reserva = id
+
+    return render(request, 'incidenciaReserva.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi, 'id_reser':id_reserva})
+@login_required
+def guardarIncidenciaReserva(request):
+
+    bi = incidencia.objects.all().order_by('-fecha_incidencia')
+    form = formIncidencia()
+    form_buscar = formBuscarIncidencia()
+
+    if request.method == 'POST':
+        form = formIncidencia(request.POST)
+        if form.is_valid():
+            a = form.save(commit=False)
+            reserva = request.POST.get('reserva')
+            a.id_reservacion = reserva
+            a.save()
+            return redirect('/libroIncidencias/')
+        else:
+
+            return render(request, 'incidencia.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
+
+    return render(request, 'incidencia.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
 
 
  

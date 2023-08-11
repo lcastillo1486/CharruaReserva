@@ -61,7 +61,7 @@ class formIncidencia(ModelForm):
     class Meta:
         model = incidencia
         fields = '__all__'
-        exclude = ('fecha_registro',)
+        exclude = ('fecha_registro','id_reservacion')
         widgets = {
             'fecha_incidencia': widgets.DateInput(attrs={'type': 'date'})
         }
