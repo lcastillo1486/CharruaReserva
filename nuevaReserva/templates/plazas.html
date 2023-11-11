@@ -893,6 +893,12 @@
                                     <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                     {% endfor%}
                                 </select>
+                                <br><br>
+                                <select name="mozoplaza9c">
+                                    {% for c in listaMozos %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
                                 {% endif %}
                             </td>
 
@@ -962,6 +968,12 @@
                             </select>
                             <br><br>
                             <select name="mozoplaza10b">
+                                {% for c in listaMozos %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            <br><br>
+                            <select name="mozoplaza10c">
                                 {% for c in listaMozos %}
                                 <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                 {% endfor%}

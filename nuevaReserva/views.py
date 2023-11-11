@@ -1190,8 +1190,9 @@ def guardaPlazaAlm(request):
 
         plaza_dia.save()
 
-        mozo = request.POST.get('mozoplaza9') + ' y ' + \
-                                request.POST.get('mozoplaza9b')
+        mozo = request.POST.get('mozoplaza9') + ', ' + \
+                                request.POST.get('mozoplaza9b') + ' y ' + \
+                                request.POST.get('mozoplaza9c')
         mjp = request.POST.get('mjp')
         rjp = request.POST.get('rjp')
         total = request.POST.get('totalpz9')
@@ -1203,8 +1204,9 @@ def guardaPlazaAlm(request):
 
         plaza_dia.save()
 
-        mozo = request.POST.get('mozoplaza10') + ' y ' + \
-                                request.POST.get('mozoplaza10b')
+        mozo = request.POST.get('mozoplaza10') + ', ' + \
+                                request.POST.get('mozoplaza10b') + ' y ' + \
+                                request.POST.get('mozoplaza10c')
         mbelua = request.POST.get('mbelua')
         rbelua = request.POST.get('rbelua')
         total = request.POST.get('totalpz10')
