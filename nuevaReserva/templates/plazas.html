@@ -894,7 +894,7 @@
                                     {% endfor%}
                                 </select>
                                 <br><br>
-                                <select name="mozoplaza9c">
+                                <select name="mozoplaza9cm">
                                     {% for c in listaMozos %}
                                     <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                     {% endfor%}
@@ -973,7 +973,7 @@
                                 {% endfor%}
                             </select>
                             <br><br>
-                            <select name="mozoplaza10c">
+                            <select name="mozoplaza10cm">
                                 {% for c in listaMozos %}
                                 <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                 {% endfor%}
@@ -1910,6 +1910,12 @@
                                     <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                     {% endfor%}
                                 </select>
+                                <br><br>
+                                <select name="mozoplaza9bcn">
+                                    {% for c in listaMozosc %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
                                 {% endif %}
                             </td>
 
@@ -1979,6 +1985,12 @@
                             </select>
                             <br><br>
                             <select name="mozoplaza10bc">
+                                {% for c in listaMozosc %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            <br><br>
+                            <select name="mozoplaza10bcn">
                                 {% for c in listaMozosc %}
                                 <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                 {% endfor%}
