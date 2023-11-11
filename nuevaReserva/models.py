@@ -120,4 +120,9 @@ class plazaCenaMan(models.Model):
 class incidenciaLog(models.Model):
     fecha_incidencia = models.DateField()
     detalle_incidencia = models.TextField (blank = False, null= False)
-    fecha_registro = models.DateField(auto_now_add=True)   
+    fecha_registro = models.DateField(auto_now_add=True)
+
+class controlmensaje(models.Model):
+    id_reservacion = models.CharField(max_length=20, blank=True, null=True)
+    enviado = models.BooleanField(default=0)
+    
