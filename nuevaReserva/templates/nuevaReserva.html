@@ -80,7 +80,7 @@
   </div>
 
   {% load crispy_forms_tags %}
-  <div style="height:10vh;width:50vw; color: #27130c;">
+  <!-- <div style="height:10vh;width:50vw; color: #27130c;">
     <form class="form" method="POST">
       {% csrf_token %}
       {{form_reserva|crispy}}
@@ -89,7 +89,66 @@
         Guardar
       </button>
     </form>
-  </div>
+  </div> -->
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label class="campo-label">{{ form_reserva.nombre.label_tag }}</label>
+        {{ form_reserva.nombre }}
+      </div>
+    
+      <div class="form-group col-md-3">
+        <label class="campo-label">{{ form_reserva.fechaReserva.label_tag }}</label>
+        {{ form_reserva.fechaReserva }}
+      </div>
+      <div class="form-group col-md-3">
+        <label class="campo-label">{{ form_reserva.hora.label_tag }}</label>
+        {{ form_reserva.hora }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label class="campo-label">{{ form_reserva.cantidadPersonas.label_tag }}</label>
+        {{ form_reserva.cantidadPersonas }}
+      </div>
+        <div class="form-group col-md-3">
+          <label class="campo-label">{{ form_reserva.telefono.label_tag }}</label>
+          {{ form_reserva.telefono }}
+        </div>
+          <div class="form-group col-md-3">
+            <label class="campo-label">{{ form_reserva.emailr.label_tag }}</label>
+            {{ form_reserva.emailr }}
+          </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label class="campo-label">{{ form_reserva.origen_reserva.label_tag }}</label>
+        {{ form_reserva.origen_reserva }}
+      </div>
+      <div class="form-group col-md-6">
+        <label class="campo-label">{{ form_reserva.observaciones.label_tag }}</label>
+        {{ form_reserva.observaciones }}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+
+      </div>
+      <div class="form-group col-md-4">
+        <button style="width: 50%;">
+          Guardar 
+        </button>
+      </div>
+      <div class="form-group col-md-4">
+
+      </div>
+
+    </div>
+  
+  </form>
 
 </body>
 {% endblock %}
