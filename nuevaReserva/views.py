@@ -29,13 +29,14 @@ def creaNuevaReserva(request):
             a.save()
             
              ## Preparar envío por whatsapp al cliente
+            id_reserva = a.id
             cliente = a.nombre
             fecha_reserva = a.fechaReserva.strftime('%d/%m/%Y')
             hora_reserva = a.hora.strftime('%I:%M %p')
             personas = a.cantidadPersonas
             telwhat = a.telefono
             if not telwhat is None:
-            ## Quitar de las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
+            ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
             ## y se gana el sueldo facilmente. 
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
@@ -63,8 +64,15 @@ Te esperamos en *El Charrúa*"""
                     'custom_uid':uid_custom,
                     'text': mensaje
                 }
-            
-                response = requests.post(url, data = data)
+
+                # comprobar si existe el id de reserva en la tabla de control de mensaje, si esta y enviado es 1 pasar por alto
+                if not controlmensaje.objects.filter(id_reservacion = id_reserva, enviado = 1).exists():
+                      
+                      response = requests.post(url, data = data)
+                      #print("what enviado")
+                      guarda_control = controlmensaje(id_reservacion = id_reserva, enviado = 1)
+                      guarda_control.save()
+                
                 #print(response.content)
 
             cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
