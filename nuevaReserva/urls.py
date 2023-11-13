@@ -31,5 +31,8 @@ urlpatterns = [
     path('buscaIncidenciasLog/', views.buscarIncidenciasLog),
     path('agregarIncidReser/<int:id>', views.agregarIncidenciaReserva),
     path('guardarIncidReser/', views.guardarIncidenciaReserva),
+    path('calculardia/', views.calculardia),
+    path('verplazasfds/', views.verplazafds, name='verPlazasfds'),
+    path('mesaManAlmfds/<str:nmesa>', views.controlMesaManAlmfds),
 
 ]
