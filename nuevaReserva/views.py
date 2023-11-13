@@ -2476,7 +2476,7 @@ def guardarIncidenciaReserva(request):
 def calculardia(request):
     zona_horaria_peru = pytz.timezone('America/Lima')
     fecha_actual = datetime.now(zona_horaria_peru)
-    es_fds = fecha_actual.weekday() in [0, 6]
+    es_fds = fecha_actual.weekday() in [5, 6]
 
     if es_fds:
         return redirect('verPlazasfds')
