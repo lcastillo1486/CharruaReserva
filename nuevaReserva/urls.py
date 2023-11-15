@@ -35,7 +35,7 @@ urlpatterns = [
     path('verplazasfds/', views.verplazafds, name='verPlazasfds'),
     path('mesaManCenfds/<str:nmesa>', views.controlMesaManCenfds),
     path('mesaManAlmfds/<str:nmesa>', views.controlMesaManAlmfds),
-    path('estadisticas/', views.estadisticas),
+
 
 
 

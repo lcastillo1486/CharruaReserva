@@ -89,6 +89,3 @@ class formIncidenciaLog(ModelForm):
 class formBuscarIncidenciaLog(forms.Form):
     fechaBIncidenciaLog = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='')
 
-class formBuscarEstadisticas(forms.Form):
-    fechaBEstadistica_desde = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='Desde:', initial=date.today().strftime('%Y-%m-%d'))
-    fechaBEstadistica_hasta = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), label='Hasta:', initial=date.today().strftime('%Y-%m-%d'))
