@@ -14,6 +14,12 @@ import string
 import re
 import time
 import pytz
+import matplotlib.pyplot as ptl
+from io import BytesIO
+import base64
+from django.db.models.functions import Extract, TruncDay
+from django.db.models import Case, When, Value, IntegerField, CharField
+from django.db.models import Count
 # Create your views here.
 
 @login_required
