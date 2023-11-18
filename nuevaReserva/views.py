@@ -3074,7 +3074,7 @@ def verplazafds(request):
             = totalnp7c = resultnp35c = resultnp36c = resultnp37c = resultnp38c = resultnp39c\
             = totalnp8c = resultnpJPc = resultnpBELUAc = 0
 
-    return render(request, 'plazasfds.html', {'listaMozos': mozoz_p,
+    return render(request, 'plazas.html', {'listaMozos': mozoz_p,
                                             'meza1': mesa1, 'meza1n':resultnp1, 'meza2': mesa2,'meza2n':resultnp2, 'meza3': mesa3, 'meza3n':resultnp3,'meza6': mesa6, 'meza6n':resultnp6, 'meza6A': mesa6A, 'meza6An':resultnp6A,'totalplaza1': tota_plaza1, 'totalnp1':totalnp1,'mozoNombre': mozoplaza1, 'estado': estado,
                                           'meza4': mesa4, 'meza4n': resultnp4, 'meza5': mesa5,'meza5n': resultnp5, 'meza10': mesa10, 'meza10n': resultnp10, 'meza11': mesa11, 'meza11n': resultnp11, 'meza12': mesa12, 'meza12n': resultnp12,'totalplaza2': tota_plaza2, 'totalnp2':totalnp2, 'mozoNombre2': mozoplaza2,
                                           'meza12a': mesa12a, 'meza12An': resultnp12A,'meza24n': mesa24,'meza24n': resultnp24, 'meza14': mesa14, 'meza14n': resultnp14, 'meza15': mesa15, 'meza15n': resultnp15, 'meza16': mesa16, 'meza16n': resultnp16, 'totalplaza3': tota_plaza3, 'totalnp3':totalnp3, 'mozoNombre3': mozoplaza3,
