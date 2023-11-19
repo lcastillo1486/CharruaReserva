@@ -3893,7 +3893,7 @@ def estadisticas(request):
 
         ## por estado de la reserva
 
-        por_estado_reserva = nuevaReserva.objects.filter().exclude(estado=1).annotate(
+        por_estado_reserva = nuevaReserva.objects.filter().exclude(estado_id=1).annotate(
         estado_reser=Case(
             When(estado=2, then=Value('Atendido')),  
             When(estado=3, then=Value('Anulado')),  
