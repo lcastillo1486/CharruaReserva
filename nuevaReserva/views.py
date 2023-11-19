@@ -3858,21 +3858,21 @@ def estadisticas(request):
 
         # Origen de la reserva 
 
-    #     por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False).values('origen_reserva').annotate(total_origen=Count('pk'))
+        por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False).values('origen_reserva').annotate(total_origen=Count('pk'))
 
-    #     etiquetas1 = [origen['origen_reserva'] for origen in por_origen_reserva]
-    #     valores1 = [cantidad['total_origen'] for cantidad in por_origen_reserva]
-    #     fig1, ax1 = ptl.subplots()
-    #     fig1.set_facecolor('#000000')
-    #     ax1.pie(valores1, labels=etiquetas1,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-    #     ax1.axis('equal')
-    #     ax1.set_title('Distribución por Origen', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        etiquetas1 = [origen['origen_reserva'] for origen in por_origen_reserva]
+        valores1 = [cantidad['total_origen'] for cantidad in por_origen_reserva]
+        fig1, ax1 = ptl.subplots()
+        fig1.set_facecolor('#000000')
+        ax1.pie(valores1, labels=etiquetas1,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+        ax1.axis('equal')
+        ax1.set_title('Distribución por Origen', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer1 = BytesIO()
-    #     ptl.savefig(buffer1, format='png')
-    #     buffer1.seek(0)
-    #     image_base641 = base64.b64encode(buffer1.read()).decode()
-    #     grafico2 = "data:image/png;base64," + image_base641
+        buffer1 = BytesIO()
+        ptl.savefig(buffer1, format='png')
+        buffer1.seek(0)
+        image_base641 = base64.b64encode(buffer1.read()).decode()
+        grafico2 = "data:image/png;base64," + image_base641
 
     #     # ocupacion mesas 
 
@@ -3965,6 +3965,6 @@ def estadisticas(request):
 
 
 
-        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6})
+        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2})
     
     
