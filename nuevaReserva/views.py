@@ -1233,7 +1233,14 @@ def guardaPlazaAlm(request):
 
         plaza_dia.save()
 
-        return controlMesaManAlm(request, 1)
+        zona_horaria_peru = pytz.timezone('America/Lima')
+        fecha_actual = datetime.now(zona_horaria_peru)
+        es_fds = fecha_actual.weekday() in [5, 6]
+
+        if es_fds:
+            return controlMesaManAlmfds(request, 1)
+        else:
+            return controlMesaManAlm(request, 1)
 @login_required
 def guardaPlazaCena(request):
     fecha_actual = datetime.now().date()
@@ -1427,7 +1434,14 @@ def guardaPlazaCena(request):
 
         plaza_cena.save()
 
-        return controlMesaManCen(request, 1)
+        zona_horaria_peru = pytz.timezone('America/Lima')
+        fecha_actual = datetime.now(zona_horaria_peru)
+        es_fds = fecha_actual.weekday() in [5, 6]
+
+        if es_fds:
+            return controlMesaManCenfds(request, 1)
+        else:
+            return controlMesaManCen(request, 1)
 
 @login_required
 def verHistoricoPlaza(request):
