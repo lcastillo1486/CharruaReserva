@@ -3965,6 +3965,6 @@ def estadisticas(request):
 
 
 
-        return render(request, 'estadisticas.html')
+          return render(request, 'estadisticas.html')
     
     

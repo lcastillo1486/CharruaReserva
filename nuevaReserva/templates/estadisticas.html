@@ -1,111 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-{% extends 'base.html' %}
-{% block content %}
-{% load static %}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Document</title>
 </head>
-<style>
-    body {
-        background: black;
-        color: white;
-    }
-
-    thead {
-        color: black;
-        background-color: white;
-    }
-
-    .centrar {
-        text-align: center;
-    }
-    input {
-    background: #6ea1e4;
-    color: black;
-    padding: 10px;
-    padding-left: 20px;
-    height: 50px;
-    font-size: 14px;
-    border-radius: 10px;
-    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
-  }
-</style>
-
 <body>
-    <div style="text-align: center;" class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
-        
-    </div>
-
-    <div class="centrar">
-        
-        
-        <!-- <h1><b>Estadísticas por Intervalo de Tiempo</b></h1> <br>
-        <form action='/estadisticas/' method="POST">
-            {% csrf_token %}
-            {{form}}
-            <button class="btn btn-primary">
-                <img src="{% static 'buscar.png' %}" style="width: 50px; height: 50px;"> 
-            </button>
-        </form>
-
-        <div class="row">
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf1}}" alt="grafico" width="500">
-            </div>
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf2}}" alt="grafico" width="500">
-            </div>
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf3}}" alt="grafico" width="500">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf4}}" alt="grafico" width="500">
-            </div>
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf5}}" alt="grafico" width="500">
-            </div>
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf6}}" alt="grafico" width="500">
-            </div>
-        </div> -->
-
-        <h1><b>Estadísticas Totales</b></h1> <br>
-        <div class="row">
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf1}}" alt="grafico" width="500">
-            </div>
-            <!-- <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf2}}" alt="grafico" width="500">
-            </div>
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf3}}" alt="grafico" width="500">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf4}}" alt="grafico" width="500">
-            </div>
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf5}}" alt="grafico" width="500">
-            </div>
-            <div class="form-group col-md-4 col-lg-4 col-xl-4">
-                <img src="{{graf6}}" alt="grafico" width="500">
-            </div>
-        </div> -->
-    </div>
+    
 </body>
-{% endblock %}
-
 </html>
