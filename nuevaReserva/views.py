@@ -3942,29 +3942,29 @@ def estadisticas(request):
     #     image_base644 = base64.b64encode(buffer4.read()).decode()
     #     grafico5 = "data:image/png;base64," + image_base644
 
-    #     # reservas con incidencia 
+        # reservas con incidencia 
 
-    #     cuenta_incidencias = incidencia.objects.filter(id_reservacion__isnull = False).count()
-    #     cuenta_reservas = nuevaReserva.objects.filter(estado = 2).count()
+        cuenta_incidencias = incidencia.objects.filter(id_reservacion__isnull = False).count()
+        cuenta_reservas = nuevaReserva.objects.filter(estado = 2).count()
 
-    #     etiquetas5 = ['Incidencias','Reservas']
-    #     valores5 = [cuenta_incidencias, cuenta_reservas]
-    #     fig5, ax5 = ptl.subplots()
-    #     fig5.set_facecolor('#000000')
+        etiquetas5 = ['Incidencias','Reservas']
+        valores5 = [cuenta_incidencias, cuenta_reservas]
+        fig5, ax5 = ptl.subplots()
+        fig5.set_facecolor('#000000')
 
-    #     ax5.pie(valores5, labels=etiquetas5,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+        ax5.pie(valores5, labels=etiquetas5,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
 
-    #     ax5.axis('equal')
-    #     ax5.set_title('Atenciones con Incidencias', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        ax5.axis('equal')
+        ax5.set_title('Atenciones con Incidencias', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer5 = BytesIO()
-    #     ptl.savefig(buffer5, format='png')
-    #     buffer5.seek(0)
-    #     image_base645 = base64.b64encode(buffer5.read()).decode()
-    #     grafico6 = "data:image/png;base64," + image_base645
+        buffer5 = BytesIO()
+        ptl.savefig(buffer5, format='png')
+        buffer5.seek(0)
+        image_base645 = base64.b64encode(buffer5.read()).decode()
+        grafico6 = "data:image/png;base64," + image_base645
 
 
 
-          return render(request, 'estadisticas.html')
+        return render(request, 'estadisticas.html', {'graf6':grafico6})
     
     
