@@ -3876,20 +3876,20 @@ def estadisticas(request):
 
     #     # ocupacion mesas 
 
-    #     por_mesa_reserva = nuevaReserva.objects.filter(estado_id=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
+        por_mesa_reserva = nuevaReserva.objects.filter(estado_id=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
 
-    #     etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
-    #     valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
-    #     fig2, ax2 = ptl.subplots()
-    #     ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-    #     ax2.axis('equal')
-    #     ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
-    #     fig2.set_facecolor('#000000')
-    #     buffer2 = BytesIO()
-    #     ptl.savefig(buffer2, format='png')
-    #     buffer2.seek(0)
-    #     image_base642 = base64.b64encode(buffer2.read()).decode()
-    #     grafico3 = "data:image/png;base64," + image_base642
+        etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
+        valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
+        fig2, ax2 = ptl.subplots()
+        ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+        ax2.axis('equal')
+        ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        fig2.set_facecolor('#000000')
+        buffer2 = BytesIO()
+        ptl.savefig(buffer2, format='png')
+        buffer2.seek(0)
+        image_base642 = base64.b64encode(buffer2.read()).decode()
+        grafico3 = "data:image/png;base64," + image_base642
 
     #     ## por estado de la reserva
 
@@ -3965,6 +3965,6 @@ def estadisticas(request):
 
 
 
-        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2})
+        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2, 'graf3':grafico3})
     
     
