@@ -3858,113 +3858,113 @@ def estadisticas(request):
 
         ## Origen de la reserva 
 
-        por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False).values('origen_reserva').annotate(total_origen=Count('pk'))
+    #     por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False).values('origen_reserva').annotate(total_origen=Count('pk'))
 
-        etiquetas1 = [origen['origen_reserva'] for origen in por_origen_reserva]
-        valores1 = [cantidad['total_origen'] for cantidad in por_origen_reserva]
-        fig1, ax1 = ptl.subplots()
-        fig1.set_facecolor('#000000')
-        ax1.pie(valores1, labels=etiquetas1,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-        ax1.axis('equal')
-        ax1.set_title('Distribución por Origen', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+    #     etiquetas1 = [origen['origen_reserva'] for origen in por_origen_reserva]
+    #     valores1 = [cantidad['total_origen'] for cantidad in por_origen_reserva]
+    #     fig1, ax1 = ptl.subplots()
+    #     fig1.set_facecolor('#000000')
+    #     ax1.pie(valores1, labels=etiquetas1,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+    #     ax1.axis('equal')
+    #     ax1.set_title('Distribución por Origen', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-        buffer1 = BytesIO()
-        ptl.savefig(buffer1, format='png')
-        buffer1.seek(0)
-        image_base641 = base64.b64encode(buffer1.read()).decode()
-        grafico2 = "data:image/png;base64," + image_base641
+    #     buffer1 = BytesIO()
+    #     ptl.savefig(buffer1, format='png')
+    #     buffer1.seek(0)
+    #     image_base641 = base64.b64encode(buffer1.read()).decode()
+    #     grafico2 = "data:image/png;base64," + image_base641
 
-        # ocupacion mesas 
+    #     # ocupacion mesas 
 
-        por_mesa_reserva = nuevaReserva.objects.filter(estado=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
+    #     por_mesa_reserva = nuevaReserva.objects.filter(estado=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
 
-        etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
-        valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
-        fig2, ax2 = ptl.subplots()
-        ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-        ax2.axis('equal')
-        ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
-        fig2.set_facecolor('#000000')
-        buffer2 = BytesIO()
-        ptl.savefig(buffer2, format='png')
-        buffer2.seek(0)
-        image_base642 = base64.b64encode(buffer2.read()).decode()
-        grafico3 = "data:image/png;base64," + image_base642
+    #     etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
+    #     valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
+    #     fig2, ax2 = ptl.subplots()
+    #     ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+    #     ax2.axis('equal')
+    #     ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+    #     fig2.set_facecolor('#000000')
+    #     buffer2 = BytesIO()
+    #     ptl.savefig(buffer2, format='png')
+    #     buffer2.seek(0)
+    #     image_base642 = base64.b64encode(buffer2.read()).decode()
+    #     grafico3 = "data:image/png;base64," + image_base642
 
-        ## por estado de la reserva
+    #     ## por estado de la reserva
 
-        por_estado_reserva = nuevaReserva.objects.filter().exclude(estado=1).annotate(
-        estado_reser=Case(
-            When(estado=2, then=Value('Atendido')),  
-            When(estado=3, then=Value('Anulado')),  
-            When(estado=4, then=Value('No Show')), 
-            output_field=CharField(),
-        )
-    ).values('estado_reser').annotate(
-        total=Count('pk')
-    )
-        etiquetas3 = [estado_reserva['estado_reser'] for estado_reserva in por_estado_reserva]
-        valores3 = [cantidad['total'] for cantidad in por_estado_reserva]
-        fig3, ax3 = ptl.subplots()
-        fig3.set_facecolor('#000000')
-        ax3.pie(valores3, labels=etiquetas3,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
-        ax3.axis('equal')
-        ax3.set_title('Distribución por Estado', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+    #     por_estado_reserva = nuevaReserva.objects.filter().exclude(estado=1).annotate(
+    #     estado_reser=Case(
+    #         When(estado=2, then=Value('Atendido')),  
+    #         When(estado=3, then=Value('Anulado')),  
+    #         When(estado=4, then=Value('No Show')), 
+    #         output_field=CharField(),
+    #     )
+    # ).values('estado_reser').annotate(
+    #     total=Count('pk')
+    # )
+    #     etiquetas3 = [estado_reserva['estado_reser'] for estado_reserva in por_estado_reserva]
+    #     valores3 = [cantidad['total'] for cantidad in por_estado_reserva]
+    #     fig3, ax3 = ptl.subplots()
+    #     fig3.set_facecolor('#000000')
+    #     ax3.pie(valores3, labels=etiquetas3,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+    #     ax3.axis('equal')
+    #     ax3.set_title('Distribución por Estado', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-        buffer3 = BytesIO()
-        ptl.savefig(buffer3, format='png')
-        buffer3.seek(0)
-        image_base643 = base64.b64encode(buffer3.read()).decode()
-        grafico4 = "data:image/png;base64," + image_base643
+    #     buffer3 = BytesIO()
+    #     ptl.savefig(buffer3, format='png')
+    #     buffer3.seek(0)
+    #     image_base643 = base64.b64encode(buffer3.read()).decode()
+    #     grafico4 = "data:image/png;base64," + image_base643
 
-        # por almuerzo o cena  atendidas
+    #     # por almuerzo o cena  atendidas
 
-        por_hora_reserva = nuevaReserva.objects.filter(estado=2).annotate(
-        hora_reserva=Case(
-            When(hora__lt='17:30', then=Value('Almuerzo')),  
-            When(hora__gt='17:30', then=Value('Cena')), 
-            output_field=CharField(),
-        )
-    ).values('hora_reserva').annotate(
-        total=Count('pk')
-    )
-        etiquetas4 = [hora_reserva['hora_reserva'] for hora_reserva in por_hora_reserva]
-        valores4 = [cantidad['total'] for cantidad in por_hora_reserva]
-        fig4, ax4 = ptl.subplots()
-        fig4.set_facecolor('#000000')
-        ax4.pie(valores4, labels=etiquetas4,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
-        ax4.axis('equal')
-        ax4.set_title('Reservas Atendidas Según Horario', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+    #     por_hora_reserva = nuevaReserva.objects.filter(estado=2).annotate(
+    #     hora_reserva=Case(
+    #         When(hora__lt='17:30', then=Value('Almuerzo')),  
+    #         When(hora__gt='17:30', then=Value('Cena')), 
+    #         output_field=CharField(),
+    #     )
+    # ).values('hora_reserva').annotate(
+    #     total=Count('pk')
+    # )
+    #     etiquetas4 = [hora_reserva['hora_reserva'] for hora_reserva in por_hora_reserva]
+    #     valores4 = [cantidad['total'] for cantidad in por_hora_reserva]
+    #     fig4, ax4 = ptl.subplots()
+    #     fig4.set_facecolor('#000000')
+    #     ax4.pie(valores4, labels=etiquetas4,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+    #     ax4.axis('equal')
+    #     ax4.set_title('Reservas Atendidas Según Horario', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-        buffer4 = BytesIO()
-        ptl.savefig(buffer4, format='png')
-        buffer4.seek(0)
-        image_base644 = base64.b64encode(buffer4.read()).decode()
-        grafico5 = "data:image/png;base64," + image_base644
+    #     buffer4 = BytesIO()
+    #     ptl.savefig(buffer4, format='png')
+    #     buffer4.seek(0)
+    #     image_base644 = base64.b64encode(buffer4.read()).decode()
+    #     grafico5 = "data:image/png;base64," + image_base644
 
-        # reservas con incidencia 
+    #     # reservas con incidencia 
 
-        cuenta_incidencias = incidencia.objects.filter(id_reservacion__isnull = False).count()
-        cuenta_reservas = nuevaReserva.objects.filter(estado = 2).count()
+    #     cuenta_incidencias = incidencia.objects.filter(id_reservacion__isnull = False).count()
+    #     cuenta_reservas = nuevaReserva.objects.filter(estado = 2).count()
 
-        etiquetas5 = ['Incidencias','Reservas']
-        valores5 = [cuenta_incidencias, cuenta_reservas]
-        fig5, ax5 = ptl.subplots()
-        fig5.set_facecolor('#000000')
+    #     etiquetas5 = ['Incidencias','Reservas']
+    #     valores5 = [cuenta_incidencias, cuenta_reservas]
+    #     fig5, ax5 = ptl.subplots()
+    #     fig5.set_facecolor('#000000')
 
-        ax5.pie(valores5, labels=etiquetas5,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+    #     ax5.pie(valores5, labels=etiquetas5,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
 
-        ax5.axis('equal')
-        ax5.set_title('Atenciones con Incidencias', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+    #     ax5.axis('equal')
+    #     ax5.set_title('Atenciones con Incidencias', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-        buffer5 = BytesIO()
-        ptl.savefig(buffer5, format='png')
-        buffer5.seek(0)
-        image_base645 = base64.b64encode(buffer5.read()).decode()
-        grafico6 = "data:image/png;base64," + image_base645
+    #     buffer5 = BytesIO()
+    #     ptl.savefig(buffer5, format='png')
+    #     buffer5.seek(0)
+    #     image_base645 = base64.b64encode(buffer5.read()).decode()
+    #     grafico6 = "data:image/png;base64," + image_base645
 
 
 
-        return render(request, 'estadisticas.html',{'graf1':grafico1,'graf2':grafico2, 'graf3':grafico3, 'graf4':grafico4, 'graf5':grafico5, 'graf6':grafico6})
+        return render(request, 'estadisticas.html',{'graf1':grafico1})
     
     
