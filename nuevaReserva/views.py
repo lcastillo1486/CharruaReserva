@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscarFechaHistori, formIncidencia, formBuscarIncidencia, formBuscarPLaza, formIncidenciaLog, formBuscarIncidenciaLog
 from django.contrib import messages
-from .models import nuevaReserva, mesaNoo, estadoMesa, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena, plazaAlmuerzoMan, plazaCenaMan, incidenciaLog, controlmensaje
+from .models import nuevaReserva, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena, plazaAlmuerzoMan, plazaCenaMan, incidenciaLog, controlmensaje
 from django.db import models
 from datetime import datetime, timedelta, date
 from django.contrib.auth.decorators import login_required
@@ -1233,6 +1233,26 @@ def guardaPlazaAlm(request):
 
         plaza_dia.save()
 
+        mozo = request.POST.get('mozoplaza11')
+        m35 = request.POST.get('m35')
+        r35 = request.POST.get('r35')
+        m36 = request.POST.get('m36')
+        r36 = request.POST.get('r36')
+        m37 = request.POST.get('m37')
+        r37 = request.POST.get('r37')
+        m38 = request.POST.get('m38')
+        r38 = request.POST.get('r38')
+        m39 = request.POST.get('m39')
+        r39 = request.POST.get('r39')
+        total = request.POST.get('totalpz11')
+        plaza = 'Plaza11'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
+                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
         zona_horaria_peru = pytz.timezone('America/Lima')
         fecha_actual = datetime.now(zona_horaria_peru)
         es_fds = fecha_actual.weekday() in [5, 6]
@@ -1431,6 +1451,26 @@ def guardaPlazaCena(request):
 
         plaza_cena = plazaCena(m1=mbelua, r1=rbelua, total=total,
                                plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_cena.save()
+
+        mozo = request.POST.get('mozoplaza11c')
+        m35 = request.POST.get('m35c')
+        r35 = request.POST.get('r35c')
+        m36 = request.POST.get('m36c')
+        r36 = request.POST.get('r36c')
+        m37 = request.POST.get('m37c')
+        r37 = request.POST.get('r37c')
+        m38 = request.POST.get('m38c')
+        r38 = request.POST.get('r38c')
+        m39 = request.POST.get('m39c')
+        r39 = request.POST.get('r39c')
+        total = request.POST.get('totalpz11c')
+        plaza = 'Plaza11'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_cena = plazaCena(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
+                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_cena.save()
 
@@ -2525,6 +2565,7 @@ def verplazafds(request):
         p9 = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza9')
         p10 = plazaAlmuerzo.objects.get(
             fecha_dia=fecha_actual, plaza='Plaza10')
+        p11 = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza11')
         anfi_nombre = plazaAlmuerzo.objects.get(
             fecha_dia=fecha_actual, plaza='Plaza1')
 
@@ -2538,6 +2579,7 @@ def verplazafds(request):
         plaza8 = p8
         plaza9 = p9
         plaza10 = p10
+        plaza11 = p11
         nombre_anfi = anfi_nombre.nombre_anfitriona
         mozoplaza1 = plaza1.mozo_nombre
         mozoplaza2 = plaza2.mozo_nombre
@@ -2549,6 +2591,7 @@ def verplazafds(request):
         mozoplaza8 = plaza8.mozo_nombre
         mozoplaza9 = plaza9.mozo_nombre
         mozoplaza10 = plaza10.mozo_nombre
+        mozoplaza11 = plaza11.mozo_nombre
     else:
         estado = 2
         mozoplaza1 = ""
@@ -2561,6 +2604,7 @@ def verplazafds(request):
         mozoplaza8 = ""
         mozoplaza9 = ""
         mozoplaza10 = ""
+        mozoplaza11 = ""
         nombre_anfi = ""
 
     mozoz_p = mozosPlaza.objects.all()
@@ -2580,6 +2624,7 @@ def verplazafds(request):
         p8c = plazaCena.objects.get(fecha_dia=fecha_actual, plaza='Plaza8')
         p9c = plazaCena.objects.get(fecha_dia=fecha_actual, plaza='Plaza9')
         p10c = plazaCena.objects.get(fecha_dia=fecha_actual, plaza='Plaza10')
+        p11c = plazaCena.objects.get(fecha_dia=fecha_actual, plaza='Plaza11')
         anfi_nombrec = plazaCena.objects.get(fecha_dia=fecha_actual, plaza='Plaza1')
 
         plaza1c = p1c
@@ -2592,6 +2637,7 @@ def verplazafds(request):
         plaza8c = p8c
         plaza9c = p9c
         plaza10c = p10c
+        plaza11c = p11c
         nombre_anfic = anfi_nombrec.nombre_anfitriona
         mozoplaza1c = plaza1c.mozo_nombre
         mozoplaza2c = plaza2c.mozo_nombre
@@ -2603,6 +2649,7 @@ def verplazafds(request):
         mozoplaza8c = plaza8c.mozo_nombre
         mozoplaza9c = plaza9c.mozo_nombre
         mozoplaza10c = plaza10c.mozo_nombre
+        mozoplaza11c = plaza11c.mozo_nombre
     else:
         estadoc = 2
         mozoplaza1c = ""
@@ -2615,6 +2662,7 @@ def verplazafds(request):
         mozoplaza8c = ""
         mozoplaza9c = ""
         mozoplaza10c = ""
+        mozoplaza11c = ""
         nombre_anfic = ""
 
     mozoz_pc = mozosPlaza.objects.all()
@@ -2730,6 +2778,19 @@ def verplazafds(request):
         fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__lt='17:30').count()
     tota_plaza10 = mesabelua
 
+    # plaza11
+    mesa35 = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__lt='17:30').count()
+    mesa36 = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__lt='17:30').count()
+    mesa37 = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__lt='17:30').count()
+    mesa38 = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__lt='17:30').count()
+    mesa39 = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__lt='17:30').count()
+    tota_plaza11 = mesa35 + mesa36 + mesa37 + mesa38 + mesa39
+
     # plaza1c
     mesa1c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='1', hora__gt='17:30').count()
@@ -2840,6 +2901,19 @@ def verplazafds(request):
     mesabeluac = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__gt='17:30').count()
     tota_plaza10c = mesabeluac
+
+    # plaza11c
+    mesa35c = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__gt='17:30').count()
+    mesa36c = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__gt='17:30').count()
+    mesa37c = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__gt='17:30').count()
+    mesa38c = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__gt='17:30').count()
+    mesa39c = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__gt='17:30').count()
+    tota_plaza11c = mesa35c + mesa36c + mesa37c + mesa38c + mesa39c
 
     ##########BUSCAR LAS MANUALES ALMUERZO#################        MODIFICAR LAS PLAZAS
     if plazaAlmuerzoMan.objects.filter(fecha_dia = fecha_actual, plaza = 'Plaza1').exists():
@@ -2954,6 +3028,21 @@ def verplazafds(request):
     #plaza10
         npBELUA = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
         resultnpBELUA = npBELUA.n1
+    
+    #plaza11
+        np35 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp35 = np35.n1
+        np36 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp36 = np36.n2
+        np37 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp37 = np37.n3
+        np38 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp38 = np38.n4
+        np39 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp39 = np39.n5
+
+        totalnp11 = int(resultnp35) + int(resultnp36) + int(resultnp37) + int(resultnp38) + int(resultnp39)
+
 
     else:
           resultnp1 = resultnp2 = resultnp3 = resultnp6 = resultnp6A = totalnp1 = resultnp4 = resultnp5 = resultnp10 \
@@ -2963,7 +3052,7 @@ def verplazafds(request):
             = totalnp5 = resultnp22 = resultnp30 = resultnp31 = resultnp32\
             = totalnp6 = resultnp27 = resultnp28 = resultnp29 = resultnpB3\
             = totalnp7 = resultnp35 = resultnp36 = resultnp37 = resultnp38 = resultnp39\
-            = totalnp8 = resultnpJP = resultnpBELUA = 0 
+            = totalnp8 = resultnpJP = resultnpBELUA =  totalnp11 = 0  
  
     ##########BUSCAR LAS MANUALES CENA#################   REEMPLAZAR POR LOS NUMEROS DE MESA SEGUN PLANTILLA 
     if plazaCenaMan.objects.filter(fecha_dia = fecha_actual, plaza = 'Plaza1').exists():
@@ -3078,6 +3167,20 @@ def verplazafds(request):
     #plaza10
         npBELUAc = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
         resultnpBELUAc = npBELUAc.n1
+    
+    #plaza11
+        np35c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp35c = np35c.n1
+        np36c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp36c = np36c.n2
+        np37c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp37c = np37c.n3
+        np38c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza1')
+        resultnp38c = np38c.n4
+        np39c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnp39c = np39c.n5
+
+        totalnp11c = int(resultnp35c) + int(resultnp36c) + int(resultnp37c) + int(resultnp38c) + int(resultnp39c)
     else:
           resultnp1c = resultnp2c = resultnp3c = resultnp6c = resultnp6Ac = totalnp1c = resultnp4c = resultnp5c = resultnp10c \
             = resultnp11c = resultnp12c = totalnp2c = resultnp12Ac = resultnp14c = resultnp15c = resultnp16c = totalnp3c = resultnp12Ac \
@@ -3086,7 +3189,7 @@ def verplazafds(request):
             = totalnp5c = resultnp22c = resultnp30c = resultnp31c = resultnp32c\
             = totalnp6c = resultnp27c = resultnp28c = resultnp29c = resultnpB3c\
             = totalnp7c = resultnp35c = resultnp36c = resultnp37c = resultnp38c = resultnp39c\
-            = totalnp8c = resultnpJPc = resultnpBELUAc = 0
+            = totalnp8c = resultnpJPc = resultnpBELUAc =  totalnp11c = 0 
 
     return render(request, 'plazasfds.html', {'listaMozos': mozoz_p,
                                             'meza1': mesa1, 'meza1n':resultnp1, 'meza2': mesa2,'meza2n':resultnp2, 'meza3': mesa3, 'meza3n':resultnp3,'meza6': mesa6, 'meza6n':resultnp6, 'meza6A': mesa6A, 'meza6An':resultnp6A,'totalplaza1': tota_plaza1, 'totalnp1':totalnp1,'mozoNombre': mozoplaza1, 'estado': estado,
@@ -3095,8 +3198,8 @@ def verplazafds(request):
                                           'meza17': mesa17, 'meza17n': resultnp17, 'meza18': mesa18, 'meza18n': resultnp18, 'meza8': mesa8, 'meza8n': resultnp8, 'meza9': mesa9, 'meza9n': resultnp9, 'meza34': mesa34, 'meza34n': resultnp34,'totalplaza4': tota_plaza4, 'totalnp4':totalnp4, 'mozoNombre4': mozoplaza4,
                                           'meza26': mesa26, 'meza26n': resultnp26, 'meza19': mesa19, 'meza19n': resultnp19, 'meza20': mesa20, 'meza20n': resultnp20, 'meza21': mesa21, 'meza21n': resultnp21,'totalplaza5': tota_plaza5, 'totalnp5':totalnp5, 'mozoNombre5': mozoplaza5, 
                                           'meza22': mesa22, 'meza22n': resultnp22, 'meza30': mesa30, 'meza30n': resultnp30, 'meza31': mesa31, 'meza31n': resultnp31, 'meza32': mesa32, 'meza32n': resultnp32, 'totalplaza6': tota_plaza6, 'totalnp6':totalnp6, 'mozoNombre6': mozoplaza6,
-                                          'meza27': mesa27, 'meza27n': resultnp27, 'meza28': mesa28, 'meza28n': resultnp28, 'meza29': mesa29, 'meza29n': resultnp29, 'mezab3': mesab3, 'mezaB3n': resultnpB3, 'totalplaza7': tota_plaza7, 'totalnp7':totalnp7, 'mozoNombre7': mozoplaza7,
-                                          'meza35': "", 'meza35n': "", 'meza36': "", 'meza36n': "", 'meza37': "", 'meza37n': "", 'meza38': "", 'meza38n': "", 'meza39': "", 'meza39n': "", 'totalplaza8': tota_plaza8, 'totalnp8':totalnp8, 'mozoNombre8': mozoplaza8,
+                                          'meza27': mesa27, 'meza27n': resultnp27, 'meza28': mesa28, 'meza28n': resultnp28, 'meza29': mesa29, 'meza29n': resultnp29, 'mezab3': mesab3, 'mezaB3n': resultnpB3, 'totalplaza7': tota_plaza7, 'totalnp7':totalnp7, 'mozoNombre7': mozoplaza7, 'totalnp11':totalnp11, 'mozoNombre11': mozoplaza11,
+                                          'meza35': mesa35, 'meza35n': resultnp35, 'meza36': mesa36, 'meza36n': resultnp36, 'meza37': mesa37, 'meza37n': resultnp37, 'meza38': mesa38, 'meza38n': resultnp38, 'meza39': mesa39, 'meza39n': resultnp39,'totalplaza8':tota_plaza11, 'totalplaza8': tota_plaza8, 'totalnp8':totalnp8, 'mozoNombre8': mozoplaza8,
                                           'mezajp': mesajp, 'mezaJPn': resultnpJP,'totalplaza9': tota_plaza9, 'mozoNombre9': mozoplaza9, 
                                           'mezabelua': mesabelua, 'mezaBELUAn': resultnpBELUA, 'totalplaza10': tota_plaza10, 'mozoNombre10': mozoplaza10, 
                                           'estado': estado, 'anfialmuerzo': nombre_anfi, 'listaAnfitrionas':anfitrionas, 'horaActual':hora_actual, 'fecha_hoy':fecha_actual,
@@ -3108,8 +3211,8 @@ def verplazafds(request):
                                           'meza17c': mesa17c, 'meza17nc': resultnp17c, 'meza18c': mesa18c, 'meza18nc': resultnp18c, 'meza8c': mesa8c, 'meza8nc': resultnp8c, 'meza9c': mesa9c, 'meza9nc': resultnp9c, 'meza34c': mesa34c, 'meza34nc': resultnp34c,'totalplaza4c': tota_plaza4c, 'totalnp4c':totalnp4c, 'mozoNombre4c': mozoplaza4c,
                                           'meza26c': mesa26c, 'meza26nc': resultnp26c, 'meza19c': mesa19c, 'meza19nc': resultnp19c, 'meza20c': mesa20c, 'meza20nc': resultnp20c, 'meza21c': mesa21c, 'meza21nc': resultnp21c,'totalplaza5c': tota_plaza5c, 'totalnp5c':totalnp5c, 'mozoNombre5c': mozoplaza5c, 
                                           'meza22c': mesa22c, 'meza22nc': resultnp22c, 'meza30c': mesa30c, 'meza30nc': resultnp30c, 'meza31c': mesa31c, 'meza31nc': resultnp31c, 'meza32c': mesa32c, 'meza32nc': resultnp32c, 'totalplaza6c': tota_plaza6c, 'totalnp6c':totalnp6c, 'mozoNombre6c': mozoplaza6c,
-                                          'meza27c': mesa27c, 'meza27nc': resultnp27c, 'meza28c': mesa28c, 'meza28nc': resultnp28c, 'meza29c': mesa29c, 'meza29nc': resultnp29c, 'mezab3c': mesab3c, 'mezaB3nc': resultnpB3c, 'totalplaza7c': tota_plaza7c, 'totalnp7c':totalnp7c, 'mozoNombre7c': mozoplaza7c,
-                                          'meza35c': "", 'meza35nc': "", 'meza36c': "", 'meza36nc': "", 'meza37c': "", 'meza37nc': "", 'meza38c': "", 'meza38nc': "", 'meza39c': "", 'meza39nc': "", 'totalplaza8c': tota_plaza8c, 'totalnp8c':totalnp8c, 'mozoNombre8c': mozoplaza8c,
+                                          'meza27c': mesa27c, 'meza27nc': resultnp27c, 'meza28c': mesa28c, 'meza28nc': resultnp28c, 'meza29c': mesa29c, 'meza29nc': resultnp29c, 'mezab3c': mesab3c, 'mezaB3nc': resultnpB3c, 'totalplaza7c': tota_plaza7c, 'totalnp7c':totalnp7c, 'mozoNombre7c': mozoplaza7c, 'totalnp11c':totalnp11c, 'mozoNombre11c': mozoplaza11c,
+                                          'meza35c': mesa35c, 'meza35nc': resultnp35c, 'meza36c': mesa36, 'meza36nc': resultnp36c, 'meza37c': mesa37c, 'meza37nc': resultnp37c, 'meza38c': mesa38c, 'meza38nc': resultnp38c, 'meza39c': mesa39c, 'meza39nc': resultnp39c,'totalplaza11c': tota_plaza11c, 'totalplaza8c': tota_plaza8c, 'totalnp8c':totalnp8c, 'mozoNombre8c': mozoplaza8c,
                                           'mezajpc': mesajpc, 'mezaJPnc': resultnpJPc,'totalplaza9c': tota_plaza9c, 'mozoNombre9c': mozoplaza9c, 
                                           'mezabeluac': mesabeluac, 'mezaBELUAnc': resultnpBELUAc, 'totalplaza10c': tota_plaza10c, 'mozoNombre10c': mozoplaza10c, 
                                           'estadoc': estadoc, 'anfialmuerzoc': nombre_anfic, 'listaAnfitrionasc':anfitrionasc})
@@ -3214,6 +3317,16 @@ def controlMesaManCenfds(request, nmesa):
         guardap10.n5 = 0
         guardap10.plaza = "Plaza10"
         guardap10.save()
+
+        # plaza11
+        guardap8 =  plazaCenaMan()
+        guardap8.n1 = 0
+        guardap8.n2 = 0
+        guardap8.n3 = 0
+        guardap8.n4 = 0
+        guardap8.n5 = 0
+        guardap8.plaza = "Plaza11"
+        guardap8.save()
 
         return redirect('calculadia')
 
@@ -3381,6 +3494,29 @@ def controlMesaManCenfds(request, nmesa):
            guardan1 = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
+    
+    #plaza11
+    if n_mesa == "35":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n1 = int(guardan1.n1) + 1
+           guardan1.save()
+    if n_mesa == "36":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n2 = int(guardan1.n2) + 1
+           guardan1.save()
+    if n_mesa == "37":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n3 = int(guardan1.n3) + 1
+           guardan1.save()
+    if n_mesa == "38":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n4 = int(guardan1.n4) + 1
+           guardan1.save()
+    if n_mesa == "39":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n5 = int(guardan1.n5) + 1
+           guardan1.save()
+    
     return redirect('calculadia')
 
 def controlMesaManAlmfds(request, nmesa):
@@ -3482,6 +3618,16 @@ def controlMesaManAlmfds(request, nmesa):
         guardap10.n4 = 0
         guardap10.n5 = 0
         guardap10.plaza = "Plaza10"
+        guardap10.save()
+
+        # plaza11
+        guardap10 = plazaAlmuerzoMan()
+        guardap10.n1 = 0
+        guardap10.n2 = 0
+        guardap10.n3 = 0
+        guardap10.n4 = 0
+        guardap10.n5 = 0
+        guardap10.plaza = "Plaza11"
         guardap10.save()
 
         return redirect('calculadia')
@@ -3653,150 +3799,172 @@ def controlMesaManAlmfds(request, nmesa):
            guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
+    
+    #plaza8
+    if n_mesa == "35":
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n1 = int(guardan1.n1) + 1
+           guardan1.save()
+    if n_mesa == "36":
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n2 = int(guardan1.n2) + 1
+           guardan1.save()
+    if n_mesa == "37":
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n3 = int(guardan1.n3) + 1
+           guardan1.save()
+    if n_mesa == "38":
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n4 = int(guardan1.n4) + 1
+           guardan1.save()
+    if n_mesa == "39":
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n5 = int(guardan1.n5) + 1
+           guardan1.save()
 
     return redirect('calculadia')
 
 def estadisticas(request):
         
     #clientes atendidos por dia semana
-    #     total_clientes_dia = nuevaReserva.objects.filter(estado=2).annotate(
-    #     dia_semana=Case(
-    #         When(fechaReserva__week_day=1, then=Value('Domingo')),  # Domingo
-    #         When(fechaReserva__week_day=2, then=Value('Lunes')),  # Lunes
-    #         When(fechaReserva__week_day=3, then=Value('Martes')),  # Martes
-    #         When(fechaReserva__week_day=4, then=Value('Miercoles')),  # Miércoles
-    #         When(fechaReserva__week_day=5, then=Value('Jueves')),  # Jueves
-    #         When(fechaReserva__week_day=6, then=Value('Viernes')),  # Viernes
-    #         When(fechaReserva__week_day=7, then=Value('Sabado')),  # Sábado
-    #         output_field=CharField(),
-    #     )
-    # ).values('dia_semana').annotate(
-    #     total=Sum('cantidadPersonas')
-    # )
+        total_clientes_dia = nuevaReserva.objects.filter(estado=2).annotate(
+        dia_semana=Case(
+            When(fechaReserva__week_day=1, then=Value('Domingo')),  # Domingo
+            When(fechaReserva__week_day=2, then=Value('Lunes')),  # Lunes
+            When(fechaReserva__week_day=3, then=Value('Martes')),  # Martes
+            When(fechaReserva__week_day=4, then=Value('Miercoles')),  # Miércoles
+            When(fechaReserva__week_day=5, then=Value('Jueves')),  # Jueves
+            When(fechaReserva__week_day=6, then=Value('Viernes')),  # Viernes
+            When(fechaReserva__week_day=7, then=Value('Sabado')),  # Sábado
+            output_field=CharField(),
+        )
+    ).values('dia_semana').annotate(
+        total=Sum('cantidadPersonas')
+    )
 
-    #     etiquetas = [dia['dia_semana'] for dia in total_clientes_dia]
-    #     valores = [cantidad['total'] for cantidad in total_clientes_dia]
-    #     fig, ax = ptl.subplots()
-    #     fig.set_facecolor('#000000')
-    #     ax.pie(valores, labels=etiquetas,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-    #     ax.axis('equal')
-    #     ax.set_title('Reservas Atendidas por día de la Semana', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        etiquetas = [dia['dia_semana'] for dia in total_clientes_dia]
+        valores = [cantidad['total'] for cantidad in total_clientes_dia]
+        fig, ax = ptl.subplots()
+        fig.set_facecolor('#000000')
+        ax.pie(valores, labels=etiquetas,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+        ax.axis('equal')
+        ax.set_title('Reservas Atendidas por día de la Semana', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer = BytesIO()
-    #     ptl.savefig(buffer, format='png')
-    #     buffer.seek(0)
-    #     image_base64 = base64.b64encode(buffer.read()).decode()
-    #     grafico1 = "data:image/png;base64," + image_base64
+        buffer = BytesIO()
+        ptl.savefig(buffer, format='png')
+        buffer.seek(0)
+        image_base64 = base64.b64encode(buffer.read()).decode()
+        grafico1 = "data:image/png;base64," + image_base64
 
-    #     ## Origen de la reserva 
+        ## Origen de la reserva 
 
-    #     por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False).values('origen_reserva').annotate(total_origen=Count('pk'))
+        por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False).values('origen_reserva').annotate(total_origen=Count('pk'))
 
-    #     etiquetas1 = [origen['origen_reserva'] for origen in por_origen_reserva]
-    #     valores1 = [cantidad['total_origen'] for cantidad in por_origen_reserva]
-    #     fig1, ax1 = ptl.subplots()
-    #     fig1.set_facecolor('#000000')
-    #     ax1.pie(valores1, labels=etiquetas1,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-    #     ax1.axis('equal')
-    #     ax1.set_title('Distribución por Origen', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        etiquetas1 = [origen['origen_reserva'] for origen in por_origen_reserva]
+        valores1 = [cantidad['total_origen'] for cantidad in por_origen_reserva]
+        fig1, ax1 = ptl.subplots()
+        fig1.set_facecolor('#000000')
+        ax1.pie(valores1, labels=etiquetas1,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+        ax1.axis('equal')
+        ax1.set_title('Distribución por Origen', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer1 = BytesIO()
-    #     ptl.savefig(buffer1, format='png')
-    #     buffer1.seek(0)
-    #     image_base641 = base64.b64encode(buffer1.read()).decode()
-    #     grafico2 = "data:image/png;base64," + image_base641
+        buffer1 = BytesIO()
+        ptl.savefig(buffer1, format='png')
+        buffer1.seek(0)
+        image_base641 = base64.b64encode(buffer1.read()).decode()
+        grafico2 = "data:image/png;base64," + image_base641
 
-    #     # ocupacion mesas 
+        # ocupacion mesas 
 
-    #     por_mesa_reserva = nuevaReserva.objects.filter(estado=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
+        por_mesa_reserva = nuevaReserva.objects.filter(estado=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
 
-    #     etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
-    #     valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
-    #     fig2, ax2 = ptl.subplots()
-    #     ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-    #     ax2.axis('equal')
-    #     ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
-    #     fig2.set_facecolor('#000000')
-    #     buffer2 = BytesIO()
-    #     ptl.savefig(buffer2, format='png')
-    #     buffer2.seek(0)
-    #     image_base642 = base64.b64encode(buffer2.read()).decode()
-    #     grafico3 = "data:image/png;base64," + image_base642
+        etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
+        valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
+        fig2, ax2 = ptl.subplots()
+        ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+        ax2.axis('equal')
+        ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        fig2.set_facecolor('#000000')
+        buffer2 = BytesIO()
+        ptl.savefig(buffer2, format='png')
+        buffer2.seek(0)
+        image_base642 = base64.b64encode(buffer2.read()).decode()
+        grafico3 = "data:image/png;base64," + image_base642
 
-    #     ## por estado de la reserva
+        ## por estado de la reserva
 
-    #     por_estado_reserva = nuevaReserva.objects.filter().exclude(estado=1).annotate(
-    #     estado_reser=Case(
-    #         When(estado=2, then=Value('Atendido')),  
-    #         When(estado=3, then=Value('Anulado')),  
-    #         When(estado=4, then=Value('No Show')), 
-    #         output_field=CharField(),
-    #     )
-    # ).values('estado_reser').annotate(
-    #     total=Count('pk')
-    # )
-    #     etiquetas3 = [estado_reserva['estado_reser'] for estado_reserva in por_estado_reserva]
-    #     valores3 = [cantidad['total'] for cantidad in por_estado_reserva]
-    #     fig3, ax3 = ptl.subplots()
-    #     fig3.set_facecolor('#000000')
-    #     ax3.pie(valores3, labels=etiquetas3,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
-    #     ax3.axis('equal')
-    #     ax3.set_title('Distribución por Estado', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        por_estado_reserva = nuevaReserva.objects.filter().exclude(estado=1).annotate(
+        estado_reser=Case(
+            When(estado=2, then=Value('Atendido')),  
+            When(estado=3, then=Value('Anulado')),  
+            When(estado=4, then=Value('No Show')), 
+            output_field=CharField(),
+        )
+    ).values('estado_reser').annotate(
+        total=Count('pk')
+    )
+        etiquetas3 = [estado_reserva['estado_reser'] for estado_reserva in por_estado_reserva]
+        valores3 = [cantidad['total'] for cantidad in por_estado_reserva]
+        fig3, ax3 = ptl.subplots()
+        fig3.set_facecolor('#000000')
+        ax3.pie(valores3, labels=etiquetas3,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+        ax3.axis('equal')
+        ax3.set_title('Distribución por Estado', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer3 = BytesIO()
-    #     ptl.savefig(buffer3, format='png')
-    #     buffer3.seek(0)
-    #     image_base643 = base64.b64encode(buffer3.read()).decode()
-    #     grafico4 = "data:image/png;base64," + image_base643
+        buffer3 = BytesIO()
+        ptl.savefig(buffer3, format='png')
+        buffer3.seek(0)
+        image_base643 = base64.b64encode(buffer3.read()).decode()
+        grafico4 = "data:image/png;base64," + image_base643
 
-    #     # por almuerzo o cena  atendidas
+        # por almuerzo o cena  atendidas
 
-    #     por_hora_reserva = nuevaReserva.objects.filter(estado=2).annotate(
-    #     hora_reserva=Case(
-    #         When(hora__lt='17:30', then=Value('Almuerzo')),  
-    #         When(hora__gt='17:30', then=Value('Cena')), 
-    #         output_field=CharField(),
-    #     )
-    # ).values('hora_reserva').annotate(
-    #     total=Count('pk')
-    # )
-    #     etiquetas4 = [hora_reserva['hora_reserva'] for hora_reserva in por_hora_reserva]
-    #     valores4 = [cantidad['total'] for cantidad in por_hora_reserva]
-    #     fig4, ax4 = ptl.subplots()
-    #     fig4.set_facecolor('#000000')
-    #     ax4.pie(valores4, labels=etiquetas4,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
-    #     ax4.axis('equal')
-    #     ax4.set_title('Reservas Atendidas Según Horario', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        por_hora_reserva = nuevaReserva.objects.filter(estado=2).annotate(
+        hora_reserva=Case(
+            When(hora__lt='17:30', then=Value('Almuerzo')),  
+            When(hora__gt='17:30', then=Value('Cena')), 
+            output_field=CharField(),
+        )
+    ).values('hora_reserva').annotate(
+        total=Count('pk')
+    )
+        etiquetas4 = [hora_reserva['hora_reserva'] for hora_reserva in por_hora_reserva]
+        valores4 = [cantidad['total'] for cantidad in por_hora_reserva]
+        fig4, ax4 = ptl.subplots()
+        fig4.set_facecolor('#000000')
+        ax4.pie(valores4, labels=etiquetas4,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+        ax4.axis('equal')
+        ax4.set_title('Reservas Atendidas Según Horario', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer4 = BytesIO()
-    #     ptl.savefig(buffer4, format='png')
-    #     buffer4.seek(0)
-    #     image_base644 = base64.b64encode(buffer4.read()).decode()
-    #     grafico5 = "data:image/png;base64," + image_base644
+        buffer4 = BytesIO()
+        ptl.savefig(buffer4, format='png')
+        buffer4.seek(0)
+        image_base644 = base64.b64encode(buffer4.read()).decode()
+        grafico5 = "data:image/png;base64," + image_base644
 
-    #     # reservas con incidencia 
+        # reservas con incidencia 
 
-    #     cuenta_incidencias = incidencia.objects.filter(id_reservacion__isnull = False).count()
-    #     cuenta_reservas = nuevaReserva.objects.filter(estado = 2).count()
+        cuenta_incidencias = incidencia.objects.filter(id_reservacion__isnull = False).count()
+        cuenta_reservas = nuevaReserva.objects.filter(estado = 2).count()
 
-    #     etiquetas5 = ['Incidencias','Reservas']
-    #     valores5 = [cuenta_incidencias, cuenta_reservas]
-    #     fig5, ax5 = ptl.subplots()
-    #     fig5.set_facecolor('#000000')
+        etiquetas5 = ['Incidencias','Reservas']
+        valores5 = [cuenta_incidencias, cuenta_reservas]
+        fig5, ax5 = ptl.subplots()
+        fig5.set_facecolor('#000000')
 
-    #     ax5.pie(valores5, labels=etiquetas5,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+        ax5.pie(valores5, labels=etiquetas5,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
 
-    #     ax5.axis('equal')
-    #     ax5.set_title('Atenciones con Incidencias', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        ax5.axis('equal')
+        ax5.set_title('Atenciones con Incidencias', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer5 = BytesIO()
-    #     ptl.savefig(buffer5, format='png')
-    #     buffer5.seek(0)
-    #     image_base645 = base64.b64encode(buffer5.read()).decode()
-    #     grafico6 = "data:image/png;base64," + image_base645
+        buffer5 = BytesIO()
+        ptl.savefig(buffer5, format='png')
+        buffer5.seek(0)
+        image_base645 = base64.b64encode(buffer5.read()).decode()
+        grafico6 = "data:image/png;base64," + image_base645
 
 
 
-        return render(request, 'estadisticas.html')
+        return render(request, 'estadisticas.html',{'graf1':grafico1,'graf2':grafico2, 'graf3':grafico3, 'graf4':grafico4, 'graf5':grafico5, 'graf6':grafico6})
     
     
