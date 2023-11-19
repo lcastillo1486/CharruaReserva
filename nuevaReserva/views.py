@@ -3827,34 +3827,34 @@ def controlMesaManAlmfds(request, nmesa):
 def estadisticas(request):
         
     #clientes atendidos por dia semana
-    #     total_clientes_dia = nuevaReserva.objects.filter(estado_id=2).annotate(
-    #     dia_semana=Case(
-    #         When(fechaReserva__week_day=1, then=Value('Domingo')),  # Domingo
-    #         When(fechaReserva__week_day=2, then=Value('Lunes')),  # Lunes
-    #         When(fechaReserva__week_day=3, then=Value('Martes')),  # Martes
-    #         When(fechaReserva__week_day=4, then=Value('Miercoles')),  # Miércoles
-    #         When(fechaReserva__week_day=5, then=Value('Jueves')),  # Jueves
-    #         When(fechaReserva__week_day=6, then=Value('Viernes')),  # Viernes
-    #         When(fechaReserva__week_day=7, then=Value('Sabado')),  # Sábado
-    #         output_field=CharField(),
-    #     )
-    # ).values('dia_semana').annotate(
-    #     total=Sum('cantidadPersonas')
-    # )
+        total_clientes_dia = nuevaReserva.objects.filter(estado_id=2).annotate(
+        dia_semana=Case(
+            When(fechaReserva__week_day=1, then=Value('Domingo')),  # Domingo
+            When(fechaReserva__week_day=2, then=Value('Lunes')),  # Lunes
+            When(fechaReserva__week_day=3, then=Value('Martes')),  # Martes
+            When(fechaReserva__week_day=4, then=Value('Miercoles')),  # Miércoles
+            When(fechaReserva__week_day=5, then=Value('Jueves')),  # Jueves
+            When(fechaReserva__week_day=6, then=Value('Viernes')),  # Viernes
+            When(fechaReserva__week_day=7, then=Value('Sabado')),  # Sábado
+            output_field=CharField(),
+        )
+    ).values('dia_semana').annotate(
+        total=Sum('cantidadPersonas')
+    )
 
-    #     etiquetas = [dia['dia_semana'] for dia in total_clientes_dia]
-    #     valores = [cantidad['total'] for cantidad in total_clientes_dia]
-    #     fig, ax = ptl.subplots()
-    #     fig.set_facecolor('#000000')
-    #     ax.pie(valores, labels=etiquetas,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-    #     ax.axis('equal')
-    #     ax.set_title('Reservas Atendidas por día de la Semana', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        etiquetas = [dia['dia_semana'] for dia in total_clientes_dia]
+        valores = [cantidad['total'] for cantidad in total_clientes_dia]
+        fig, ax = ptl.subplots()
+        fig.set_facecolor('#000000')
+        ax.pie(valores, labels=etiquetas,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+        ax.axis('equal')
+        ax.set_title('Reservas Atendidas por día de la Semana', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer = BytesIO()
-    #     ptl.savefig(buffer, format='png')
-    #     buffer.seek(0)
-    #     image_base64 = base64.b64encode(buffer.read()).decode()
-    #     grafico1 = "data:image/png;base64," + image_base64
+        buffer = BytesIO()
+        ptl.savefig(buffer, format='png')
+        buffer.seek(0)
+        image_base64 = base64.b64encode(buffer.read()).decode()
+        grafico1 = "data:image/png;base64," + image_base64
 
         # Origen de la reserva 
 
@@ -3965,6 +3965,6 @@ def estadisticas(request):
 
 
 
-        return render(request, 'estadisticas.html', {'graf6':grafico6})
+        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6})
     
     
