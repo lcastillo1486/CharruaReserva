@@ -366,7 +366,7 @@ def buscaHistoricoFecha(request):
 @login_required
 def exportaExcelHistorico(request):
 
-    completado = nuevaReserva.objects.all().order_by('-fechaReserva')[:100]
+    completado = nuevaReserva.objects.all().order_by('-fechaReserva')[:1000]
     
     #crea nuevo libro
     wb1 = openpyxl.Workbook()
