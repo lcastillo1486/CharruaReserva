@@ -96,7 +96,7 @@ Te esperamos en *El Charrúa*"""
 
 def envioRecordatorio():
     fecha_actual = datetime.now().date()
-    listado_envio = nuevaReserva.objects.filter(fechaReserva=fecha_actual)
+    listado_envio = nuevaReserva.objects.filter(fechaReserva=fecha_actual, estado_id=1)
     for telefono in listado_envio:
       telwhat = telefono.telefono
       if not telwhat is None:
