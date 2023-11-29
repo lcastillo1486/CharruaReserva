@@ -366,7 +366,7 @@ def buscaHistoricoFecha(request):
 @login_required
 def exportaExcelHistorico(request):
 
-    completado = nuevaReserva.objects.all().order_by('-fechaReserva')
+    completado = nuevaReserva.objects.all().order_by('-fechaReserva')[:100]
     
     #crea nuevo libro
     wb1 = openpyxl.Workbook()
@@ -3966,5 +3966,505 @@ def estadisticas(request):
 
 
         return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2, 'graf3':grafico3})
+
+def guardaPlazaAlmfds(request):
+    fecha_actual = datetime.now().date()
+    hora_actual = datetime.now().strftime('%H:%M')
+
+    if plazaAlmuerzo.objects.filter(fecha_dia=fecha_actual).exists():
+        return HttpResponse('Ya esta guardado')
+
+    # if hora_actual < '17:30':
+    #     return HttpResponse('No puede guardar la plaza hasta finalizar el turno')
+
+    if request.method == 'POST':
+
+        mozo = request.POST.get('mozoplaza1')
+        m1 = request.POST.get('m1')
+        r1 = request.POST.get('r1')
+        m2 = request.POST.get('m2')
+        r2 = request.POST.get('r2')
+        m3 = request.POST.get('m3')
+        r3 = request.POST.get('r3')
+        m6 = request.POST.get('m6')
+        r6 = request.POST.get('r6')
+        # m6a = request.POST.get('m6A')
+        # r6a = request.POST.get('r6A')
+        total = request.POST.get('totalpz1')
+        plaza = 'Plaza1'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m1, r1=r1, m2=m2, r2=r2, m3=m3, r3=r3,
+                                   m4=m6, r4=r6, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza2')
+        m4 = request.POST.get('m4')
+        r4 = request.POST.get('r4')
+        m5 = request.POST.get('m5')
+        r5 = request.POST.get('r5')
+        # m10 = request.POST.get('m10')
+        # r10 = request.POST.get('r10')
+        m11 = request.POST.get('m11')
+        r11 = request.POST.get('r11')
+        m12 = request.POST.get('m12')
+        r12 = request.POST.get('r12')
+        total = request.POST.get('totalpz2')
+        plaza = 'Plaza2'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m4, r1=r4, m2=m5, r2=r5, m3=m11,
+                                   r3=r11, m4=m12, r4=r12, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza3')
+        m12a = request.POST.get('m12A')
+        r12 = request.POST.get('r12')
+        m14 = request.POST.get('m14')
+        r14 = request.POST.get('r14')
+        m15 = request.POST.get('m15')
+        r15 = request.POST.get('r15')
+        m21 = request.POST.get('m21')
+        r21 = request.POST.get('r21')
+        total = request.POST.get('totalpz3')
+        plaza = 'Plaza3'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m12a, r1=r12, m2=m14, r2=r14, m3=m15, r3=r15, m4=m21,
+                                   r4=r21, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza4')
+        m6a = request.POST.get('m6A')
+        r6a = request.POST.get('r6A')
+        m10 = request.POST.get('m10')
+        r10 = request.POST.get('r10')
+        # m18 = request.POST.get('m18')
+        # r18 = request.POST.get('r18')
+        # m8 = request.POST.get('m8')
+        # r8 = request.POST.get('r8')
+        m9 = request.POST.get('m9')
+        r9 = request.POST.get('r9')
+        m16 = request.POST.get('m16')
+        r16 = request.POST.get('r16')
+        # m34 = request.POST.get('m34')
+        # r34 = request.POST.get('r34')
+        total = request.POST.get('totalpz4')
+        plaza = 'Plaza4'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m6a, r1=r6a, m2=m9, r2=r9, m3=m10, r3=r10, m4=m16,
+                                   r4=r16, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza5')
+        m8 = request.POST.get('m8')
+        r8 = request.POST.get('r8')
+        m17 = request.POST.get('m17')
+        r17 = request.POST.get('r17')
+        m18 = request.POST.get('m18')
+        r18 = request.POST.get('r18')
+        m34 = request.POST.get('m34')
+        r34 = request.POST.get('r34')
+        # m26 = request.POST.get('m26')
+        # r26 = request.POST.get('r26')
+        # m19 = request.POST.get('m19')
+        # r19 = request.POST.get('r19')
+        # m20 = request.POST.get('m20')
+        # r20 = request.POST.get('r20')
+        # m21 = request.POST.get('m21')
+        # r21 = request.POST.get('r21')
+        total = request.POST.get('totalpz5')
+        plaza = 'Plaza5'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m8, r1=r8, m2=m17, r2=r17, m3=m18, r3=r18, m4=m34,
+                                   r4=r34, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza6')
+        m19 = request.POST.get('m19')
+        r19 = request.POST.get('r19')
+        m20 = request.POST.get('m20')
+        r20 = request.POST.get('r20')
+        m24 = request.POST.get('m24')
+        r24 = request.POST.get('r24')
+        m26 = request.POST.get('m26')
+        r26 = request.POST.get('r26')
+        # m22 = request.POST.get('m22')
+        # r22 = request.POST.get('r22')
+        # m30 = request.POST.get('m30')
+        # r30 = request.POST.get('r30')
+        # m31 = request.POST.get('m31')
+        # r31 = request.POST.get('r31')
+        # m32 = request.POST.get('m32')
+        # r32 = request.POST.get('r32')
+        total = request.POST.get('totalpz6')
+        plaza = 'Plaza6'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m19, r1=r19, m2=m20, r2=r20, m3=m24, r3=r24, m4=m26,
+                                   r4=r26, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza7')
+        m27 = request.POST.get('m27')
+        r27 = request.POST.get('r27')
+        m28 = request.POST.get('m28')
+        r28 = request.POST.get('r28')
+        m29 = request.POST.get('m29')
+        r29 = request.POST.get('r29')
+        mb3 = request.POST.get('mb3')
+        rb3 = request.POST.get('rb3')
+        total = request.POST.get('totalpz7')
+        plaza = 'Plaza7'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m27, r1=r27, m2=m28, r2=r28, m3=m29, r3=r29, m4=mb3,
+                                   r4=rb3, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza8')
+        m22 = request.POST.get('m22')
+        r22 = request.POST.get('r22')
+        m23 = request.POST.get('m23')
+        r23 = request.POST.get('r23')
+        m30 = request.POST.get('m30')
+        r30 = request.POST.get('r30')
+        m31 = request.POST.get('m31')
+        r31 = request.POST.get('r31')
+        m32 = request.POST.get('m32')
+        r32 = request.POST.get('r32')
+        # m27 = request.POST.get('m27')
+        # r27 = request.POST.get('r27')
+        # m28 = request.POST.get('m28')
+        # r28 = request.POST.get('r28')
+        # m29 = request.POST.get('m29')
+        # r29 = request.POST.get('r29')
+        # mb3 = request.POST.get('mb3')
+        # rb3 = request.POST.get('rb3')
+        total = request.POST.get('totalpz8')
+        plaza = 'Plaza8'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m22, r1=r22, m2=m23, r2=r23, m3=m30, r3=r30, m4=m31,
+                                   r4=r31, m5=m32, r5=r32, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        
+        mozo = request.POST.get('mozoplaza9') + ' y ' + \
+                                request.POST.get('mozoplaza9b')
+        mjp = request.POST.get('mjp')
+        rjp = request.POST.get('rjp')
+        total = request.POST.get('totalpz9')
+        plaza = 'Plaza9'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(
+            m1=mjp, r1=rjp, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza10') + ' y ' + \
+                                request.POST.get('mozoplaza10b')
+        mbelua = request.POST.get('mbelua')
+        rbelua = request.POST.get('rbelua')
+        total = request.POST.get('totalpz10')
+        plaza = 'Plaza10'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=mbelua, r1=rbelua, total=total,
+                                  plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza11')
+        m35 = request.POST.get('m35')
+        r35 = request.POST.get('r35')
+        m36 = request.POST.get('m36')
+        r36 = request.POST.get('r36')
+        m37 = request.POST.get('m37')
+        r37 = request.POST.get('r37')
+        m38 = request.POST.get('m38')
+        r38 = request.POST.get('r38')
+        m39 = request.POST.get('m39')
+        r39 = request.POST.get('r39')
+        total = request.POST.get('totalpz11')
+        plaza = 'Plaza11'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
+                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        
+        zona_horaria_peru = pytz.timezone('America/Lima')
+        fecha_actual = datetime.now(zona_horaria_peru)
+        es_fds = fecha_actual.weekday() in [5, 6]
+
+        if es_fds:
+            return controlMesaManAlmfds(request, 1)
+        else:
+            return controlMesaManAlm(request, 1)
+
+def guardaPlazaCenafds(request):
+    fecha_actual = datetime.now().date()
+    hora_actual = datetime.now().strftime('%H:%M')
+
+    if plazaAlmuerzo.objects.filter(fecha_dia=fecha_actual).exists():
+        return HttpResponse('Ya esta guardado')
+
+    # if hora_actual < '17:30':
+    #     return HttpResponse('No puede guardar la plaza hasta finalizar el turno')
+
+    if request.method == 'POST':
+
+        mozo = request.POST.get('mozoplaza1c')
+        m1 = request.POST.get('m1c')
+        r1 = request.POST.get('r1c')
+        m2 = request.POST.get('m2c')
+        r2 = request.POST.get('r2c')
+        m3 = request.POST.get('m3c')
+        r3 = request.POST.get('r3c')
+        m6 = request.POST.get('m6c')
+        r6 = request.POST.get('r6c')
+        # m6a = request.POST.get('m6A')
+        # r6a = request.POST.get('r6A')
+        total = request.POST.get('totalpz1c')
+        plaza = 'Plaza1'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m1, r1=r1, m2=m2, r2=r2, m3=m3, r3=r3,
+                                   m4=m6, r4=r6, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza2c')
+        m4 = request.POST.get('m4c')
+        r4 = request.POST.get('r4c')
+        m5 = request.POST.get('m5c')
+        r5 = request.POST.get('r5c')
+        # m10 = request.POST.get('m10')
+        # r10 = request.POST.get('r10')
+        m11 = request.POST.get('m11c')
+        r11 = request.POST.get('r11c')
+        m12 = request.POST.get('m12c')
+        r12 = request.POST.get('r12c')
+        total = request.POST.get('totalpz2c')
+        plaza = 'Plaza2'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m4, r1=r4, m2=m5, r2=r5, m3=m11,
+                                   r3=r11, m4=m12, r4=r12, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza3c')
+        m12a = request.POST.get('m12Ac')
+        r12 = request.POST.get('r12c')
+        m14 = request.POST.get('m14c')
+        r14 = request.POST.get('r14c')
+        m15 = request.POST.get('m15c')
+        r15 = request.POST.get('r15c')
+        m21 = request.POST.get('m21c')
+        r21 = request.POST.get('r21c')
+        total = request.POST.get('totalpz3c')
+        plaza = 'Plaza3'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m12a, r1=r12, m2=m14, r2=r14, m3=m15, r3=r15, m4=m21,
+                                   r4=r21, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza4c')
+        m6a = request.POST.get('m6Ac')
+        r6a = request.POST.get('r6Ac')
+        m10 = request.POST.get('m10c')
+        r10 = request.POST.get('r10c')
+        # m18 = request.POST.get('m18')
+        # r18 = request.POST.get('r18')
+        # m8 = request.POST.get('m8')
+        # r8 = request.POST.get('r8')
+        m9 = request.POST.get('m9c')
+        r9 = request.POST.get('r9c')
+        m16 = request.POST.get('m16c')
+        r16 = request.POST.get('r16c')
+        # m34 = request.POST.get('m34')
+        # r34 = request.POST.get('r34')
+        total = request.POST.get('totalpz4c')
+        plaza = 'Plaza4'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m6a, r1=r6a, m2=m9, r2=r9, m3=m10, r3=r10, m4=m16,
+                                   r4=r16, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza5c')
+        m8 = request.POST.get('m8c')
+        r8 = request.POST.get('r8c')
+        m17 = request.POST.get('m17c')
+        r17 = request.POST.get('r17c')
+        m18 = request.POST.get('m18c')
+        r18 = request.POST.get('r18c')
+        m34 = request.POST.get('m34c')
+        r34 = request.POST.get('r34c')
+        # m26 = request.POST.get('m26')
+        # r26 = request.POST.get('r26')
+        # m19 = request.POST.get('m19')
+        # r19 = request.POST.get('r19')
+        # m20 = request.POST.get('m20')
+        # r20 = request.POST.get('r20')
+        # m21 = request.POST.get('m21')
+        # r21 = request.POST.get('r21')
+        total = request.POST.get('totalpz5c')
+        plaza = 'Plaza5'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m8, r1=r8, m2=m17, r2=r17, m3=m18, r3=r18, m4=m34,
+                                   r4=r34, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza6c')
+        m19 = request.POST.get('m19c')
+        r19 = request.POST.get('r19c')
+        m20 = request.POST.get('m20c')
+        r20 = request.POST.get('r20c')
+        m24 = request.POST.get('m24c')
+        r24 = request.POST.get('r24c')
+        m26 = request.POST.get('m26c')
+        r26 = request.POST.get('r26c')
+        # m22 = request.POST.get('m22')
+        # r22 = request.POST.get('r22')
+        # m30 = request.POST.get('m30')
+        # r30 = request.POST.get('r30')
+        # m31 = request.POST.get('m31')
+        # r31 = request.POST.get('r31')
+        # m32 = request.POST.get('m32')
+        # r32 = request.POST.get('r32')
+        total = request.POST.get('totalpz6c')
+        plaza = 'Plaza6'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m19, r1=r19, m2=m20, r2=r20, m3=m24, r3=r24, m4=m26,
+                                   r4=r26, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza7c')
+        m27 = request.POST.get('m27c')
+        r27 = request.POST.get('r27c')
+        m28 = request.POST.get('m28c')
+        r28 = request.POST.get('r28c')
+        m29 = request.POST.get('m29c')
+        r29 = request.POST.get('r29c')
+        mb3 = request.POST.get('mb3c')
+        rb3 = request.POST.get('rb3c')
+        total = request.POST.get('totalpz7c')
+        plaza = 'Plaza7'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m27, r1=r27, m2=m28, r2=r28, m3=m29, r3=r29, m4=mb3,
+                                   r4=rb3, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza8c')
+        m22 = request.POST.get('m22c')
+        r22 = request.POST.get('r22c')
+        m23 = request.POST.get('m23c')
+        r23 = request.POST.get('r23c')
+        m30 = request.POST.get('m30c')
+        r30 = request.POST.get('r30c')
+        m31 = request.POST.get('m31c')
+        r31 = request.POST.get('r31c')
+        m32 = request.POST.get('m32c')
+        r32 = request.POST.get('r32c')
+        # m27 = request.POST.get('m27')
+        # r27 = request.POST.get('r27')
+        # m28 = request.POST.get('m28')
+        # r28 = request.POST.get('r28')
+        # m29 = request.POST.get('m29')
+        # r29 = request.POST.get('r29')
+        # mb3 = request.POST.get('mb3')
+        # rb3 = request.POST.get('rb3')
+        total = request.POST.get('totalpz8c')
+        plaza = 'Plaza8'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m22, r1=r22, m2=m23, r2=r23, m3=m30, r3=r30, m4=m31,
+                                   r4=r31, m5=m32, r5=r32, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        
+        mozo = request.POST.get('mozoplaza9c') + ', ' + \
+                                request.POST.get('mozoplaza9bc') + ' y ' + \
+                                request.POST.get('mozoplaza9bcn')
+        mjp = request.POST.get('mjpc')
+        rjp = request.POST.get('rjpc')
+        total = request.POST.get('totalpz9c')
+        plaza = 'Plaza9'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_cena = plazaCena(m1=mjp, r1=rjp, total=total,
+                               plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_cena.save()
+
+        mozo = request.POST.get('mozoplaza10c') + ', ' + \
+                                request.POST.get('mozoplaza10bc') + ' y ' + \
+                                request.POST.get('mozoplaza10bcn') 
+        mbelua = request.POST.get('mbeluac')
+        rbelua = request.POST.get('rbeluac')
+        total = request.POST.get('totalpz10c')
+        plaza = 'Plaza10'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_cena = plazaCena(m1=mbelua, r1=rbelua, total=total,
+                               plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_cena.save()
+
+        mozo = request.POST.get('mozoplaza11c')
+        m35 = request.POST.get('m35c')
+        r35 = request.POST.get('r35c')
+        m36 = request.POST.get('m36c')
+        r36 = request.POST.get('r36c')
+        m37 = request.POST.get('m37c')
+        r37 = request.POST.get('r37c')
+        m38 = request.POST.get('m38c')
+        r38 = request.POST.get('r38c')
+        m39 = request.POST.get('m39c')
+        r39 = request.POST.get('r39c')
+        total = request.POST.get('totalpz11c')
+        plaza = 'Plaza11'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaAlmuerzo(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
+                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        
+        zona_horaria_peru = pytz.timezone('America/Lima')
+        fecha_actual = datetime.now(zona_horaria_peru)
+        es_fds = fecha_actual.weekday() in [5, 6]
+
+        if es_fds:
+            return controlMesaManCenfds(request, 1)
+        else:
+            return controlMesaManAlm(request, 1)
     
     

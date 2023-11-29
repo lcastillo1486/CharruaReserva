@@ -59,7 +59,7 @@
     <div class="row">
 
         <div class="table-responsive py-2">
-            <form method="POST" action="/guardarPlazaAlmuerzo/">
+            <form method="POST" action="/guardarPlazaAlmuerzofds/">
                 {% csrf_token %}
                 <input type="hidden" name="num_filas" value=10>
                 <table class="table table-striped">
@@ -1183,7 +1183,7 @@
     <div class="row">
         <!-- <h4>Turno Cena</h4> -->
         <div class="table-responsive py-2">
-            <form method="POST" action="/guardarPlazaCena/">
+            <form method="POST" action="/guardarPlazaCenafds/">
                 {% csrf_token %}
                 <input type="hidden" name="num_filas" value=10>
                 <table class="table table-striped">
@@ -1641,7 +1641,7 @@
                             <td align="center">
 
                                 {% if estadoc == 1 %}
-                                <font color="white">{{mozoNombre5}}</font>
+                                <font color="white">{{mozoNombre5c}}</font>
                                 {% else %}
                                 <select name="mozoplaza5c">
                                     {% for c in listaMozosc %}
