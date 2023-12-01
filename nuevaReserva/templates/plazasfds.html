@@ -715,97 +715,6 @@
                                     {% endfor%}
                                 </select>
                                 {% endif %}
-
-                            </td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
-                                    name="m27" value=27>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManAlmfds/27' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r27" value={{meza27|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{meza27n}}</td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
-                                    name="m28" value=28>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManAlmfds/28' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r28" value={{meza28|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{meza28n}}</td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
-                                    name="m29" value=29>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManAlmfds/29' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r29" value={{meza29|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{meza29n}}</td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 30px;"
-                                    name="mb3" value=B3>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManAlmfds/B3' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="rb3" value={{mezab3|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{mezaB3n}}</td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;" name="m12" value = 12> -->
-                            </td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
-                            </td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
-                            </td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
-                            </td>
-                            <td align="center" style="background-color:  #25415a;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="totalpz7" value={{totalplaza7|default:0}}>
-                            </td>
-                            <td align="center" style="color: white; background-color:  #25415a;">{{totalnp7}}</td>
-                            <td align="center">
-                                <font color="white">Plaza 7</font>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                {% if estado == 1 %}
-                                <font color="white">{{mozoNombre8}}</font>
-                                {% else %}
-                                <select name="mozoplaza8">
-                                    {% for c in listaMozos %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                {% endif %}
                             </td>
                             <td align="center">
                                 <input type="text" readonly
@@ -883,7 +792,98 @@
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
                                     name="totalpz8" value={{totalplaza8|default:0}}>
                             </td>
-                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp8}}</td>
+                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp7}}</td>
+                            <td align="center">
+                                <font color="white">Plaza 7</font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                {% if estado == 1 %}
+                                <font color="white">{{mozoNombre8}}</font>
+                                {% else %}
+                                <select name="mozoplaza8">
+                                    {% for c in listaMozos %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                {% endif %}
+
+                            </td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
+                                    name="m27" value=27>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManAlmfds/27' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="r27" value={{meza27|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{meza27n}}</td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
+                                    name="m28" value=28>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManAlmfds/28' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="r28" value={{meza28|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{meza28n}}</td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
+                                    name="m29" value=29>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManAlmfds/29' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="r29" value={{meza29|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{meza29n}}</td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 30px;"
+                                    name="mb3" value=B3>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManAlmfds/B3' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="rb3" value={{mezab3|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{mezaB3n}}</td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;" name="m12" value = 12> -->
+                            </td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
+                            </td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
+                            </td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
+                            </td>
+                            <td align="center" style="background-color:  #25415a;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="totalpz7" value={{totalplaza7|default:0}}>
+                            </td>
+                            <td align="center" style="color: white; background-color:  #25415a;">{{totalnp8}}</td>
                             <td align="center">
                                 <font color="white">Plaza 8</font>
                             </td>
@@ -894,166 +894,6 @@
                                 <font color="white">{{mozoNombre9}}</font>
                                 {% else %}
                                 <select name="mozoplaza9">
-                                    {% for c in listaMozos %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                <br><br>
-                                <select name="mozoplaza9b">
-                                    {% for c in listaMozos %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                <br><br>
-                                <select name="mozoplaza9cm">
-                                    {% for c in listaMozos %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                {% endif %}
-                            </td>
-
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
-                                    name="mjp" value=JP>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManAlmfds/JP' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="rjp" value={{mezajp|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{mezaJPn}}</td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td align="center" style="background-color: #25415a;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="totalpz9" value={{totalplaza9|default:0}}>
-                            </td>
-                            <td align="center" style="color: white; background-color: #25415a;">{{mezaJPn}}</td>
-                            <td align="center">
-                                <font color="white">Plaza 9</font>
-                            </td>
-
-                        </tr>
-                        <td align="center">
-                            {% if estado == 1 %}
-                            <font color="white">{{mozoNombre10}}</font>
-                            {% else %}
-                            <select name="mozoplaza10">
-                                {% for c in listaMozos %}
-                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                {% endfor%}
-                            </select>
-                            <br><br>
-                            <select name="mozoplaza10b">
-                                {% for c in listaMozos %}
-                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                {% endfor%}
-                            </select>
-                            <br><br>
-                            <select name="mozoplaza10cm">
-                                {% for c in listaMozos %}
-                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                {% endfor%}
-                            </select>
-                            {% endif %}
-                        </td>
-
-                        <td align="center">
-                            <input type="text" readonly
-                                style="background-color: transparent; border: none; color: white; text-align: center; width: 50px;"
-                                name="mbelua" value=BELUA>
-                        </td>
-                        <td align="center" style="background-color: #ffffbf;">
-                            <a href='/mesaManAlmfds/BELUA' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                        </td>
-                        <td align="center" style="background-color: green;">
-                            <input type="text" readonly
-                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                name="rbelua" value={{mezabelua|default:0}}>
-                        </td>
-                        <td align="center" style="color: white;background-color: red">{{mezaBELUAn}}</td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td align="center" style="background-color: #25415a;">
-                            <input type="text" readonly
-                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                name="totalpz10" value={{totalplaza10|default:0}}>
-                        </td>
-                        <td align="center" style="color: white; background-color: #25415a;">{{mezaBELUAn}}</td>
-                        <td align="center">
-                            <font color="white">Plaza 10</font>
-                        </td>
-
-                        </tr>
-
-                        <tr>
-                            <td align="center">
-                                {% if estado == 1 %}
-                                <font color="white">{{mozoNombre11}}</font>
-                                {% else %}
-                                <select name="mozoplaza11">
                                     {% for c in listaMozos %}
                                     <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                     {% endfor%}
@@ -1136,12 +976,173 @@
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
                                     name="totalpz11" value={{totalplaza11|default:0}}>
                             </td>
-                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp11}}</td>
+                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp9}}</td>
                             <td align="center">
-                                <font color="white">Plaza 11</font>
+                                <font color="white">Plaza 9</font>
                             </td>
                         </tr>
     
+                        <tr>
+                            <td align="center">
+                                {% if estado == 1 %}
+                                <font color="white">{{mozoNombre10}}</font>
+                                {% else %}
+                                <select name="mozoplaza10">
+                                    {% for c in listaMozos %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                <br><br>
+                                <select name="mozoplaza10b">
+                                    {% for c in listaMozos %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                <br><br>
+                                <select name="mozoplaza10cm">
+                                    {% for c in listaMozos %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                {% endif %}
+                            </td>
+
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
+                                    name="mjp" value=JP>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManAlmfds/JP' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="rjp" value={{mezajp|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{mezaJPn}}</td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td align="center" style="background-color: #25415a;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="totalpz9" value={{totalplaza9|default:0}}>
+                            </td>
+                            <td align="center" style="color: white; background-color: #25415a;">{{mezaJPn}}</td>
+                            <td align="center">
+                                <font color="white">Plaza 10</font>
+                            </td>
+
+                        </tr>
+                        <td align="center">
+                            {% if estado == 1 %}
+                            <font color="white">{{mozoNombre11}}</font>
+                            {% else %}
+                            <select name="mozoplaza11">
+                                {% for c in listaMozos %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            <br><br>
+                            <select name="mozoplaza10b">
+                                {% for c in listaMozos %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            <br><br>
+                            <select name="mozoplaza10cm">
+                                {% for c in listaMozos %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            {% endif %}
+                        </td>
+
+                        <td align="center">
+                            <input type="text" readonly
+                                style="background-color: transparent; border: none; color: white; text-align: center; width: 50px;"
+                                name="mbelua" value=BELUA>
+                        </td>
+                        <td align="center" style="background-color: #ffffbf;">
+                            <a href='/mesaManAlmfds/BELUA' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                        </td>
+                        <td align="center" style="background-color: green;">
+                            <input type="text" readonly
+                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                name="rbelua" value={{mezabelua|default:0}}>
+                        </td>
+                        <td align="center" style="color: white;background-color: red">{{mezaBELUAn}}</td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="center" style="background-color: #25415a;">
+                            <input type="text" readonly
+                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                name="totalpz10" value={{totalplaza10|default:0}}>
+                        </td>
+                        <td align="center" style="color: white; background-color: #25415a;">{{mezaBELUAn}}</td>
+                        <td align="center">
+                            <font color="white">Plaza 11</font>
+                        </td>
+
+                        </tr>
+
+                        
 
                     </tbody>
                 </table>
@@ -1183,7 +1184,7 @@
     <div class="row">
         <!-- <h4>Turno Cena</h4> -->
         <div class="table-responsive py-2">
-            <form method="POST" action="/guardarPlazaCenafds/">
+            <form method="POST" action="/guardarPlazaCena/">
                 {% csrf_token %}
                 <input type="hidden" name="num_filas" value=10>
                 <table class="table table-striped">
@@ -1826,97 +1827,6 @@
                                 <font color="white">{{mozoNombre7c}}</font>
                                 {% else %}
                                 <select name="mozoplaza7c">
-                                    {% for c in listaMozos %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                {% endif %}
-
-                            </td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
-                                    name="m27" value=27>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManCenfds/27' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r27c" value={{meza27c|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{meza27nc}}</td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
-                                    name="m28c" value=28>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManCenfds/28' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r28c" value={{meza28c|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{meza28nc}}</td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
-                                    name="m29c" value=29>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManCenfds/29' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r29c" value={{meza29c|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{meza29nc}}</td>
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 30px;"
-                                    name="mb3c" value=B3>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManCenfds/B3' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="rb3c" value={{mezab3c|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{mezaB3nc}}</td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;" name="m12" value = 12> -->
-                            </td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
-                            </td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
-                            </td>
-                            <td align="center">
-                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
-                            </td>
-                            <td align="center" style="background-color:  #25415a;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="totalpz7c" value={{totalplaza7c|default:0}}>
-                            </td>
-                            <td align="center" style="color: white; background-color:  #25415a;">{{totalnp7c}}</td>
-                            <td align="center">
-                                <font color="white">Plaza 7</font>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                {% if estadoc == 1 %}
-                                <font color="white">{{mozoNombre8c}}</font>
-                                {% else %}
-                                <select name="mozoplaza8c">
                                     {% for c in listaMozosc %}
                                     <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                     {% endfor%}
@@ -1998,178 +1908,109 @@
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
                                     name="totalpz8c" value={{totalplaza8c|default:0}}>
                             </td>
-                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp8c}}</td>
+                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp7c}}</td>
+                            <td align="center">
+                                <font color="white">Plaza 7</font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                {% if estadoc == 1 %}
+                                <font color="white">{{mozoNombre8c}}</font>
+                                {% else %}
+                                <select name="mozoplaza8c">
+                                    {% for c in listaMozos %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                {% endif %}
+
+                            </td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
+                                    name="m27" value=27>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManCenfds/27' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="r27c" value={{meza27c|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{meza27nc}}</td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
+                                    name="m28c" value=28>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManCenfds/28' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="r28c" value={{meza28c|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{meza28nc}}</td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;"
+                                    name="m29c" value=29>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManCenfds/29' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="r29c" value={{meza29c|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{meza29nc}}</td>
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 30px;"
+                                    name="mb3c" value=B3>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManCenfds/B3' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="rb3c" value={{mezab3c|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{mezaB3nc}}</td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 20px;" name="m12" value = 12> -->
+                            </td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
+                            </td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
+                            </td>
+                            <td align="center">
+                                <!-- <input type="text" readonly style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;" name="r12" value = {{meza12|default:0}} > -->
+                            </td>
+                            <td align="center" style="background-color:  #25415a;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="totalpz7c" value={{totalplaza7c|default:0}}>
+                            </td>
+                            <td align="center" style="color: white; background-color:  #25415a;">{{totalnp8c}}</td>
                             <td align="center">
                                 <font color="white">Plaza 8</font>
                             </td>
                         </tr>
+
                         <tr>
                             <td align="center">
                                 {% if estadoc == 1 %}
                                 <font color="white">{{mozoNombre9c}}</font>
                                 {% else %}
                                 <select name="mozoplaza9c">
-                                    {% for c in listaMozosc %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                <br><br>
-                                <select name="mozoplaza9bc">
-                                    {% for c in listaMozosc %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                <br><br>
-                                <select name="mozoplaza9bcn">
-                                    {% for c in listaMozosc %}
-                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                    {% endfor%}
-                                </select>
-                                {% endif %}
-                            </td>
-
-                            <td align="center">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
-                                    name="mjpc" value=JP>
-                            </td>
-                            <td align="center" style="background-color: #ffffbf;">
-                                <a href='/mesaManCenfds/JP' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                            </td>
-                            <td align="center" style="background-color: green;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="rjpc" value={{mezajpc|default:0}}>
-                            </td>
-                            <td align="center" style="color: white;background-color: red">{{mezaJPnc}}</td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <font color="white"></font>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td align="center" style="background-color: #25415a;">
-                                <input type="text" readonly
-                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="totalpz9c" value={{totalplaza9c|default:0}}>
-                            </td>
-                            <td align="center" style="color: white; background-color: #25415a;">{{mezaJPnc}}</td>
-                            <td align="center">
-                                <font color="white">Plaza 9</font>
-                            </td>
-
-                        </tr>
-                        <td align="center">
-                            {% if estadoc == 1 %}
-                            <font color="white">{{mozoNombre10c}}</font>
-                            {% else %}
-                            <select name="mozoplaza10c">
-                                {% for c in listaMozosc %}
-                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                {% endfor%}
-                            </select>
-                            <br><br>
-                            <select name="mozoplaza10bc">
-                                {% for c in listaMozosc %}
-                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                {% endfor%}
-                            </select>
-                            <br><br>
-                            <select name="mozoplaza10bcn">
-                                {% for c in listaMozosc %}
-                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
-                                {% endfor%}
-                            </select>
-                            {% endif %}
-                        </td>
-
-                        <td align="center">
-                            <input type="text" readonly
-                                style="background-color: transparent; border: none; color: white; text-align: center; width: 50px;"
-                                name="mbeluac" value=BELUA>
-                        </td>
-                        <td align="center" style="background-color: #ffffbf;">
-                            <a href='/mesaManCenfds/BELUA' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
-                        </td>
-                        <td align="center" style="background-color: green;">
-                            <input type="text" readonly
-                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                name="rbeluac" value={{mezabeluac|default:0}}>
-                        </td>
-                        <td align="center" style="color: white;background-color: red">{{mezaBELUAnc}}</td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <font color="white"></font>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td align="center" style="background-color: #25415a;">
-                            <input type="text" readonly
-                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                name="totalpz10c" value={{totalplaza10c|default:0}}>
-                        </td>
-                        <td align="center" style="color: white; background-color: #25415a;">{{mezaBELUAnc}}</td>
-                        <td align="center">
-                            <font color="white">Plaza 10</font>
-                        </td>
-
-                        </tr>
-
-                        
-                        <tr>
-                            <td align="center">
-                                {% if estadoc == 1 %}
-                                <font color="white">{{mozoNombre11c}}</font>
-                                {% else %}
-                                <select name="mozoplaza11c">
                                     {% for c in listaMozosc %}
                                     <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                     {% endfor%}
@@ -2251,11 +2092,174 @@
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
                                     name="totalpz11c" value={{totalplaza11c|default:0}}>
                             </td>
-                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp11c}}</td>
+                            <td align="center" style="color: white; background-color: #25415a;">{{totalnp9c}}</td>
                             <td align="center">
-                                <font color="white">Plaza 11</font>
+                                <font color="white">Plaza 9</font>
                             </td>
                         </tr>
+                        
+                        <tr>
+                            <td align="center">
+                                {% if estadoc == 1 %}
+                                <font color="white">{{mozoNombre10c}}</font>
+                                {% else %}
+                                <select name="mozoplaza10c">
+                                    {% for c in listaMozosc %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                <br><br>
+                                <select name="mozoplaza10bc">
+                                    {% for c in listaMozosc %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                <br><br>
+                                <select name="mozoplaza10bcn">
+                                    {% for c in listaMozosc %}
+                                    <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                    {% endfor%}
+                                </select>
+                                {% endif %}
+                            </td>
+
+                            <td align="center">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 35px;"
+                                    name="mjpc" value=JP>
+                            </td>
+                            <td align="center" style="background-color: #ffffbf;">
+                                <a href='/mesaManCenfds/JP' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                            </td>
+                            <td align="center" style="background-color: green;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="rjpc" value={{mezajpc|default:0}}>
+                            </td>
+                            <td align="center" style="color: white;background-color: red">{{mezaJPnc}}</td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <font color="white"></font>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td align="center" style="background-color: #25415a;">
+                                <input type="text" readonly
+                                    style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                    name="totalpz9c" value={{totalplaza9c|default:0}}>
+                            </td>
+                            <td align="center" style="color: white; background-color: #25415a;">{{mezaJPnc}}</td>
+                            <td align="center">
+                                <font color="white">Plaza 10</font>
+                            </td>
+
+                        </tr>
+                        <td align="center">
+                            {% if estadoc == 1 %}
+                            <font color="white">{{mozoNombre11c}}</font>
+                            {% else %}
+                            <select name="mozoplaza11c">
+                                {% for c in listaMozosc %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            <br><br>
+                            <select name="mozoplaza11bc">
+                                {% for c in listaMozosc %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            <br><br>
+                            <select name="mozoplaza11bcn">
+                                {% for c in listaMozosc %}
+                                <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
+                                {% endfor%}
+                            </select>
+                            {% endif %}
+                        </td>
+
+                        <td align="center">
+                            <input type="text" readonly
+                                style="background-color: transparent; border: none; color: white; text-align: center; width: 50px;"
+                                name="mbeluac" value=BELUA>
+                        </td>
+                        <td align="center" style="background-color: #ffffbf;">
+                            <a href='/mesaManCenfds/BELUA' style="width: 40px; height: 30px;" class=" btn btn-secondary"></a>
+                        </td>
+                        <td align="center" style="background-color: green;">
+                            <input type="text" readonly
+                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                name="rbeluac" value={{mezabeluac|default:0}}>
+                        </td>
+                        <td align="center" style="color: white;background-color: red">{{mezaBELUAnc}}</td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <font color="white"></font>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="center" style="background-color: #25415a;">
+                            <input type="text" readonly
+                                style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
+                                name="totalpz10c" value={{totalplaza10c|default:0}}>
+                        </td>
+                        <td align="center" style="color: white; background-color: #25415a;">{{mezaBELUAnc}}</td>
+                        <td align="center">
+                            <font color="white">Plaza 11</font>
+                        </td>
+
+                        </tr>
+
+                        
+                        
 
                     </tbody>
                 </table>
