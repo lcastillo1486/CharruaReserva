@@ -2565,11 +2565,9 @@ def verplazafds(request):
         p7 = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza7')
         p8 = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza8')
         p9 = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza9')
-        p10 = plazaAlmuerzo.objects.get(
-            fecha_dia=fecha_actual, plaza='Plaza10')
+        p10 = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza10')
         p11 = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza11')
-        anfi_nombre = plazaAlmuerzo.objects.get(
-            fecha_dia=fecha_actual, plaza='Plaza1')
+        anfi_nombre = plazaAlmuerzo.objects.get(fecha_dia=fecha_actual, plaza='Plaza1')
 
         plaza1 = p1
         plaza2 = p2
@@ -2745,7 +2743,7 @@ def verplazafds(request):
 
     tota_plaza6 = mesa19 + mesa20 + mesa24 + mesa26
 
-    # plaza7
+    # plaza8
     mesa27 = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='27', hora__lt='17:30').count()
     mesa28 = nuevaReserva.objects.filter(
@@ -2755,9 +2753,9 @@ def verplazafds(request):
     mesab3 = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__lt='17:30').count()
 
-    tota_plaza7 = mesa27 + mesa28 + mesa29 + mesab3
+    tota_plaza8 = mesa27 + mesa28 + mesa29 + mesab3
 
-    # plaza8
+    # plaza7
     mesa22 = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='22', hora__lt='17:30').count()
     mesa23 = nuevaReserva.objects.filter(
@@ -2768,19 +2766,9 @@ def verplazafds(request):
         fechaReserva=fecha_actual, mesa_asignadaa='31', hora__lt='17:30').count()
     mesa32 = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='32', hora__lt='17:30').count()
-    tota_plaza8 = mesa22 + mesa23 + mesa30 + mesa31 + mesa32
+    tota_plaza7 = mesa22 + mesa23 + mesa30 + mesa31 + mesa32
 
     # plaza9
-    mesajp = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__lt='17:30').count()
-    tota_plaza9 = mesajp
-
-    # plaza10
-    mesabelua = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__lt='17:30').count()
-    tota_plaza10 = mesabelua
-
-    # plaza11
     mesa35 = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='35', hora__lt='17:30').count()
     mesa36 = nuevaReserva.objects.filter(
@@ -2791,8 +2779,23 @@ def verplazafds(request):
         fechaReserva=fecha_actual, mesa_asignadaa='38', hora__lt='17:30').count()
     mesa39 = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='39', hora__lt='17:30').count()
-    tota_plaza11 = mesa35 + mesa36 + mesa37 + mesa38 + mesa39
+    tota_plaza9 = mesa35 + mesa36 + mesa37 + mesa38 + mesa39
 
+    # plaza10
+    mesajp = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__lt='17:30').count()
+    tota_plaza10 = mesajp
+
+    # plaza11
+    mesabelua = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__lt='17:30').count()
+    tota_plaza11 = mesabelua
+
+    
+
+    
+    
+    
     # plaza1c
     mesa1c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='1', hora__gt='17:30').count()
@@ -2869,7 +2872,7 @@ def verplazafds(request):
 
     tota_plaza6c = mesa19c + mesa20c + mesa24c + mesa26c
 
-    # plaza7c
+    # plaza8c
     mesa27c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='27', hora__gt='17:30').count()
     mesa28c = nuevaReserva.objects.filter(
@@ -2879,9 +2882,9 @@ def verplazafds(request):
     mesab3c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__gt='17:30').count()
 
-    tota_plaza7c = mesa27c + mesa28c + mesa29c + mesab3c
+    tota_plaza8c = mesa27c + mesa28c + mesa29c + mesab3c
 
-    # plaza8c
+    # plaza7c
     mesa22c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='22', hora__gt='17:30').count()
     mesa23c = nuevaReserva.objects.filter(
@@ -2892,19 +2895,9 @@ def verplazafds(request):
         fechaReserva=fecha_actual, mesa_asignadaa='31', hora__gt='17:30').count()
     mesa32c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='32', hora__gt='17:30').count()
-    tota_plaza8c = mesa22c + mesa23c + mesa30c + mesa31c + mesa32c
+    tota_plaza7c = mesa22c + mesa23c + mesa30c + mesa31c + mesa32c
 
     # plaza9c
-    mesajpc = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__gt='17:30').count()
-    tota_plaza9c = mesajpc
-
-    # plaza10c
-    mesabeluac = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__gt='17:30').count()
-    tota_plaza10c = mesabeluac
-
-    # plaza11c
     mesa35c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='35', hora__gt='17:30').count()
     mesa36c = nuevaReserva.objects.filter(
@@ -2915,7 +2908,19 @@ def verplazafds(request):
         fechaReserva=fecha_actual, mesa_asignadaa='38', hora__gt='17:30').count()
     mesa39c = nuevaReserva.objects.filter(
         fechaReserva=fecha_actual, mesa_asignadaa='39', hora__gt='17:30').count()
-    tota_plaza11c = mesa35c + mesa36c + mesa37c + mesa38c + mesa39c
+    tota_plaza9c = mesa35c + mesa36c + mesa37c + mesa38c + mesa39c
+
+    # plaza10c
+    mesajpc = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__gt='17:30').count()
+    tota_plaza10c = mesajpc
+
+    # plaza11c
+    mesabeluac = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__gt='17:30').count()
+    tota_plaza11c = mesabeluac
+
+    
 
     ##########BUSCAR LAS MANUALES ALMUERZO#################        MODIFICAR LAS PLAZAS
     if plazaAlmuerzoMan.objects.filter(fecha_dia = fecha_actual, plaza = 'Plaza1').exists():
@@ -2997,53 +3002,54 @@ def verplazafds(request):
 
         totalnp6 = int(resultnp19) + int(resultnp20) + int(resultnp24) + int(resultnp26) 
 
-    #plaza7
-        np27 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+    #plaza8
+        np27 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnp27 = np27.n1
-        np28 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+        np28 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnp28 = np28.n2
-        np29 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+        np29 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnp29 = np29.n3
-        npB3 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+        npB3 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnpB3 = npB3.n4
 
-        totalnp7 = int(resultnp27) + int(resultnp28) + int(resultnp29) + int(resultnpB3) 
+        totalnp8 = int(resultnp27) + int(resultnp28) + int(resultnp29) + int(resultnpB3) 
 
-    #plaza8
-        np22 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+    #plaza7
+        np22 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp22 = np22.n1
-        np23 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np23 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp23 = np23.n2
-        np30 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np30 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp30 = np30.n3
-        np31 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np31 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp31 = np31.n4
-        np32 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np32 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp32 = np32.n5
 
-        totalnp8 = int(resultnp22) + int(resultnp23) + int(resultnp30) + int(resultnp31) + int(resultnp32)
-
-    #plaza9
-        npJP = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
-        resultnpJP = npJP.n1 
-
-    #plaza10
-        npBELUA = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
-        resultnpBELUA = npBELUA.n1
+        totalnp7 = int(resultnp22) + int(resultnp23) + int(resultnp30) + int(resultnp31) + int(resultnp32)
     
-    #plaza11
-        np35 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+    #plaza9
+        np35 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp35 = np35.n1
-        np36 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        np36 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp36 = np36.n2
-        np37 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        np37 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp37 = np37.n3
-        np38 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        np38 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp38 = np38.n4
-        np39 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        np39 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp39 = np39.n5
 
-        totalnp11 = int(resultnp35) + int(resultnp36) + int(resultnp37) + int(resultnp38) + int(resultnp39)
+        totalnp9 = int(resultnp35) + int(resultnp36) + int(resultnp37) + int(resultnp38) + int(resultnp39)
+
+    #plaza10
+        npJP = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
+        resultnpJP = npJP.n1 
+
+    #plaza11
+        npBELUA = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnpBELUA = npBELUA.n1
+    
 
 
     else:
@@ -3054,7 +3060,7 @@ def verplazafds(request):
             = totalnp5 = resultnp22 = resultnp30 = resultnp31 = resultnp32\
             = totalnp6 = resultnp27 = resultnp28 = resultnp29 = resultnpB3\
             = totalnp7 = resultnp35 = resultnp36 = resultnp37 = resultnp38 = resultnp39\
-            = totalnp8 = resultnpJP = resultnpBELUA =  totalnp11 = 0  
+            = totalnp8 = resultnpJP = resultnpBELUA =  totalnp11 = totalnp9 = 0  
  
     ##########BUSCAR LAS MANUALES CENA#################   REEMPLAZAR POR LOS NUMEROS DE MESA SEGUN PLANTILLA 
     if plazaCenaMan.objects.filter(fecha_dia = fecha_actual, plaza = 'Plaza1').exists():
@@ -3136,53 +3142,55 @@ def verplazafds(request):
 
         totalnp6c = int(resultnp19c) + int(resultnp20c) + int(resultnp24c) + int(resultnp26c) 
 
-    #plaza7
-        np27c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+    #plaza8
+        np27c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnp27c = np27c.n1
-        np28c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+        np28c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnp28c = np28c.n2
-        np29c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+        np29c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnp29c = np29c.n3
-        npB3c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+        npB3c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
         resultnpB3c = npB3c.n4
 
-        totalnp7c = int(resultnp27c) + int(resultnp28c) + int(resultnp29c) + int(resultnpB3c) 
+        totalnp8c = int(resultnp27c) + int(resultnp28c) + int(resultnp29c) + int(resultnpB3c) 
 
-    #plaza8
-        np22c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+    #plaza7
+        np22c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp22c = np22c.n1
-        np23c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np23c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp23c = np23c.n2
-        np30c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np30c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp30c = np30c.n3
-        np31c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np31c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp31c = np31c.n4
-        np32c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+        np32c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
         resultnp32c = np32c.n5
 
-        totalnp8c = int(resultnp22c) + int(resultnp23c) + int(resultnp30c) + int(resultnp31c) + int(resultnp32c)
-
-    #plaza9
-        npJPc = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
-        resultnpJPc = npJPc.n1 
-
-    #plaza10
-        npBELUAc = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
-        resultnpBELUAc = npBELUAc.n1
+        totalnp7c = int(resultnp22c) + int(resultnp23c) + int(resultnp30c) + int(resultnp31c) + int(resultnp32c)
     
-    #plaza11
-        np35c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+    #plaza9
+        np35c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp35c = np35c.n1
-        np36c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        np36c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp36c = np36c.n2
-        np37c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        np37c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp37c = np37c.n3
-        np38c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza1')
+        np38c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp38c = np38c.n4
-        np39c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        np39c = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
         resultnp39c = np39c.n5
 
-        totalnp11c = int(resultnp35c) + int(resultnp36c) + int(resultnp37c) + int(resultnp38c) + int(resultnp39c)
+        totalnp9c = int(resultnp35c) + int(resultnp36c) + int(resultnp37c) + int(resultnp38c) + int(resultnp39c)
+
+    #plaza10
+        npJPc = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
+        resultnpJPc = npJPc.n1 
+
+    #plaza11
+        npBELUAc = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+        resultnpBELUAc = npBELUAc.n1
+    
+    
     else:
           resultnp1c = resultnp2c = resultnp3c = resultnp6c = resultnp6Ac = totalnp1c = resultnp4c = resultnp5c = resultnp10c \
             = resultnp11c = resultnp12c = totalnp2c = resultnp12Ac = resultnp14c = resultnp15c = resultnp16c = totalnp3c = resultnp12Ac \
@@ -3191,18 +3199,19 @@ def verplazafds(request):
             = totalnp5c = resultnp22c = resultnp30c = resultnp31c = resultnp32c\
             = totalnp6c = resultnp27c = resultnp28c = resultnp29c = resultnpB3c\
             = totalnp7c = resultnp35c = resultnp36c = resultnp37c = resultnp38c = resultnp39c\
-            = totalnp8c = resultnpJPc = resultnpBELUAc =  totalnp11c = 0 
+            = totalnp8c = resultnpJPc = resultnpBELUAc =  totalnp11c =  totalnp9c = 0
+
 
     return render(request, 'plazasfds.html', {'listaMozos': mozoz_p,
                                             'meza1': mesa1, 'meza1n':resultnp1, 'meza2': mesa2,'meza2n':resultnp2, 'meza3': mesa3, 'meza3n':resultnp3,'meza6': mesa6, 'meza6n':resultnp6, 'meza6A': mesa6A, 'meza6An':resultnp6A,'totalplaza1': tota_plaza1, 'totalnp1':totalnp1,'mozoNombre': mozoplaza1, 'estado': estado,
                                           'meza4': mesa4, 'meza4n': resultnp4, 'meza5': mesa5,'meza5n': resultnp5, 'meza10': mesa10, 'meza10n': resultnp10, 'meza11': mesa11, 'meza11n': resultnp11, 'meza12': mesa12, 'meza12n': resultnp12,'totalplaza2': tota_plaza2, 'totalnp2':totalnp2, 'mozoNombre2': mozoplaza2,
-                                          'meza12a': mesa12a, 'meza12An': resultnp12A,'meza24n': mesa24,'meza24n': resultnp24, 'meza14': mesa14, 'meza14n': resultnp14, 'meza15': mesa15, 'meza15n': resultnp15, 'meza16': mesa16, 'meza16n': resultnp16, 'totalplaza3': tota_plaza3, 'totalnp3':totalnp3, 'mozoNombre3': mozoplaza3,
+                                          'meza12a': mesa12a, 'meza12An': resultnp12A,'meza24': mesa24,'meza24n': resultnp24, 'meza14': mesa14, 'meza14n': resultnp14, 'meza15': mesa15, 'meza15n': resultnp15, 'meza16': mesa16, 'meza16n': resultnp16, 'totalplaza3': tota_plaza3, 'totalnp3':totalnp3, 'mozoNombre3': mozoplaza3,
                                           'meza17': mesa17, 'meza17n': resultnp17, 'meza18': mesa18, 'meza18n': resultnp18, 'meza8': mesa8, 'meza8n': resultnp8, 'meza9': mesa9, 'meza9n': resultnp9, 'meza34': mesa34, 'meza34n': resultnp34,'totalplaza4': tota_plaza4, 'totalnp4':totalnp4, 'mozoNombre4': mozoplaza4,
                                           'meza26': mesa26, 'meza26n': resultnp26, 'meza19': mesa19, 'meza19n': resultnp19, 'meza20': mesa20, 'meza20n': resultnp20, 'meza21': mesa21, 'meza21n': resultnp21,'totalplaza5': tota_plaza5, 'totalnp5':totalnp5, 'mozoNombre5': mozoplaza5, 
                                           'meza22': mesa22, 'meza22n': resultnp22, 'meza30': mesa30, 'meza30n': resultnp30, 'meza31': mesa31, 'meza31n': resultnp31, 'meza32': mesa32, 'meza32n': resultnp32, 'totalplaza6': tota_plaza6, 'totalnp6':totalnp6, 'mozoNombre6': mozoplaza6,
-                                          'meza27': mesa27, 'meza27n': resultnp27, 'meza28': mesa28, 'meza28n': resultnp28, 'meza29': mesa29, 'meza29n': resultnp29, 'mezab3': mesab3, 'mezaB3n': resultnpB3, 'totalplaza7': tota_plaza7, 'totalnp7':totalnp7, 'mozoNombre7': mozoplaza7, 'totalnp11':totalnp11, 'mozoNombre11': mozoplaza11,
-                                          'meza35': mesa35, 'meza35n': resultnp35, 'meza36': mesa36, 'meza36n': resultnp36, 'meza37': mesa37, 'meza37n': resultnp37, 'meza38': mesa38, 'meza38n': resultnp38, 'meza39': mesa39, 'meza39n': resultnp39,'totalplaza8':tota_plaza11, 'totalplaza8': tota_plaza8, 'totalnp8':totalnp8, 'mozoNombre8': mozoplaza8,
-                                          'mezajp': mesajp, 'mezaJPn': resultnpJP,'totalplaza9': tota_plaza9, 'mozoNombre9': mozoplaza9, 
+                                          'meza27': mesa27, 'meza27n': resultnp27, 'meza28': mesa28, 'meza28n': resultnp28, 'meza29': mesa29, 'meza29n': resultnp29, 'mezab3': mesab3, 'mezaB3n': resultnpB3, 'totalplaza7': tota_plaza7, 'totalnp7':totalnp7, 'mozoNombre7': mozoplaza7, 
+                                          'meza35': mesa35, 'meza35n': resultnp35, 'meza36': mesa36, 'meza36n': resultnp36, 'meza37': mesa37, 'meza37n': resultnp37, 'meza38': mesa38, 'meza38n': resultnp38, 'meza39': mesa39, 'meza39n': resultnp39,'totalplaza8': tota_plaza8, 'totalnp8':totalnp8, 'mozoNombre8': mozoplaza8, 'mozoNombre11': mozoplaza11,
+                                          'mezajp': mesajp, 'mezaJPn': resultnpJP,'totalplaza9': tota_plaza9, 'mozoNombre9': mozoplaza9, 'totalnp9': totalnp9, 
                                           'mezabelua': mesabelua, 'mezaBELUAn': resultnpBELUA, 'totalplaza10': tota_plaza10, 'mozoNombre10': mozoplaza10, 
                                           'estado': estado, 'anfialmuerzo': nombre_anfi, 'listaAnfitrionas':anfitrionas, 'horaActual':hora_actual, 'fecha_hoy':fecha_actual,
                                           ############cena############
@@ -3213,9 +3222,9 @@ def verplazafds(request):
                                           'meza17c': mesa17c, 'meza17nc': resultnp17c, 'meza18c': mesa18c, 'meza18nc': resultnp18c, 'meza8c': mesa8c, 'meza8nc': resultnp8c, 'meza9c': mesa9c, 'meza9nc': resultnp9c, 'meza34c': mesa34c, 'meza34nc': resultnp34c,'totalplaza4c': tota_plaza4c, 'totalnp4c':totalnp4c, 'mozoNombre4c': mozoplaza4c,
                                           'meza26c': mesa26c, 'meza26nc': resultnp26c, 'meza19c': mesa19c, 'meza19nc': resultnp19c, 'meza20c': mesa20c, 'meza20nc': resultnp20c, 'meza21c': mesa21c, 'meza21nc': resultnp21c,'totalplaza5c': tota_plaza5c, 'totalnp5c':totalnp5c, 'mozoNombre5c': mozoplaza5c, 
                                           'meza22c': mesa22c, 'meza22nc': resultnp22c, 'meza30c': mesa30c, 'meza30nc': resultnp30c, 'meza31c': mesa31c, 'meza31nc': resultnp31c, 'meza32c': mesa32c, 'meza32nc': resultnp32c, 'totalplaza6c': tota_plaza6c, 'totalnp6c':totalnp6c, 'mozoNombre6c': mozoplaza6c,
-                                          'meza27c': mesa27c, 'meza27nc': resultnp27c, 'meza28c': mesa28c, 'meza28nc': resultnp28c, 'meza29c': mesa29c, 'meza29nc': resultnp29c, 'mezab3c': mesab3c, 'mezaB3nc': resultnpB3c, 'totalplaza7c': tota_plaza7c, 'totalnp7c':totalnp7c, 'mozoNombre7c': mozoplaza7c, 'totalnp11c':totalnp11c, 'mozoNombre11c': mozoplaza11c,
-                                          'meza35c': mesa35c, 'meza35nc': resultnp35c, 'meza36c': mesa36, 'meza36nc': resultnp36c, 'meza37c': mesa37c, 'meza37nc': resultnp37c, 'meza38c': mesa38c, 'meza38nc': resultnp38c, 'meza39c': mesa39c, 'meza39nc': resultnp39c,'totalplaza11c': tota_plaza11c, 'totalplaza8c': tota_plaza8c, 'totalnp8c':totalnp8c, 'mozoNombre8c': mozoplaza8c,
-                                          'mezajpc': mesajpc, 'mezaJPnc': resultnpJPc,'totalplaza9c': tota_plaza9c, 'mozoNombre9c': mozoplaza9c, 
+                                          'meza27c': mesa27c, 'meza27nc': resultnp27c, 'meza28c': mesa28c, 'meza28nc': resultnp28c, 'meza29c': mesa29c, 'meza29nc': resultnp29c, 'mezab3c': mesab3c, 'mezaB3nc': resultnpB3c, 'totalplaza7c': tota_plaza7c, 'totalnp7c':totalnp7c, 'mozoNombre7c': mozoplaza7c, 'mozoNombre11c': mozoplaza11c,
+                                          'meza35c': mesa35c, 'meza35nc': resultnp35c, 'meza36c': mesa36, 'meza36nc': resultnp36c, 'meza37c': mesa37c, 'meza37nc': resultnp37c, 'meza38c': mesa38c, 'meza38nc': resultnp38c, 'meza39c': mesa39c, 'meza39nc': resultnp39c,'totalplaza8c': tota_plaza8c, 'totalnp8c':totalnp8c, 'mozoNombre8c': mozoplaza8c,
+                                          'mezajpc': mesajpc, 'mezaJPnc': resultnpJPc,'totalplaza9c': tota_plaza9c, 'mozoNombre9c': mozoplaza9c, 'totalnp9c':totalnp9c, 'totalplaza11c':tota_plaza11c,
                                           'mezabeluac': mesabeluac, 'mezaBELUAnc': resultnpBELUAc, 'totalplaza10c': tota_plaza10c, 'mozoNombre10c': mozoplaza10c, 
                                           'estadoc': estadoc, 'anfialmuerzoc': nombre_anfic, 'listaAnfitrionasc':anfitrionasc})
 
@@ -3319,16 +3328,15 @@ def controlMesaManCenfds(request, nmesa):
         guardap10.n5 = 0
         guardap10.plaza = "Plaza10"
         guardap10.save()
-
         # plaza11
-        guardap8 =  plazaCenaMan()
-        guardap8.n1 = 0
-        guardap8.n2 = 0
-        guardap8.n3 = 0
-        guardap8.n4 = 0
-        guardap8.n5 = 0
-        guardap8.plaza = "Plaza11"
-        guardap8.save()
+        guardap10 =  plazaCenaMan()
+        guardap10.n1 = 0
+        guardap10.n2 = 0
+        guardap10.n3 = 0
+        guardap10.n4 = 0
+        guardap10.n5 = 0
+        guardap10.plaza = "Plaza11"
+        guardap10.save()
 
         return redirect('calculadia')
 
@@ -3450,75 +3458,75 @@ def controlMesaManCenfds(request, nmesa):
            guardan1.save()
     #plaza7
     if n_mesa == "27":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
     if n_mesa == "28":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n2 = int(guardan1.n2) + 1
            guardan1.save()
     if n_mesa == "29":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n3 = int(guardan1.n3) + 1
            guardan1.save()
     if n_mesa == "B3":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n4 = int(guardan1.n4) + 1
            guardan1.save()
     #plaza8
     if n_mesa == "22":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
     if n_mesa == "23":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n2 = int(guardan1.n2) + 1
            guardan1.save()
     if n_mesa == "30":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n3 = int(guardan1.n3) + 1
            guardan1.save()
     if n_mesa == "31":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n4 = int(guardan1.n4) + 1
            guardan1.save()
     if n_mesa == "32":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1.n5 = int(guardan1.n5) + 1
+           guardan1.save()
+    
+    #plaza9
+    if n_mesa == "35":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
+           guardan1.n1 = int(guardan1.n1) + 1
+           guardan1.save()
+    if n_mesa == "36":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
+           guardan1.n2 = int(guardan1.n2) + 1
+           guardan1.save()
+    if n_mesa == "37":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
+           guardan1.n3 = int(guardan1.n3) + 1
+           guardan1.save()
+    if n_mesa == "38":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
+           guardan1.n4 = int(guardan1.n4) + 1
+           guardan1.save()
+    if n_mesa == "39":
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
            guardan1.n5 = int(guardan1.n5) + 1
            guardan1.save()
     #plaza9
     if n_mesa == "JP":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
+           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
     #plaza10
     if n_mesa == "BELUA":
-           guardan1 = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
+           guardan1 = plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
-    
-    #plaza11
-    if n_mesa == "35":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
-           guardan1.n1 = int(guardan1.n1) + 1
-           guardan1.save()
-    if n_mesa == "36":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
-           guardan1.n2 = int(guardan1.n2) + 1
-           guardan1.save()
-    if n_mesa == "37":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
-           guardan1.n3 = int(guardan1.n3) + 1
-           guardan1.save()
-    if n_mesa == "38":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
-           guardan1.n4 = int(guardan1.n4) + 1
-           guardan1.save()
-    if n_mesa == "39":
-           guardan1 =  plazaCenaMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
-           guardan1.n5 = int(guardan1.n5) + 1
-           guardan1.save()
-    
+   
     return redirect('calculadia')
 
 def controlMesaManAlmfds(request, nmesa):
@@ -3621,16 +3629,15 @@ def controlMesaManAlmfds(request, nmesa):
         guardap10.n5 = 0
         guardap10.plaza = "Plaza10"
         guardap10.save()
-
         # plaza11
-        guardap10 = plazaAlmuerzoMan()
-        guardap10.n1 = 0
-        guardap10.n2 = 0
-        guardap10.n3 = 0
-        guardap10.n4 = 0
-        guardap10.n5 = 0
-        guardap10.plaza = "Plaza11"
-        guardap10.save()
+        guardap11 = plazaAlmuerzoMan()
+        guardap11.n1 = 0
+        guardap11.n2 = 0
+        guardap11.n3 = 0
+        guardap11.n4 = 0
+        guardap11.n5 = 0
+        guardap11.plaza = "Plaza11"
+        guardap11.save()
 
         return redirect('calculadia')
 
@@ -3755,73 +3762,74 @@ def controlMesaManAlmfds(request, nmesa):
     #        guardan1.save()
     #plaza7
     if n_mesa == "27":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
     if n_mesa == "28":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n2 = int(guardan1.n2) + 1
            guardan1.save()
     if n_mesa == "29":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n3 = int(guardan1.n3) + 1
            guardan1.save()
     if n_mesa == "B3":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
            guardan1.n4 = int(guardan1.n4) + 1
            guardan1.save()
     #plaza8
     if n_mesa == "22":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
     if n_mesa == "23":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n2 = int(guardan1.n2) + 1
            guardan1.save()
     if n_mesa == "30":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n3 = int(guardan1.n3) + 1
            guardan1.save()
     if n_mesa == "31":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n4 = int(guardan1.n4) + 1
            guardan1.save()
     if n_mesa == "32":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza8')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza7')
            guardan1.n5 = int(guardan1.n5) + 1
            guardan1.save()
+    
     #plaza9
-    if n_mesa == "JP":
+    if n_mesa == "35":
            guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
-    #plaza10
-    if n_mesa == "BELUA":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
-           guardan1.n1 = int(guardan1.n1) + 1
-           guardan1.save()
-    
-    #plaza8
-    if n_mesa == "35":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
-           guardan1.n1 = int(guardan1.n1) + 1
-           guardan1.save()
     if n_mesa == "36":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
            guardan1.n2 = int(guardan1.n2) + 1
            guardan1.save()
     if n_mesa == "37":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
            guardan1.n3 = int(guardan1.n3) + 1
            guardan1.save()
     if n_mesa == "38":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
            guardan1.n4 = int(guardan1.n4) + 1
            guardan1.save()
     if n_mesa == "39":
-           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza9')
            guardan1.n5 = int(guardan1.n5) + 1
+           guardan1.save()
+
+    #plaza10
+    if n_mesa == "JP":
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza10')
+           guardan1.n1 = int(guardan1.n1) + 1
+           guardan1.save()
+    #plaza11
+    if n_mesa == "BELUA":
+           guardan1 = plazaAlmuerzoMan.objects.get(fecha_dia = fecha_actual, plaza = 'Plaza11')
+           guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
 
     return redirect('calculadia')
@@ -4161,34 +4169,7 @@ def guardaPlazaAlmfds(request):
 
         plaza_dia.save()
 
-        
-        mozo = request.POST.get('mozoplaza9') + ' y ' + \
-                                request.POST.get('mozoplaza9b')
-        mjp = request.POST.get('mjp')
-        rjp = request.POST.get('rjp')
-        total = request.POST.get('totalpz9')
-        plaza = 'Plaza9'
-        anfi = request.POST.get('anfitriona')
-
-        plaza_dia = plazaAlmuerzo(
-            m1=mjp, r1=rjp, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
-
-        plaza_dia.save()
-
-        mozo = request.POST.get('mozoplaza10') + ' y ' + \
-                                request.POST.get('mozoplaza10b')
-        mbelua = request.POST.get('mbelua')
-        rbelua = request.POST.get('rbelua')
-        total = request.POST.get('totalpz10')
-        plaza = 'Plaza10'
-        anfi = request.POST.get('anfitriona')
-
-        plaza_dia = plazaAlmuerzo(m1=mbelua, r1=rbelua, total=total,
-                                  plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
-
-        plaza_dia.save()
-
-        mozo = request.POST.get('mozoplaza11')
+        mozo = request.POST.get('mozoplaza9')
         m35 = request.POST.get('m35')
         r35 = request.POST.get('r35')
         m36 = request.POST.get('m36')
@@ -4199,14 +4180,45 @@ def guardaPlazaAlmfds(request):
         r38 = request.POST.get('r38')
         m39 = request.POST.get('m39')
         r39 = request.POST.get('r39')
-        total = request.POST.get('totalpz11')
-        plaza = 'Plaza11'
+        total = request.POST.get('totalpz9')
+        plaza = 'Plaza9'
         anfi = request.POST.get('anfitriona')
 
         plaza_dia = plazaAlmuerzo(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
                                    r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
+
+        
+        mozo = request.POST.get('mozoplaza10') + ', ' + \
+                                request.POST.get('mozoplaza10b') + ' y ' + \
+                                request.POST.get('mozoplaza10cm')
+        mjp = request.POST.get('mjp')
+        rjp = request.POST.get('rjp')
+        total = request.POST.get('totalpz10')
+        plaza = 'Plaza10'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(
+            m1=mjp, r1=rjp, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        mozo = request.POST.get('mozoplaza11') + ', ' + \
+                                request.POST.get('mozoplaza11b') + ' y ' + \
+                                request.POST.get('mozoplaza11cm')
+                                
+        mbelua = request.POST.get('mbelua')
+        rbelua = request.POST.get('rbelua')
+        total = request.POST.get('totalpz11')
+        plaza = 'Plaza11'
+        anfi = request.POST.get('anfitriona')
+
+        plaza_dia = plazaAlmuerzo(m1=mbelua, r1=rbelua, total=total,
+                                  plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
 
         
         zona_horaria_peru = pytz.timezone('America/Lima')
@@ -4222,7 +4234,7 @@ def guardaPlazaCenafds(request):
     fecha_actual = datetime.now().date()
     hora_actual = datetime.now().strftime('%H:%M')
 
-    if plazaAlmuerzo.objects.filter(fecha_dia=fecha_actual).exists():
+    if plazaCena.objects.filter(fecha_dia=fecha_actual).exists():
         return HttpResponse('Ya esta guardado')
 
     # if hora_actual < '17:30':
@@ -4245,7 +4257,7 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza1'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m1, r1=r1, m2=m2, r2=r2, m3=m3, r3=r3,
+        plaza_dia = plazaCena(m1=m1, r1=r1, m2=m2, r2=r2, m3=m3, r3=r3,
                                    m4=m6, r4=r6, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
@@ -4265,7 +4277,7 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza2'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m4, r1=r4, m2=m5, r2=r5, m3=m11,
+        plaza_dia = plazaCena(m1=m4, r1=r4, m2=m5, r2=r5, m3=m11,
                                    r3=r11, m4=m12, r4=r12, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
@@ -4283,7 +4295,7 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza3'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m12a, r1=r12, m2=m14, r2=r14, m3=m15, r3=r15, m4=m21,
+        plaza_dia = plazaCena(m1=m12a, r1=r12, m2=m14, r2=r14, m3=m15, r3=r15, m4=m21,
                                    r4=r21, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
@@ -4307,7 +4319,7 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza4'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m6a, r1=r6a, m2=m9, r2=r9, m3=m10, r3=r10, m4=m16,
+        plaza_dia = plazaCena(m1=m6a, r1=r6a, m2=m9, r2=r9, m3=m10, r3=r10, m4=m16,
                                    r4=r16, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
@@ -4333,7 +4345,7 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza5'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m8, r1=r8, m2=m17, r2=r17, m3=m18, r3=r18, m4=m34,
+        plaza_dia = plazaCena(m1=m8, r1=r8, m2=m17, r2=r17, m3=m18, r3=r18, m4=m34,
                                    r4=r34, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
@@ -4359,7 +4371,7 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza6'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m19, r1=r19, m2=m20, r2=r20, m3=m24, r3=r24, m4=m26,
+        plaza_dia = plazaCena(m1=m19, r1=r19, m2=m20, r2=r20, m3=m24, r3=r24, m4=m26,
                                    r4=r26, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
@@ -4377,7 +4389,7 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza7'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m27, r1=r27, m2=m28, r2=r28, m3=m29, r3=r29, m4=mb3,
+        plaza_dia = plazaCena(m1=m27, r1=r27, m2=m28, r2=r28, m3=m29, r3=r29, m4=mb3,
                                    r4=rb3, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
@@ -4405,41 +4417,12 @@ def guardaPlazaCenafds(request):
         plaza = 'Plaza8'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m22, r1=r22, m2=m23, r2=r23, m3=m30, r3=r30, m4=m31,
+        plaza_dia = plazaCena(m1=m22, r1=r22, m2=m23, r2=r23, m3=m30, r3=r30, m4=m31,
                                    r4=r31, m5=m32, r5=r32, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
         plaza_dia.save()
 
-        
-        mozo = request.POST.get('mozoplaza9c') + ', ' + \
-                                request.POST.get('mozoplaza9bc') + ' y ' + \
-                                request.POST.get('mozoplaza9bcn')
-        mjp = request.POST.get('mjpc')
-        rjp = request.POST.get('rjpc')
-        total = request.POST.get('totalpz9c')
-        plaza = 'Plaza9'
-        anfi = request.POST.get('anfitrionac')
-
-        plaza_cena = plazaCena(m1=mjp, r1=rjp, total=total,
-                               plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
-
-        plaza_cena.save()
-
-        mozo = request.POST.get('mozoplaza10c') + ', ' + \
-                                request.POST.get('mozoplaza10bc') + ' y ' + \
-                                request.POST.get('mozoplaza10bcn') 
-        mbelua = request.POST.get('mbeluac')
-        rbelua = request.POST.get('rbeluac')
-        total = request.POST.get('totalpz10c')
-        plaza = 'Plaza10'
-        anfi = request.POST.get('anfitrionac')
-
-        plaza_cena = plazaCena(m1=mbelua, r1=rbelua, total=total,
-                               plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
-
-        plaza_cena.save()
-
-        mozo = request.POST.get('mozoplaza11c')
+        mozo = request.POST.get('mozoplaza9c')
         m35 = request.POST.get('m35c')
         r35 = request.POST.get('r35c')
         m36 = request.POST.get('m36c')
@@ -4450,14 +4433,45 @@ def guardaPlazaCenafds(request):
         r38 = request.POST.get('r38c')
         m39 = request.POST.get('m39c')
         r39 = request.POST.get('r39c')
+        total = request.POST.get('totalpz9c')
+        plaza = 'Plaza9'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_dia = plazaCena(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
+                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_dia.save()
+
+        
+        mozo = request.POST.get('mozoplaza10c') + ', ' + \
+                                request.POST.get('mozoplaza10bc') + ' y ' + \
+                                request.POST.get('mozoplaza10bcn')
+        mjp = request.POST.get('mjpc')
+        rjp = request.POST.get('rjpc')
+        total = request.POST.get('totalpz10c')
+        plaza = 'Plaza10'
+        anfi = request.POST.get('anfitrionac')
+
+        plaza_cena = plazaCena(m1=mjp, r1=rjp, total=total,
+                               plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+
+        plaza_cena.save()
+
+        mozo = request.POST.get('mozoplaza11c') + ', ' + \
+                                request.POST.get('mozoplaza11bc') + ' y ' + \
+                                request.POST.get('mozoplaza11bcn') 
+        mbelua = request.POST.get('mbeluac')
+        rbelua = request.POST.get('rbeluac')
         total = request.POST.get('totalpz11c')
         plaza = 'Plaza11'
         anfi = request.POST.get('anfitrionac')
 
-        plaza_dia = plazaAlmuerzo(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
-                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
+        plaza_cena = plazaCena(m1=mbelua, r1=rbelua, total=total,
+                               plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
 
-        plaza_dia.save()
+        plaza_cena.save()
+
+        
 
         
         zona_horaria_peru = pytz.timezone('America/Lima')
@@ -4468,5 +4482,3 @@ def guardaPlazaCenafds(request):
             return controlMesaManCenfds(request, 1)
         else:
             return controlMesaManAlm(request, 1)
-    
-    

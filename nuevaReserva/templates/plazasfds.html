@@ -1072,13 +1072,13 @@
                                 {% endfor%}
                             </select>
                             <br><br>
-                            <select name="mozoplaza10b">
+                            <select name="mozoplaza11b">
                                 {% for c in listaMozos %}
                                 <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                 {% endfor%}
                             </select>
                             <br><br>
-                            <select name="mozoplaza10cm">
+                            <select name="mozoplaza11cm">
                                 {% for c in listaMozos %}
                                 <option value="{{c.nombre_mozo}}"> {{c.nombre_mozo}}</option>
                                 {% endfor%}
@@ -1184,7 +1184,7 @@
     <div class="row">
         <!-- <h4>Turno Cena</h4> -->
         <div class="table-responsive py-2">
-            <form method="POST" action="/guardarPlazaCena/">
+            <form method="POST" action="/guardarPlazaCenafds/">
                 {% csrf_token %}
                 <input type="hidden" name="num_filas" value=10>
                 <table class="table table-striped">
@@ -1900,13 +1900,13 @@
                             <td align="center" style="background-color: green;">
                                 <input type="text" readonly
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r32c" value={{meza32|default:0}}>
+                                    name="r32c" value={{meza32c|default:0}}>
                             </td>
                             <td align="center" style="color: white;background-color: red">{{meza32nc}}</td>
                             <td align="center" style="background-color: #25415a;">
                                 <input type="text" readonly
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="totalpz8c" value={{totalplaza8c|default:0}}>
+                                    name="totalpz7c" value={{totalplaza7c|default:0}}>
                             </td>
                             <td align="center" style="color: white; background-color: #25415a;">{{totalnp7c}}</td>
                             <td align="center">
@@ -2084,13 +2084,13 @@
                             <td align="center" style="background-color: green;">
                                 <input type="text" readonly
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="r39c" value={{meza39|default:0}}>
+                                    name="r39c" value={{meza39c|default:0}}>
                             </td>
                             <td align="center" style="color: white;background-color: red">{{meza39nc}}</td>
                             <td align="center" style="background-color: #25415a;">
                                 <input type="text" readonly
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="totalpz11c" value={{totalplaza11c|default:0}}>
+                                    name="totalpz9c" value={{totalplaza9c|default:0}}>
                             </td>
                             <td align="center" style="color: white; background-color: #25415a;">{{totalnp9c}}</td>
                             <td align="center">
@@ -2170,7 +2170,7 @@
                             <td align="center" style="background-color: #25415a;">
                                 <input type="text" readonly
                                     style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                    name="totalpz9c" value={{totalplaza9c|default:0}}>
+                                    name="totalpz10c" value={{totalplaza10c|default:0}}>
                             </td>
                             <td align="center" style="color: white; background-color: #25415a;">{{mezaJPnc}}</td>
                             <td align="center">
@@ -2249,7 +2249,7 @@
                         <td align="center" style="background-color: #25415a;">
                             <input type="text" readonly
                                 style="background-color: transparent; border: none; color: white; text-align: center; width: 25px;"
-                                name="totalpz10c" value={{totalplaza10c|default:0}}>
+                                name="totalpz11c" value={{totalplaza11c|default:0}}>
                         </td>
                         <td align="center" style="color: white; background-color: #25415a;">{{mezaBELUAnc}}</td>
                         <td align="center">
