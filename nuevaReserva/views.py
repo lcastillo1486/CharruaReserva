@@ -33,9 +33,17 @@ def creaNuevaReserva(request):
         if form.is_valid():
             a = form.save(commit=False)
             a.estado_id = 1
-            a.save()
+            cliente = a.nombre
+            fecha_reserva = a.fechaReserva
+            hora_reserva = a.hora
+            personas = a.cantidadPersonas
             
-             ## Preparar envío por whatsapp al cliente
+            if nuevaReserva.objects.filter(nombre = cliente, fechaReserva = fecha_reserva, hora = hora_reserva, cantidadPersonas = personas).exists():
+                  return redirect('delDia')
+            else:
+                a.save()
+            
+            ## Preparar envío por whatsapp al cliente
             id_reserva = a.id
             cliente = a.nombre
             fecha_reserva = a.fechaReserva.strftime('%d/%m/%Y')
