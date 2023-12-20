@@ -1243,26 +1243,6 @@ def guardaPlazaAlm(request):
 
         plaza_dia.save()
 
-        mozo = request.POST.get('mozoplaza11')
-        m35 = request.POST.get('m35')
-        r35 = request.POST.get('r35')
-        m36 = request.POST.get('m36')
-        r36 = request.POST.get('r36')
-        m37 = request.POST.get('m37')
-        r37 = request.POST.get('r37')
-        m38 = request.POST.get('m38')
-        r38 = request.POST.get('r38')
-        m39 = request.POST.get('m39')
-        r39 = request.POST.get('r39')
-        total = request.POST.get('totalpz11')
-        plaza = 'Plaza11'
-        anfi = request.POST.get('anfitriona')
-
-        plaza_dia = plazaAlmuerzo(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
-                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
-
-        plaza_dia.save()
-
         zona_horaria_peru = pytz.timezone('America/Lima')
         fecha_actual = datetime.now(zona_horaria_peru)
         es_fds = fecha_actual.weekday() in [5, 6]
@@ -1464,25 +1444,6 @@ def guardaPlazaCena(request):
 
         plaza_cena.save()
 
-        mozo = request.POST.get('mozoplaza11c')
-        m35 = request.POST.get('m35c')
-        r35 = request.POST.get('r35c')
-        m36 = request.POST.get('m36c')
-        r36 = request.POST.get('r36c')
-        m37 = request.POST.get('m37c')
-        r37 = request.POST.get('r37c')
-        m38 = request.POST.get('m38c')
-        r38 = request.POST.get('r38c')
-        m39 = request.POST.get('m39c')
-        r39 = request.POST.get('r39c')
-        total = request.POST.get('totalpz11c')
-        plaza = 'Plaza11'
-        anfi = request.POST.get('anfitrionac')
-
-        plaza_cena = plazaCena(m1=m35, r1=r35, m2=m36, r2=r36, m3=m37, r3=r37, m4=m38,
-                                   r4=r38, m5=m39, r5=r39, total=total, plaza=plaza, mozo_nombre=mozo, nombre_anfitriona=anfi)
-
-        plaza_cena.save()
 
         zona_horaria_peru = pytz.timezone('America/Lima')
         fecha_actual = datetime.now(zona_horaria_peru)
