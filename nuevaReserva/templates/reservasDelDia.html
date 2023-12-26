@@ -164,7 +164,7 @@
                         <!-- programar cambio de estado -->
                         <td style="text-align: right;" ><a href='/editarReserva/{{c.id}}' class="btn btn-light" style="background: url(/static/editar.png); background-size: cover; width: 50px; height: 50px;" title="Editar"></a></td>
                         <td style="text-align: right;"><a href='/cambiarEstadoReserva/{{c.id}}' class="btn btn-success" style="background: url(/static/atendido.png); background-size: cover; width: 50px; height: 50px;" title="Atendido"></a></td>
-                        <td style="text-align: right;"><a href='/cambiarEstadoAnulado/{{c.id}}' id="anula" data-toggle="tooltip" class="btn btn-danger" style="background: url(/static/anulado.png); background-size: cover; width: 50px; height: 50px;" title="Anulado"></a></td>
+                        <td style="text-align: right;"><a href='/cambiarEstadoAnulado/{{c.id}}' onclick="return confirm('¡ATENCIÓN!\n¿Está seguro que desea eliminar esta reserva?')" class="btn btn-danger" style="background: url(/static/anulado.png); background-size: cover; width: 50px; height: 50px;" title="Anulado"></a></td>
                         <td style="text-align: right;"><a href='/cambiarEstadoShow/{{c.id}}' class="btn btn-warning" style="background: url(/static/noshow.png); background-size: cover; width: 70px; height: 50px;" title="No Show"></a></td>
                         <td style="text-align: right;"><a href='/agregarIncidReser/{{c.id}}' class="btn btn-light">Incidencia</a></td>
                     </tr>
