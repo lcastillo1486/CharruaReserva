@@ -166,7 +166,7 @@ def listadoDelDia(request):
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual ).order_by('hora')
-    cuenta_deldia = nuevaReserva.objects.filter(estado_id = 1, fechaReserva = fecha_actual ).count()
+    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual ).count()
     totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual).aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
