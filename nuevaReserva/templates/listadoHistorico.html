@@ -47,7 +47,10 @@
                         height: 70px;
                     }
                 </style>
-                <button type="submit" class="btn btn-warning">Buscar</button>
+                <button type="submit" class="btn btn-warning" name = "accion" value="Buscar">Buscar</button><br<><br>
+                Filtrar por turno:
+                <button type="submit" class="btn btn-info" name="accion" value="Almuerzo">Almuerzo</button>
+                <button type="submit" class="btn btn-info" name="accion" value="Cena">Cena</button>
             </form>
         </div>
 
@@ -58,7 +61,10 @@
             Total de clientes del día: {{totalClientes|default:0}}
         </div>
 
-        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">   
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            {% if turno %}
+                <h1><b> Filtrado Turno: {{turno}}</b></h1>
+            {% endif %}   
         </div>
 
     </div>

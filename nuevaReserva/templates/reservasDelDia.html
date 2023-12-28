@@ -48,6 +48,9 @@
 
             <h1><b>Reservas del Día </b></h1>
             {{fechaHoy}}<br>
+            {% if turno %}
+            TURNO: {{turno}}<br>
+            {% endif %}
             Total de reservas del día: {{totalDia}}
         </div>
         <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
