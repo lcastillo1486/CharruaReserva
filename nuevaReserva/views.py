@@ -3952,29 +3952,30 @@ def estadisticas(request):
 
     #     ## por estado de la reserva
 
-    #     por_estado_reserva = nuevaReserva.objects.filter().exclude(estado_id=1).annotate(
-    #     estado_reser=Case(
-    #         When(estado=2, then=Value('Atendido')),  
-    #         When(estado=3, then=Value('Anulado')),  
-    #         When(estado=4, then=Value('No Show')), 
-    #         output_field=CharField(),
-    #     )
-    # ).values('estado_reser').annotate(
-    #     total=Count('pk')
-    # )
-    #     etiquetas3 = [estado_reserva['estado_reser'] for estado_reserva in por_estado_reserva]
-    #     valores3 = [cantidad['total'] for cantidad in por_estado_reserva]
-    #     fig3, ax3 = ptl.subplots()
-    #     fig3.set_facecolor('#000000')
-    #     ax3.pie(valores3, labels=etiquetas3,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
-    #     ax3.axis('equal')
-    #     ax3.set_title('Distribución por Estado', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        por_estado_reserva = nuevaReserva.objects.filter(fechaReserva__year=fecha_actual.year,
+    fechaReserva__month=fecha_actual.month).exclude(estado_id=1).annotate(
+        estado_reser=Case(
+            When(estado=2, then=Value('Atendido')),  
+            When(estado=3, then=Value('Anulado')),  
+            When(estado=4, then=Value('No Show')), 
+            output_field=CharField(),
+        )
+    ).values('estado_reser').annotate(
+        total=Count('pk')
+    )
+        etiquetas3 = [estado_reserva['estado_reser'] for estado_reserva in por_estado_reserva]
+        valores3 = [cantidad['total'] for cantidad in por_estado_reserva]
+        fig3, ax3 = ptl.subplots()
+        fig3.set_facecolor('#000000')
+        ax3.pie(valores3, labels=etiquetas3,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+        ax3.axis('equal')
+        ax3.set_title('Distribución por Estado', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer3 = BytesIO()
-    #     ptl.savefig(buffer3, format='png')
-    #     buffer3.seek(0)
-    #     image_base643 = base64.b64encode(buffer3.read()).decode()
-    #     grafico4 = "data:image/png;base64," + image_base643
+        buffer3 = BytesIO()
+        ptl.savefig(buffer3, format='png')
+        buffer3.seek(0)
+        image_base643 = base64.b64encode(buffer3.read()).decode()
+        grafico4 = "data:image/png;base64," + image_base643
 
     #     # por almuerzo o cena  atendidas
 
@@ -4024,7 +4025,7 @@ def estadisticas(request):
 
 
 
-        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2})
+        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2, 'graf4':grafico4})
 
 def guardaPlazaAlmfds(request):
     fecha_actual = datetime.now().date()
