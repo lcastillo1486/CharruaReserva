@@ -3881,8 +3881,11 @@ def controlMesaManAlmfds(request, nmesa):
 
 def estadisticas(request):
         
+        fecha_actual = datetime.now()
+        
     #clientes atendidos por dia semana
-        total_clientes_dia = nuevaReserva.objects.filter(estado_id=2).annotate(
+        total_clientes_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva__year=fecha_actual.year,
+    fechaReserva__month=fecha_actual.month).annotate(
         dia_semana=Case(
             When(fechaReserva__week_day=1, then=Value('Domingo')),  # Domingo
             When(fechaReserva__week_day=2, then=Value('Lunes')),  # Lunes
@@ -3913,7 +3916,8 @@ def estadisticas(request):
 
         # Origen de la reserva 
 
-        por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False).values('origen_reserva').annotate(total_origen=Count('pk'))
+        por_origen_reserva = nuevaReserva.objects.filter(origen_reserva__isnull=False, fechaReserva__year=fecha_actual.year,
+    fechaReserva__month=fecha_actual.month).values('origen_reserva').annotate(total_origen=Count('pk'))
 
         etiquetas1 = [origen['origen_reserva'] for origen in por_origen_reserva]
         valores1 = [cantidad['total_origen'] for cantidad in por_origen_reserva]
@@ -3931,20 +3935,20 @@ def estadisticas(request):
 
     #     # ocupacion mesas 
 
-        por_mesa_reserva = nuevaReserva.objects.filter(estado_id=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
+        # por_mesa_reserva = nuevaReserva.objects.filter(estado_id=2, mesa_asignadaa__isnull=False).values('mesa_asignadaa').annotate(total_mesa=Count('pk'))
 
-        etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
-        valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
-        fig2, ax2 = ptl.subplots()
-        ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
-        ax2.axis('equal')
-        ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
-        fig2.set_facecolor('#000000')
-        buffer2 = BytesIO()
-        ptl.savefig(buffer2, format='png')
-        buffer2.seek(0)
-        image_base642 = base64.b64encode(buffer2.read()).decode()
-        grafico3 = "data:image/png;base64," + image_base642
+        # etiquetas2 = [mesa['mesa_asignadaa'] for mesa in por_mesa_reserva]
+        # valores2 = [cantidad['total_mesa'] for cantidad in por_mesa_reserva]
+        # fig2, ax2 = ptl.subplots()
+        # ax2.pie(valores2, labels=etiquetas2,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'})
+        # ax2.axis('equal')
+        # ax2.set_title('Ocupación de Mesas', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        # fig2.set_facecolor('#000000')
+        # buffer2 = BytesIO()
+        # ptl.savefig(buffer2, format='png')
+        # buffer2.seek(0)
+        # image_base642 = base64.b64encode(buffer2.read()).decode()
+        # grafico3 = "data:image/png;base64," + image_base642
 
     #     ## por estado de la reserva
 
@@ -4020,7 +4024,7 @@ def estadisticas(request):
 
 
 
-        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2, 'graf3':grafico3})
+        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2})
 
 def guardaPlazaAlmfds(request):
     fecha_actual = datetime.now().date()
