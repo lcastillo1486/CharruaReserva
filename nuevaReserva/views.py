@@ -3979,28 +3979,29 @@ def estadisticas(request):
 
     #     # por almuerzo o cena  atendidas
 
-    #     por_hora_reserva = nuevaReserva.objects.filter(estado_id=2).annotate(
-    #     hora_reserva=Case(
-    #         When(hora__lt='17:30', then=Value('Almuerzo')),  
-    #         When(hora__gt='17:30', then=Value('Cena')), 
-    #         output_field=CharField(),
-    #     )
-    # ).values('hora_reserva').annotate(
-    #     total=Count('pk')
-    # )
-    #     etiquetas4 = [hora_reserva['hora_reserva'] for hora_reserva in por_hora_reserva]
-    #     valores4 = [cantidad['total'] for cantidad in por_hora_reserva]
-    #     fig4, ax4 = ptl.subplots()
-    #     fig4.set_facecolor('#000000')
-    #     ax4.pie(valores4, labels=etiquetas4,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
-    #     ax4.axis('equal')
-    #     ax4.set_title('Reservas Atendidas Según Horario', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
+        por_hora_reserva = nuevaReserva.objects.filter(estado_id=2, fechaReserva__year=fecha_actual.year,
+    fechaReserva__month=fecha_actual.month).annotate(
+        hora_reserva=Case(
+            When(hora__lt='17:30', then=Value('Almuerzo')),  
+            When(hora__gt='17:30', then=Value('Cena')), 
+            output_field=CharField(),
+        )
+    ).values('hora_reserva').annotate(
+        total=Count('pk')
+    )
+        etiquetas4 = [hora_reserva['hora_reserva'] for hora_reserva in por_hora_reserva]
+        valores4 = [cantidad['total'] for cantidad in por_hora_reserva]
+        fig4, ax4 = ptl.subplots()
+        fig4.set_facecolor('#000000')
+        ax4.pie(valores4, labels=etiquetas4,autopct='%1.1f%%',startangle=140, shadow=True, textprops={'color': 'white'} )
+        ax4.axis('equal')
+        ax4.set_title('Reservas Atendidas Según Horario', fontweight='bold', fontdict={'color': 'white', 'fontsize': 16})
 
-    #     buffer4 = BytesIO()
-    #     ptl.savefig(buffer4, format='png')
-    #     buffer4.seek(0)
-    #     image_base644 = base64.b64encode(buffer4.read()).decode()
-    #     grafico5 = "data:image/png;base64," + image_base644
+        buffer4 = BytesIO()
+        ptl.savefig(buffer4, format='png')
+        buffer4.seek(0)
+        image_base644 = base64.b64encode(buffer4.read()).decode()
+        grafico5 = "data:image/png;base64," + image_base644
 
         # reservas con incidencia 
 
@@ -4025,7 +4026,7 @@ def estadisticas(request):
 
 
 
-        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2, 'graf4':grafico4})
+        return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2, 'graf4':grafico4, 'graf5':grafico5})
 
 def guardaPlazaAlmfds(request):
     fecha_actual = datetime.now().date()
