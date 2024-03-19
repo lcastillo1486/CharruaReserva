@@ -316,12 +316,12 @@ def muentraCena(request):
     cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
 
-    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '17:30' ).order_by('hora')
+    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01' ).order_by('hora')
 
-    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '17:30').aggregate(Sum('cantidadPersonas'))
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01').aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
 
-    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '17:30').count()
+    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01').count()
 
     turno = "CENA"
 
@@ -337,12 +337,12 @@ def muentraTarde(request):
     cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
 
-    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '17:30' ).order_by('hora')
+    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01' ).order_by('hora')
 
-    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '17:30').aggregate(Sum('cantidadPersonas'))
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01').aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
 
-    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '17:30' ).count()
+    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01' ).count()
 
     turno = "ALMUERZO"
 
@@ -393,10 +393,10 @@ def buscaHistoricoFecha(request):
             if decision == "Cena":
                 b = formBuscar.cleaned_data['fechaBuscar']
                 turno = "CENA"
-                completado = nuevaReserva.objects.filter(fechaReserva=b, hora__gt='17:30').order_by('-fechaReserva', 'hora')
-                cuenta_completado = nuevaReserva.objects.filter(estado_id=2, hora__gt='17:30').count()
-                cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=b, hora__gt='17:30').count()
-                totalClientesAten = nuevaReserva.objects.filter(fechaReserva=b, estado_id=2, hora__gt='17:30').aggregate(Sum('cantidadPersonas'))
+                completado = nuevaReserva.objects.filter(fechaReserva=b, hora__gt='16:01').order_by('-fechaReserva', 'hora')
+                cuenta_completado = nuevaReserva.objects.filter(estado_id=2, hora__gt='16:01').count()
+                cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=b, hora__gt='16:01').count()
+                totalClientesAten = nuevaReserva.objects.filter(fechaReserva=b, estado_id=2, hora__gt='16:01').aggregate(Sum('cantidadPersonas'))
                 totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
                 return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia,
                                                                     "totalClientes":totalpersonas, "turno":turno })
@@ -405,10 +405,10 @@ def buscaHistoricoFecha(request):
 
                 b = formBuscar.cleaned_data['fechaBuscar']
                 turno = "ALMUERZO"
-                completado = nuevaReserva.objects.filter(fechaReserva=b, hora__lt='17:30').order_by('-fechaReserva', 'hora')
-                cuenta_completado = nuevaReserva.objects.filter(estado_id=2, hora__lt='17:30').count()
-                cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=b, hora__lt='17:30').count()
-                totalClientesAten = nuevaReserva.objects.filter(fechaReserva=b, estado_id=2, hora__lt='17:30').aggregate(Sum('cantidadPersonas'))
+                completado = nuevaReserva.objects.filter(fechaReserva=b, hora__lt='16:01').order_by('-fechaReserva', 'hora')
+                cuenta_completado = nuevaReserva.objects.filter(estado_id=2, hora__lt='16:01').count()
+                cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=b, hora__lt='16:01').count()
+                totalClientesAten = nuevaReserva.objects.filter(fechaReserva=b, estado_id=2, hora__lt='16:01').aggregate(Sum('cantidadPersonas'))
                 totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
                 return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia,
                                                                     "totalClientes":totalpersonas, "turno":turno})
@@ -636,222 +636,222 @@ def verPlaza(request):
 
     # plaza1
     mesa1 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__lt='16:01').count()
     mesa2 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__lt='16:01').count()
     mesa3 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__lt='16:01').count()
     mesa6 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__lt='16:01').count()
     mesa6A = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__lt='16:01').count()
     tota_plaza1 = mesa1 + mesa2 + mesa3 + mesa6 + mesa6A
 
     # plaza2
     mesa4 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__lt='16:01').count()
     mesa5 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__lt='16:01').count()
     mesa10 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__lt='16:01').count()
     mesa11 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__lt='16:01').count()
     mesa12 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__lt='16:01').count()
     tota_plaza2 = mesa4 + mesa5 + mesa10 + mesa11 + mesa12
 
     # plaza3
     mesa12a = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__lt='16:01').count()
     mesa14 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__lt='16:01').count()
     mesa15 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__lt='16:01').count()
     mesa16 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__lt='16:01').count()
 
     tota_plaza3 = mesa12a + mesa14 + mesa15 + mesa16
 
     # plaza4
     mesa17 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__lt='16:01').count()
     mesa18 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__lt='16:01').count()
     mesa8 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__lt='16:01').count()
     mesa9 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__lt='16:01').count()
     mesa34 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__lt='16:01').count()
     tota_plaza4 = mesa17 + mesa18 + mesa8 + mesa9 + mesa34
 
     # plaza5
     mesa26 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__lt='16:01').count()
     mesa19 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__lt='16:01').count()
     mesa20 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__lt='16:01').count()
     mesa21 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__lt='16:01').count()
 
     tota_plaza5 = mesa26 + mesa19 + mesa20 + mesa21
 
     # plaza6
     mesa22 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__lt='16:01').count()
     mesa30 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__lt='16:01').count()
     mesa31 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__lt='16:01').count()
     mesa32 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__lt='16:01').count()
 
     tota_plaza6 = mesa22 + mesa30 + mesa31 + mesa32
 
     # plaza7
     mesa27 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__lt='16:01').count()
     mesa28 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__lt='16:01').count()
     mesa29 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__lt='16:01').count()
     mesab3 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__lt='16:01').count()
 
     tota_plaza7 = mesa27 + mesa28 + mesa29 + mesab3
 
     # plaza8
     mesa35 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__lt='16:01').count()
     mesa36 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__lt='16:01').count()
     mesa37 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__lt='16:01').count()
     mesa38 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__lt='16:01').count()
     mesa39 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__lt='16:01').count()
     tota_plaza8 = mesa35 + mesa36 + mesa37 + mesa38 + mesa39
 
     # plaza9
     mesajp = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__lt='16:01').count()
     tota_plaza9 = mesajp
 
     # plaza10
     mesabelua = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__lt='16:01').count()
     tota_plaza10 = mesabelua
 
     # plaza1c
     mesa1c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__gt='16:01').count()
     mesa2c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__gt='16:01').count()
     mesa3c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__gt='16:01').count()
     mesa6c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__gt='16:01').count()
     mesa6Ac = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__gt='16:01').count()
     tota_plaza1c = mesa1c + mesa2c + mesa3c + mesa6c + mesa6Ac
 
     # plaza2c
     mesa4c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__gt='16:01').count()
     mesa5c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__gt='16:01').count()
     mesa10c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__gt='16:01').count()
     mesa11c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__gt='16:01').count()
     mesa12c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__gt='16:01').count()
     tota_plaza2c = mesa4c + mesa5c + mesa10c + mesa11c + mesa12c
 
     # plaza3c
     mesa12ac = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__gt='16:01').count()
     mesa14c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__gt='16:01').count()
     mesa15c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__gt='16:01').count()
     mesa16c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__gt='16:01').count()
 
     tota_plaza3c = mesa12ac + mesa14c + mesa15c + mesa16c
 
     # plaza4c
     mesa17c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__gt='16:01').count()
     mesa18c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__gt='16:01').count()
     mesa8c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__gt='16:01').count()
     mesa9c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__gt='16:01').count()
     mesa34c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__gt='16:01').count()
     tota_plaza4c = mesa17c + mesa18c + mesa8c + mesa9c + mesa34c
 
     # plaza5c
     mesa26c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__gt='16:01').count()
     mesa19c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__gt='16:01').count()
     mesa20c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__gt='16:01').count()
     mesa21c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__gt='16:01').count()
 
     tota_plaza5c = mesa26c + mesa19c + mesa20c + mesa21c
 
     # plaza6c
     mesa22c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__gt='16:01').count()
     mesa30c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__gt='16:01').count()
     mesa31c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__gt='16:01').count()
     mesa32c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__gt='16:01').count()
 
     tota_plaza6c = mesa22c + mesa30c + mesa31c + mesa32c
 
     # plaza7c
     mesa27c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__gt='16:01').count()
     mesa28c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__gt='16:01').count()
     mesa29c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__gt='16:01').count()
     mesab3c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__gt='16:01').count()
 
     tota_plaza7c = mesa27c + mesa28c + mesa29c + mesab3c
 
     # plaza8c
     mesa35c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__gt='16:01').count()
     mesa36c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__gt='16:01').count()
     mesa37c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__gt='16:01').count()
     mesa38c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__gt='16:01').count()
     mesa39c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__gt='16:01').count()
     tota_plaza8c = mesa35c + mesa36c + mesa37c + mesa38c + mesa39c
 
     # plaza9c
     mesajpc = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__gt='16:01').count()
     tota_plaza9c = mesajpc
 
     # plaza10c
     mesabeluac = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__gt='16:01').count()
     tota_plaza10c = mesabeluac
 
     ##########BUSCAR LAS MANUALES ALMUERZO#################
@@ -1134,7 +1134,7 @@ def guardaPlazaAlm(request):
     if plazaAlmuerzo.objects.filter(fecha_dia=fecha_actual).exists():
         return HttpResponse('Ya esta guardado')
 
-    # if hora_actual < '17:30':
+    # if hora_actual < '16:01':
     #     return HttpResponse('No puede guardar la plaza hasta finalizar el turno')
 
     if request.method == 'POST':
@@ -1544,15 +1544,15 @@ def verHistoricoPlaza(request):
 
                 # plaza1
                 mesa1 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='1', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='1', hora__lt='16:01').count()
                 mesa2 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='2', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='2', hora__lt='16:01').count()
                 mesa3 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='3', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='3', hora__lt='16:01').count()
                 mesa6 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='6', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='6', hora__lt='16:01').count()
                 mesa6A = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='6A', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='6A', hora__lt='16:01').count()
                 tota_plaza1 = mesa1 + mesa2 + mesa3 + mesa6 + mesa6A
 
                 guardarp = plazaAlmuerzo.objects.get(
@@ -1568,15 +1568,15 @@ def verHistoricoPlaza(request):
 
                 # plaza2
                 mesa4 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='4', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='4', hora__lt='16:01').count()
                 mesa5 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='5', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='5', hora__lt='16:01').count()
                 mesa10 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='10', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='10', hora__lt='16:01').count()
                 mesa11 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='11', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='11', hora__lt='16:01').count()
                 mesa12 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='12', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='12', hora__lt='16:01').count()
                 tota_plaza2 = mesa4 + mesa5 + mesa10 + mesa11 + mesa12
 
                 guardarp2 = plazaAlmuerzo.objects.get(
@@ -1592,13 +1592,13 @@ def verHistoricoPlaza(request):
 
                 # plaza3
                 mesa12A = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='12A', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='12A', hora__lt='16:01').count()
                 mesa14 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='14', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='14', hora__lt='16:01').count()
                 mesa15 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='15', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='15', hora__lt='16:01').count()
                 mesa16 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='16', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='16', hora__lt='16:01').count()
 
                 tota_plaza3 = mesa12A + mesa14 + mesa15 + mesa16
 
@@ -1614,15 +1614,15 @@ def verHistoricoPlaza(request):
 
                 # plaza4
                 mesa17 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='17', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='17', hora__lt='16:01').count()
                 mesa18 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='18', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='18', hora__lt='16:01').count()
                 mesa8 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='8', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='8', hora__lt='16:01').count()
                 mesa9 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='9', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='9', hora__lt='16:01').count()
                 mesa34 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='34', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='34', hora__lt='16:01').count()
 
                 tota_plaza4 = mesa17 + mesa18 + mesa8 + mesa9 + mesa34
 
@@ -1639,13 +1639,13 @@ def verHistoricoPlaza(request):
 
                 # plaza5
                 mesa26 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='26', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='26', hora__lt='16:01').count()
                 mesa19 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='19', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='19', hora__lt='16:01').count()
                 mesa20 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='20', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='20', hora__lt='16:01').count()
                 mesa21 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='21', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='21', hora__lt='16:01').count()
 
                 tota_plaza5 = mesa26 + mesa19 + mesa20 + mesa21
 
@@ -1661,13 +1661,13 @@ def verHistoricoPlaza(request):
 
                 # plaza6
                 mesa22 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='22', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='22', hora__lt='16:01').count()
                 mesa30 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='30', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='30', hora__lt='16:01').count()
                 mesa31 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='31', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='31', hora__lt='16:01').count()
                 mesa32 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='32', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='32', hora__lt='16:01').count()
 
                 tota_plaza6 = mesa22 + mesa30 + mesa31 + mesa31
 
@@ -1683,13 +1683,13 @@ def verHistoricoPlaza(request):
 
                 # plaza7
                 mesa27 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='27', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='27', hora__lt='16:01').count()
                 mesa28 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='28', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='28', hora__lt='16:01').count()
                 mesa29 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='29', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='29', hora__lt='16:01').count()
                 mesaB3 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='B3', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='B3', hora__lt='16:01').count()
 
                 tota_plaza7 = mesa27 + mesa28 + mesa29 + mesaB3
 
@@ -1705,15 +1705,15 @@ def verHistoricoPlaza(request):
 
                 # plaza8
                 mesa35 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='35', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='35', hora__lt='16:01').count()
                 mesa36 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='36', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='36', hora__lt='16:01').count()
                 mesa37 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='37', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='37', hora__lt='16:01').count()
                 mesa38 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='38', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='38', hora__lt='16:01').count()
                 mesa39 = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='39', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='39', hora__lt='16:01').count()
 
                 tota_plaza8 = mesa35 + mesa36 + mesa37 + mesa38 + mesa39
 
@@ -1730,7 +1730,7 @@ def verHistoricoPlaza(request):
 
                 # plaza9
                 mesajp = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='JP', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='JP', hora__lt='16:01').count()
 
                 tota_plaza9 = mesajp
 
@@ -1743,7 +1743,7 @@ def verHistoricoPlaza(request):
 
                 # plaza10
                 mesabelua = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='BELUA', hora__lt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='BELUA', hora__lt='16:01').count()
 
                 tota_plaza10 = mesabelua
 
@@ -1757,11 +1757,11 @@ def verHistoricoPlaza(request):
             if plazaCena.objects.filter(fecha_dia=b).exists():
 
                 # plaza1
-                mesa1c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='1', hora__gt='17:30').count()
-                mesa2c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='2', hora__gt='17:30').count()
-                mesa3c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='3', hora__gt='17:30').count()
-                mesa6c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='6', hora__gt='17:30').count()
-                mesa6Ac = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='6A', hora__gt='17:30').count()
+                mesa1c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='1', hora__gt='16:01').count()
+                mesa2c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='2', hora__gt='16:01').count()
+                mesa3c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='3', hora__gt='16:01').count()
+                mesa6c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='6', hora__gt='16:01').count()
+                mesa6Ac = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='6A', hora__gt='16:01').count()
                 tota_plaza1c = mesa1c + mesa2c + mesa3c + mesa6c + mesa6Ac
 
                 guardarpc = plazaCena.objects.get(fecha_dia=b, plaza='Plaza1')
@@ -1775,11 +1775,11 @@ def verHistoricoPlaza(request):
                 guardarpc.save()
 
                 # plaza2
-                mesa4c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='4', hora__gt='17:30').count()
-                mesa5c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='5', hora__gt='17:30').count()
-                mesa10c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='10', hora__gt='17:30').count()
-                mesa11c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='11', hora__gt='17:30').count()
-                mesa12c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='12', hora__gt='17:30').count()
+                mesa4c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='4', hora__gt='16:01').count()
+                mesa5c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='5', hora__gt='16:01').count()
+                mesa10c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='10', hora__gt='16:01').count()
+                mesa11c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='11', hora__gt='16:01').count()
+                mesa12c = nuevaReserva.objects.filter(fechaReserva=b, mesa_asignadaa='12', hora__gt='16:01').count()
                 total_plaza2c = mesa4c + mesa5c + mesa10c + mesa11c + mesa12c
 
                 guardarp2c = plazaCena.objects.get(fecha_dia=b, plaza='Plaza2')
@@ -1794,13 +1794,13 @@ def verHistoricoPlaza(request):
 
                 # plaza3
                 mesa12Ac = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='12A', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='12A', hora__gt='16:01').count()
                 mesa14c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='14', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='14', hora__gt='16:01').count()
                 mesa15c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='15', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='15', hora__gt='16:01').count()
                 mesa16c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='16', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='16', hora__gt='16:01').count()
 
                 tota_plaza3c = mesa12Ac + mesa14c + mesa15c + mesa16c
 
@@ -1815,15 +1815,15 @@ def verHistoricoPlaza(request):
 
                 # plaza4
                 mesa17c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='17', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='17', hora__gt='16:01').count()
                 mesa18c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='18', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='18', hora__gt='16:01').count()
                 mesa8c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='8', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='8', hora__gt='16:01').count()
                 mesa9c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='9', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='9', hora__gt='16:01').count()
                 mesa34c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='34', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='34', hora__gt='16:01').count()
 
                 tota_plaza4c = mesa17c + mesa18c + mesa8c + mesa9c + mesa34c
 
@@ -1839,13 +1839,13 @@ def verHistoricoPlaza(request):
 
                  # plaza5
                 mesa26c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='26', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='26', hora__gt='16:01').count()
                 mesa19c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='19', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='19', hora__gt='16:01').count()
                 mesa20c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='20', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='20', hora__gt='16:01').count()
                 mesa21c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='21', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='21', hora__gt='16:01').count()
 
                 tota_plaza5c = mesa26c + mesa19c + mesa20c + mesa21c
 
@@ -1861,13 +1861,13 @@ def verHistoricoPlaza(request):
 
                 # plaza6
                 mesa22c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='22', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='22', hora__gt='16:01').count()
                 mesa30c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='30', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='30', hora__gt='16:01').count()
                 mesa31c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='31', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='31', hora__gt='16:01').count()
                 mesa32c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='32', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='32', hora__gt='16:01').count()
 
                 tota_plaza6c = mesa22c + mesa30c + mesa31c + mesa32c
 
@@ -1883,13 +1883,13 @@ def verHistoricoPlaza(request):
 
                 # plaza7
                 mesa27c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='27', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='27', hora__gt='16:01').count()
                 mesa28c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='28', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='28', hora__gt='16:01').count()
                 mesa29c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='29', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='29', hora__gt='16:01').count()
                 mesaB3c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='B3', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='B3', hora__gt='16:01').count()
 
                 tota_plaza7c = mesa27c + mesa28c + mesa29c + mesaB3c
 
@@ -1905,15 +1905,15 @@ def verHistoricoPlaza(request):
 
                  # plaza8
                 mesa35c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='35', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='35', hora__gt='16:01').count()
                 mesa36c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='36', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='36', hora__gt='16:01').count()
                 mesa37c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='37', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='37', hora__gt='16:01').count()
                 mesa38c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='38', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='38', hora__gt='16:01').count()
                 mesa39c = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='39', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='39', hora__gt='16:01').count()
 
                 tota_plaza8c = mesa35c + mesa36c + mesa37c + mesa38c + mesa39c
 
@@ -1930,7 +1930,7 @@ def verHistoricoPlaza(request):
 
                 # plaza9
                 mesajpc = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='JP', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='JP', hora__gt='16:01').count()
 
                 tota_plaza9c = mesajpc
 
@@ -1943,7 +1943,7 @@ def verHistoricoPlaza(request):
 
                 # plaza10
                 mesabeluac = nuevaReserva.objects.filter(
-                    fechaReserva=b, mesa_asignadaa='BELUA', hora__gt='17:30').count()
+                    fechaReserva=b, mesa_asignadaa='BELUA', hora__gt='16:01').count()
 
                 tota_plaza10c = mesabeluac
 
@@ -2715,125 +2715,125 @@ def verplazafds(request):
 
     # plaza1
     mesa1 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__lt='16:01').count()
     mesa2 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__lt='16:01').count()
     mesa3 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__lt='16:01').count()
     mesa6 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__lt='16:01').count()
     # mesa6A = nuevaReserva.objects.filter(
-    #     fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__lt='17:30').count()
+    #     fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__lt='16:01').count()
     tota_plaza1 = mesa1 + mesa2 + mesa3 + mesa6 
 
     # plaza2
     mesa4 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__lt='16:01').count()
     mesa5 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__lt='16:01').count()
     # mesa10 = nuevaReserva.objects.filter(
-    #     fechaReserva=fecha_actual, mesa_asignadaa='10', hora__lt='17:30').count()
+    #     fechaReserva=fecha_actual, mesa_asignadaa='10', hora__lt='16:01').count()
     mesa11 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__lt='16:01').count()
     mesa12 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__lt='16:01').count()
     tota_plaza2 = mesa4 + mesa5 +  mesa11 + mesa12
 
     # plaza3
     mesa12a = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__lt='16:01').count()
     mesa14 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__lt='16:01').count()
     mesa15 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__lt='16:01').count()
     mesa21 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__lt='16:01').count()
 
     tota_plaza3 = mesa12a + mesa14 + mesa15 + mesa21
 
     # plaza4
     mesa6A = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__lt='16:01').count()
     mesa9 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__lt='16:01').count()
     mesa10 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__lt='16:01').count()
     mesa16 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__lt='16:01').count()
     # mesa34 = nuevaReserva.objects.filter(
-    #     fechaReserva=fecha_actual, mesa_asignadaa='34', hora__lt='17:30').count()
+    #     fechaReserva=fecha_actual, mesa_asignadaa='34', hora__lt='16:01').count()
     tota_plaza4 = mesa6A + mesa9 + mesa10 + mesa16 
 
     # plaza5
     mesa8 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__lt='16:01').count()
     mesa17 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__lt='16:01').count()
     mesa18 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__lt='16:01').count()
     mesa34 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__lt='16:01').count()
 
     tota_plaza5 = mesa8 + mesa17 + mesa18 + mesa34
 
     # plaza6
     mesa19 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__lt='16:01').count()
     mesa20 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__lt='16:01').count()
     mesa24 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='24', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='24', hora__lt='16:01').count()
     mesa26 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__lt='16:01').count()
 
     tota_plaza6 = mesa19 + mesa20 + mesa24 + mesa26
 
     # plaza8
     mesa27 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__lt='16:01').count()
     mesa28 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__lt='16:01').count()
     mesa29 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__lt='16:01').count()
     mesab3 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__lt='16:01').count()
 
     tota_plaza8 = mesa27 + mesa28 + mesa29 + mesab3
 
     # plaza7
     mesa22 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__lt='16:01').count()
     mesa23 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='23', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='23', hora__lt='16:01').count()
     mesa30 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__lt='16:01').count()
     mesa31 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__lt='16:01').count()
     mesa32 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__lt='16:01').count()
     tota_plaza7 = mesa22 + mesa23 + mesa30 + mesa31 + mesa32
 
     # plaza9
     mesa35 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__lt='16:01').count()
     mesa36 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__lt='16:01').count()
     mesa37 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__lt='16:01').count()
     mesa38 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__lt='16:01').count()
     mesa39 = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__lt='16:01').count()
     tota_plaza9 = mesa35 + mesa36 + mesa37 + mesa38 + mesa39
 
     # plaza10
     mesajp = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__lt='16:01').count()
     tota_plaza10 = mesajp
 
     # plaza11
     mesabelua = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__lt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__lt='16:01').count()
     tota_plaza11 = mesabelua
 
     
@@ -2843,126 +2843,126 @@ def verplazafds(request):
     
     # plaza1c
     mesa1c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='1', hora__gt='16:01').count()
     mesa2c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='2', hora__gt='16:01').count()
     mesa3c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='3', hora__gt='16:01').count()
     mesa6c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6', hora__gt='16:01').count()
     # mesa6Ac = nuevaReserva.objects.filter(
-    #     fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__gt='17:30').count()
+    #     fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__gt='16:01').count()
     tota_plaza1c = mesa1c + mesa2c + mesa3c + mesa6c
 
     # plaza2c
     mesa4c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='4', hora__gt='16:01').count()
     mesa5c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='5', hora__gt='16:01').count()
     # mesa10c = nuevaReserva.objects.filter(
-    #     fechaReserva=fecha_actual, mesa_asignadaa='10', hora__gt='17:30').count()
+    #     fechaReserva=fecha_actual, mesa_asignadaa='10', hora__gt='16:01').count()
     mesa11c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='11', hora__gt='16:01').count()
     mesa12c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12', hora__gt='16:01').count()
     tota_plaza2c = mesa4c + mesa5c + mesa11c + mesa12c
 
 
     # plaza3c
     mesa12ac = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='12A', hora__gt='16:01').count()
     mesa14c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='14', hora__gt='16:01').count()
     mesa15c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='15', hora__gt='16:01').count()
     mesa21c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='21', hora__gt='16:01').count()
 
     tota_plaza3c = mesa12ac + mesa14c + mesa15c + mesa21c
 
     # plaza4c
     mesa6Ac = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='6A', hora__gt='16:01').count()
     mesa9c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='9', hora__gt='16:01').count()
     mesa10c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='10', hora__gt='16:01').count()
     mesa16c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='16', hora__gt='16:01').count()
     # mesa34c = nuevaReserva.objects.filter(
-    #     fechaReserva=fecha_actual, mesa_asignadaa='34', hora__gt='17:30').count()
+    #     fechaReserva=fecha_actual, mesa_asignadaa='34', hora__gt='16:01').count()
     tota_plaza4c = mesa6Ac + mesa9c + mesa10c + mesa16c 
 
     # plaza5c
     mesa8c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='8', hora__gt='16:01').count()
     mesa17c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='17', hora__gt='16:01').count()
     mesa18c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='18', hora__gt='16:01').count()
     mesa34c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='34', hora__gt='16:01').count()
 
     tota_plaza5c = mesa8c + mesa17c + mesa18c + mesa34c
 
     # plaza6c
     mesa19c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='19', hora__gt='16:01').count()
     mesa20c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='20', hora__gt='16:01').count()
     mesa24c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='24', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='24', hora__gt='16:01').count()
     mesa26c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='26', hora__gt='16:01').count()
 
     tota_plaza6c = mesa19c + mesa20c + mesa24c + mesa26c
 
     # plaza8c
     mesa27c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='27', hora__gt='16:01').count()
     mesa28c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='28', hora__gt='16:01').count()
     mesa29c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='29', hora__gt='16:01').count()
     mesab3c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='B3', hora__gt='16:01').count()
 
     tota_plaza8c = mesa27c + mesa28c + mesa29c + mesab3c
 
     # plaza7c
     mesa22c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='22', hora__gt='16:01').count()
     mesa23c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='23', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='23', hora__gt='16:01').count()
     mesa30c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='30', hora__gt='16:01').count()
     mesa31c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='31', hora__gt='16:01').count()
     mesa32c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='32', hora__gt='16:01').count()
     tota_plaza7c = mesa22c + mesa23c + mesa30c + mesa31c + mesa32c
 
     # plaza9c
     mesa35c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='35', hora__gt='16:01').count()
     mesa36c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='36', hora__gt='16:01').count()
     mesa37c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='37', hora__gt='16:01').count()
     mesa38c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='38', hora__gt='16:01').count()
     mesa39c = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='39', hora__gt='16:01').count()
     tota_plaza9c = mesa35c + mesa36c + mesa37c + mesa38c + mesa39c
 
     # plaza10c
     mesajpc = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='JP', hora__gt='16:01').count()
     tota_plaza10c = mesajpc
 
     # plaza11c
     mesabeluac = nuevaReserva.objects.filter(
-        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__gt='17:30').count()
+        fechaReserva=fecha_actual, mesa_asignadaa='BELUA', hora__gt='16:01').count()
     tota_plaza11c = mesabeluac
 
     
@@ -3982,8 +3982,8 @@ def estadisticas(request):
         por_hora_reserva = nuevaReserva.objects.filter(estado_id=2, fechaReserva__year=fecha_actual.year,
     fechaReserva__month=fecha_actual.month).annotate(
         hora_reserva=Case(
-            When(hora__lt='17:30', then=Value('Almuerzo')),  
-            When(hora__gt='17:30', then=Value('Cena')), 
+            When(hora__lt='16:01', then=Value('Almuerzo')),  
+            When(hora__gt='16:01', then=Value('Cena')), 
             output_field=CharField(),
         )
     ).values('hora_reserva').annotate(
@@ -4035,7 +4035,7 @@ def guardaPlazaAlmfds(request):
     if plazaAlmuerzo.objects.filter(fecha_dia=fecha_actual).exists():
         return HttpResponse('Ya esta guardado')
 
-    # if hora_actual < '17:30':
+    # if hora_actual < '16:01':
     #     return HttpResponse('No puede guardar la plaza hasta finalizar el turno')
 
     if request.method == 'POST':
@@ -4288,7 +4288,7 @@ def guardaPlazaCenafds(request):
     if plazaCena.objects.filter(fecha_dia=fecha_actual).exists():
         return HttpResponse('Ya esta guardado')
 
-    # if hora_actual < '17:30':
+    # if hora_actual < '16:01':
     #     return HttpResponse('No puede guardar la plaza hasta finalizar el turno')
 
     if request.method == 'POST':
