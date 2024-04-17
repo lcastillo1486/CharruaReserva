@@ -243,6 +243,43 @@ def editarReserva(request, id):
 
         form = editReservaFoms(request.POST,instance=editCurso)
         if form.is_valid:
+            fecha_reserva = editCurso.fechaReserva.strftime('%d/%m/%Y')
+            fecha_nueva = request.POST.get('fechaReserva')
+            telwhat = request.POST.get('telefono')
+            hora_reserva = request.POST.get('hora')
+            personas = request.POST.get('cantidadPersonas')
+            cliente = request.POST.get('nombre')
+
+            if fecha_reserva != fecha_nueva:
+                  if not telwhat is None:
+                        ## Quitar de las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
+                        ## y se gana el sueldo facilmente. 
+                    telwhat = re.sub(r'[^\d]+', '', telwhat)
+                    telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
+                    mensaje = f"""Estimado/a: *{cliente}*. 
+Esperamos que esté teniendo un excelente día. Nos complace informarle que su solicitud de cambiar la \n
+fecha de su reserva en nuestro restaurante ha sido atendida. \n
+Su nueva fecha de reserva es el día *{fecha_reserva}* a las *{hora_reserva}*. \n
+Agradecemos su solicitud y esperamos que esta nueva fecha sea aún más conveniente para usted y su grupo. \n
+Agradecemos su preferencia y le aseguramos que estamos trabajando arduamente para garantizar una \n
+experiencia gastronómica memorable en su próxima visita. Si tiene alguna pregunta o inquietud, no \n
+dude en comunicarse con nosotros al *994 043 376*. \n
+Gracias por elegir *EL CHARRÚA*. \n
+Saludos cordiales"""
+
+                    letras = string.ascii_lowercase
+                    uid_custom = ''.join(random.choice(letras) for i in range(6))  
+
+                    url = 'https://www.waboxapp.com/api/send/chat'
+                    data = {
+                        'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
+                        'uid': '51994043376',
+                        'to': telwhat,
+                        'custom_uid':uid_custom,
+                        'text': mensaje
+                    }
+                        
+                    response = requests.post(url, data = data) 
             form.save()
             return redirect('/reservasDelDia/') 
 
