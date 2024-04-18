@@ -246,7 +246,7 @@ def editarReserva(request, id):
             fecha_reserva = editCurso.fechaReserva.strftime('%d/%m/%Y')
             fecha_nueva = request.POST.get('fechaReserva')
             telwhat = request.POST.get('telefono')
-            hora_reserva = request.POST.get('hora').strftime('%I:%M %p')
+            hora_reserva = request.POST.get('hora')
             personas = request.POST.get('cantidadPersonas')
             cliente = request.POST.get('nombre')
 
