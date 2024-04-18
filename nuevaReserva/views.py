@@ -250,6 +250,8 @@ def editarReserva(request, id):
             personas = request.POST.get('cantidadPersonas')
             cliente = request.POST.get('nombre')
 
+            fecha_format = fecha_nueva.strftime('%d/%m/%Y')
+
             if fecha_reserva != fecha_nueva:
                   if not telwhat is None:
                         ## Quitar de las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
@@ -259,7 +261,7 @@ def editarReserva(request, id):
                     mensaje = f"""Estimado/a: *{cliente}*. 
 Esperamos que esté teniendo un excelente día. Nos complace informarle que su solicitud de cambiar la
 fecha de su reserva en nuestro restaurante ha sido atendida. 
-Su nueva fecha de reserva es el día *{fecha_reserva}* a las *{hora_reserva}*. \n
+Su nueva fecha de reserva es el día *{fecha_format}* a las *{hora_reserva}*. \n
 Agradecemos su solicitud y esperamos que esta nueva fecha sea aún más conveniente para usted y su grupo.
 Agradecemos su preferencia y le aseguramos que estamos trabajando arduamente para garantizar una 
 experiencia gastronómica memorable en su próxima visita. Si tiene alguna pregunta o inquietud, no
