@@ -132,7 +132,7 @@ def envioRecordatorio():
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
                 cliente = telefono.nombre 
-                hora_reserva = telefono.hora
+                hora_reserva = telefono.hora.strftime('%I:%M %p')
                 personas = telefono.cantidadPersonas
                 # hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
                 # hora_limite = time(17, 30)
@@ -246,7 +246,7 @@ def editarReserva(request, id):
             fecha_reserva = editCurso.fechaReserva.strftime('%d/%m/%Y')
             fecha_nueva = request.POST.get('fechaReserva')
             telwhat = request.POST.get('telefono')
-            hora_reserva = request.POST.get('hora')
+            hora_reserva = request.POST.get('hora').strftime('%I:%M %p')
             personas = request.POST.get('cantidadPersonas')
             cliente = request.POST.get('nombre')
 
@@ -257,12 +257,12 @@ def editarReserva(request, id):
                     telwhat = re.sub(r'[^\d]+', '', telwhat)
                     telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
                     mensaje = f"""Estimado/a: *{cliente}*. 
-Esperamos que esté teniendo un excelente día. Nos complace informarle que su solicitud de cambiar la \n
-fecha de su reserva en nuestro restaurante ha sido atendida. \n
+Esperamos que esté teniendo un excelente día. Nos complace informarle que su solicitud de cambiar la
+fecha de su reserva en nuestro restaurante ha sido atendida. 
 Su nueva fecha de reserva es el día *{fecha_reserva}* a las *{hora_reserva}*. \n
-Agradecemos su solicitud y esperamos que esta nueva fecha sea aún más conveniente para usted y su grupo. \n
-Agradecemos su preferencia y le aseguramos que estamos trabajando arduamente para garantizar una \n
-experiencia gastronómica memorable en su próxima visita. Si tiene alguna pregunta o inquietud, no \n
+Agradecemos su solicitud y esperamos que esta nueva fecha sea aún más conveniente para usted y su grupo.
+Agradecemos su preferencia y le aseguramos que estamos trabajando arduamente para garantizar una 
+experiencia gastronómica memorable en su próxima visita. Si tiene alguna pregunta o inquietud, no
 dude en comunicarse con nosotros al *994 043 376*. \n
 Gracias por elegir *EL CHARRÚA*. \n
 Saludos cordiales"""
