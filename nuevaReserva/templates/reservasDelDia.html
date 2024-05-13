@@ -30,18 +30,17 @@
         color: black;
         background-color: white;
     }
-
 </style>
 
 <body>
     <div class="row">
 
         <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
-            
+
             <a href='/muestraTarde/' class="btn btn-light">Almuerzo</a>
             <a href='/muestraCena/' class="btn btn-light">Cena</a>
             <a href='/reservasDelDia/' class="btn btn-light">Todos</a>
-        
+
         </div>
         <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
 
@@ -52,15 +51,18 @@
             TURNO: {{turno}}<br>
             {% endif %}
             Total de reservas del día: {{totalDia}}
+            {% if busqueda_activa == 1%}
             <h1><b>
-                <font color="yellow">**Busqueda Activa**</font>
-            </b></h1>
-        {% endif %}
+                    <font color="yellow">**Busqueda Activa**</font>
+                </b></h1>
+            {% endif %}
         </div>
         <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
 
             <b>
-                <font color="white"><h3>Total Clientes: {{totalPersonas|default:0}}</h3><br></font>
+                <font color="white">
+                    <h3>Total Clientes: {{totalPersonas|default:0}}</h3><br>
+                </font>
             </b>
             <form action='/reservasDelDia/' method="POST">
                 {% csrf_token %}
@@ -115,9 +117,9 @@
                         <th>
                             Mesa:
                         </th>
-                        
+
                         <th colspan="5"><a href='/exportarExcel/' class="btn btn-secondary">Exportar a Excel</a></th>
-                        
+
 
                     </tr>
                 </thead>
@@ -125,16 +127,16 @@
                 <tbody>
                     {% for c in listaEspera %}
                     {% if c.estado_id == 3 %}
-                        <tr style="background-color: red;">
-                    
-                    {% elif c.estado_id == 2 %}
-                        <tr style="background-color: green;">
+                    <tr style="background-color: red;">
 
-                    {% elif c.estado_id == 4 %}
-                        <tr style="background-color: yellow;">
-                    {% else %}
-                        <tr>
-                    {% endif %}
+                        {% elif c.estado_id == 2 %}
+                    <tr style="background-color: green;">
+
+                        {% elif c.estado_id == 4 %}
+                    <tr style="background-color: yellow;">
+                        {% else %}
+                    <tr>
+                        {% endif %}
                         <td>
 
                         </td>
@@ -162,17 +164,17 @@
                         </td>
                         </FONT>
                         <td>
-                            
-                            <form action='/guardarMesa/{{c.id}}' method="POST" >
+
+                            <form action='/guardarMesa/{{c.id}}' method="POST">
                                 {% csrf_token %}
                                 <input type="text" id="mesa" name="mesa" size="7" />
                                 <button class="btn btn-primary btn-sm">
-                                    <img src="{% static 'guardar.png' %}" style="width: 20px; height: 20px;"> 
+                                    <img src="{% static 'guardar.png' %}" style="width: 20px; height: 20px;">
                                 </button>
-                            </form>             
-                            
+                            </form>
+
                         </td>
-                        
+
                         <td>
                             <h4>
                                 <FONT COLOR="white">{{c.mesa_asignadaa|default:" "}}
@@ -180,11 +182,22 @@
                         </td>
                         </FONT>
                         <!-- programar cambio de estado -->
-                        <td style="text-align: right;" ><a href='/editarReserva/{{c.id}}' class="btn btn-light" style="background: url(/static/editar.png); background-size: cover; width: 50px; height: 50px;" title="Editar"></a></td>
-                        <td style="text-align: right;"><a href='/cambiarEstadoReserva/{{c.id}}' class="btn btn-success" style="background: url(/static/atendido.png); background-size: cover; width: 50px; height: 50px;" title="Atendido"></a></td>
-                        <td style="text-align: right;"><a href='/cambiarEstadoAnulado/{{c.id}}' onclick="return confirm('¡ATENCIÓN!\n¿Está seguro que desea eliminar esta reserva?')" class="btn btn-danger" style="background: url(/static/anulado.png); background-size: cover; width: 50px; height: 50px;" title="Anulado"></a></td>
-                        <td style="text-align: right;"><a href='/cambiarEstadoShow/{{c.id}}' class="btn btn-warning" style="background: url(/static/noshow.png); background-size: cover; width: 70px; height: 50px;" title="No Show"></a></td>
-                        <td style="text-align: right;"><a href='/agregarIncidReser/{{c.id}}' class="btn btn-light">Incidencia</a></td>
+                        <td style="text-align: right;"><a href='/editarReserva/{{c.id}}' class="btn btn-light"
+                                style="background: url(/static/editar.png); background-size: cover; width: 50px; height: 50px;"
+                                title="Editar"></a></td>
+                        <td style="text-align: right;"><a href='/cambiarEstadoReserva/{{c.id}}' class="btn btn-success"
+                                style="background: url(/static/atendido.png); background-size: cover; width: 50px; height: 50px;"
+                                title="Atendido"></a></td>
+                        <td style="text-align: right;"><a href='/cambiarEstadoAnulado/{{c.id}}'
+                                onclick="return confirm('¡ATENCIÓN!\n¿Está seguro que desea eliminar esta reserva?')"
+                                class="btn btn-danger"
+                                style="background: url(/static/anulado.png); background-size: cover; width: 50px; height: 50px;"
+                                title="Anulado"></a></td>
+                        <td style="text-align: right;"><a href='/cambiarEstadoShow/{{c.id}}' class="btn btn-warning"
+                                style="background: url(/static/noshow.png); background-size: cover; width: 70px; height: 50px;"
+                                title="No Show"></a></td>
+                        <td style="text-align: right;"><a href='/agregarIncidReser/{{c.id}}'
+                                class="btn btn-light">Incidencia</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -202,17 +215,17 @@
                 window.location.href = event.target.href; // Redirige a la URL del enlace
             } else {
                 // Si el usuario cancela, no se realiza ninguna acción
-                return;  
+                return;
             }
         });
         document.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.which === 13) {
-        var botonBuscar = document.getElementById("boton-buscar");
-        if (botonBuscar) {
-          botonBuscar.click();
-        }
-      }
-    });
+            if (event.key === "Enter" || event.which === 13) {
+                var botonBuscar = document.getElementById("boton-buscar");
+                if (botonBuscar) {
+                    botonBuscar.click();
+                }
+            }
+        });
     </script>
 
 </body>
