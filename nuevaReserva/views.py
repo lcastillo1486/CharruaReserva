@@ -199,18 +199,42 @@ def listadoDelDia(request):
     
     fecha_actual = datetime.now().date()
 
-    cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
-    cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
-    cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
-    cuenta_pendiente = nuevaReserva.objects.filter(estado_id=1, fechaReserva=fecha_actual).count()
-    
+    cuenta_atendido = nuevaReserva.objects.filter(
+        estado_id=2, fechaReserva=fecha_actual).count()
+    cuenta_anulado = nuevaReserva.objects.filter(
+        estado_id=3, fechaReserva=fecha_actual).count()
+    cuenta_noshow = nuevaReserva.objects.filter(
+        estado_id=4, fechaReserva=fecha_actual).count()
+    cuenta_pendiente = nuevaReserva.objects.filter(
+        estado_id=1, fechaReserva=fecha_actual).count()
 
-    deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual ).order_by('hora')
-    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual ).count()
-    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual).aggregate(Sum('cantidadPersonas'))
+    deldia = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual).order_by('hora')
+    
+    cuenta_deldia = nuevaReserva.objects.filter(
+         fechaReserva=fecha_actual).exclude(estado_id__in=[3, 4]).count()
+    
+    totalClientesAten = nuevaReserva.objects.filter(
+        fechaReserva=fecha_actual).exclude(estado_id__in=[3, 4]).aggregate(Sum('cantidadPersonas'))
+    
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
-    return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
-    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas, 'totalPendiente':cuenta_pendiente})
+
+    if request.method == "POST":
+        nombre_cliente = request.POST.get('nombre')
+        if len(nombre_cliente) == 0:
+            return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia": cuenta_deldia, 'fechaHoy': fecha_actual, 'totalAtendido': cuenta_atendido,
+            'totalAnulado': cuenta_anulado, 'totalNoshow': cuenta_noshow, "totalPersonas": totalpersonas, 'totalPendiente':cuenta_pendiente})
+    
+        else:
+            busqueda_activa = 1
+            coindicenias = nuevaReserva.objects.filter(nombre__icontains = nombre_cliente, fechaReserva=fecha_actual).order_by('hora')
+
+            return render(request, 'reservasDelDia.html', {"listaEspera": coindicenias, "totalDia": cuenta_deldia, 'fechaHoy': fecha_actual, 'totalAtendido': cuenta_atendido,
+            'totalAnulado': cuenta_anulado, 'totalNoshow': cuenta_noshow, "totalPersonas": totalpersonas, 'totalPendiente':cuenta_pendiente, 'busqueda_activa':busqueda_activa})
+    else:
+        return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia": cuenta_deldia, 'fechaHoy': fecha_actual, 'totalAtendido': cuenta_atendido,
+            'totalAnulado': cuenta_anulado, 'totalNoshow': cuenta_noshow, "totalPersonas": totalpersonas, 'totalPendiente':cuenta_pendiente})  
+  
 @login_required
 def listadoEnProceso(request):
     en_proceso = nuevaReserva.objects.filter(estado_id = 2)

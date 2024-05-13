@@ -58,6 +58,14 @@
             <b>
                 <font color="white"><h3>Total Clientes: {{totalPersonas|default:0}}</h3><br></font>
             </b>
+            <form action='/reservasDelDia/' method="POST">
+                {% csrf_token %}
+                <h5>Buscar Cliente:</h5>
+                <input type="text" id="nombre-input" name="nombre">
+                <button type="submit" id="boton-buscar"
+                    style="margin-top: 10px; margin-bottom: 10px; margin-left: 0%; width: 100px;"
+                    class="btn btn-success">BUSCAR</button>
+            </form>
             <b>
                 <font color="green">Total Reservas Atendidas: {{totalAtendido}}<br></font>
             </b>
@@ -181,6 +189,7 @@
     </div>
 
     <script>
+        document.getElementById("nombre-input").focus();
         document.getElementById('anula').addEventListener('click', function (event) {
             event.preventDefault(); // Evita que se siga el enlace automáticamente
             var confirmacion = confirm('!ATENCIóN¡ \n\ ¿Está seguro que desea eliminar esta reserva?');
@@ -192,6 +201,14 @@
                 return;  
             }
         });
+        document.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.which === 13) {
+        var botonBuscar = document.getElementById("boton-buscar");
+        if (botonBuscar) {
+          botonBuscar.click();
+        }
+      }
+    });
     </script>
 
 </body>
