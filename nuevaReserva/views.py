@@ -376,6 +376,7 @@ def muentraCena(request):
     cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
     cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
+    cuenta_pendiente = nuevaReserva.objects.filter(estado_id=1, fechaReserva=fecha_actual).count()
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01' ).order_by('hora')
 
@@ -387,7 +388,7 @@ def muentraCena(request):
     turno = "CENA"
 
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
-    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas, "turno":turno })
+    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas, "turno":turno, 'totalPendiente':cuenta_pendiente })
 
 @login_required
 def muentraTarde(request):
@@ -397,6 +398,7 @@ def muentraTarde(request):
     cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
     cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
+    cuenta_pendiente = nuevaReserva.objects.filter(estado_id=1, fechaReserva=fecha_actual).count()
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01' ).order_by('hora')
 
@@ -408,7 +410,7 @@ def muentraTarde(request):
     turno = "ALMUERZO"
 
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
-    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas, "turno":turno })
+    'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas, "turno":turno, 'totalPendiente':cuenta_pendiente })
 
 @login_required
 def exportaExcel(request):
