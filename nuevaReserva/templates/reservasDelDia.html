@@ -40,7 +40,15 @@
             <a href='/muestraTarde/' class="btn btn-light">Almuerzo</a>
             <a href='/muestraCena/' class="btn btn-light">Cena</a>
             <a href='/reservasDelDia/' class="btn btn-light">Todos</a>
-
+            <br><br>
+            <!-- <form action='/reservasDelDia/' method="POST">
+                {% csrf_token %}
+                <h5>Buscar Cliente:</h5>
+                <input type="text" id="nombre-input" name="nombre"><br>
+                <button type="submit" id="boton-buscar"
+                    style="margin-top: 10px; margin-bottom: 10px; margin-left: 0%; width: 100px;"
+                    class="btn btn-success">BUSCAR</button>
+            </form> -->
         </div>
         <div style="text-align: center;" class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
 
@@ -64,30 +72,44 @@
                     <h3>Total Clientes: {{totalPersonas|default:0}}</h3><br>
                 </font>
             </b>
-            <form action='/reservasDelDia/' method="POST">
-                {% csrf_token %}
-                <h5>Buscar Cliente:</h5>
-                <input type="text" id="nombre-input" name="nombre">
-                <button type="submit" id="boton-buscar"
-                    style="margin-top: 10px; margin-bottom: 10px; margin-left: 0%; width: 100px;"
-                    class="btn btn-success">BUSCAR</button>
-            </form>
-            <b>
-                <font color="green">Total Reservas Atendidas: {{totalAtendido}}<br></font>
-            </b>
-            <b>
-                <font color="red">Total Reservas anuladas: {{totalAnulado}}<br></font>
-            </b>
-            <b>
-                <font color="yellow">Total Reservas No Show: {{totalNoshow}}<br></font>
-            </b>
-            <b>
-                <font color="white">Total Reservas Pendientes: {{totalPendiente}}<br></font>
-            </b>
-
+            
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <form action='/reservasDelDia/' method="POST">
+                    {% csrf_token %}
+                    <h5>Buscar Cliente:</h5>
+                    <input type="text" id="nombre-input" name="nombre">
+                    <button type="submit" id="boton-buscar"
+                        style="margin-top: 10px; margin-bottom: 10px; margin-left: 0%; width: 100px;"
+                        class="btn btn-success">BUSCAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+        <div class="row" style="margin-left: 40px;">
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <b>
+                    <font color="green">Total Reservas Atendidas: {{totalAtendido}}<br></font>
+                </b>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <b>
+                    <font color="red">Total Reservas anuladas: {{totalAnulado}}<br></font>
+                </b>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <b>
+                    <font color="yellow">Total Reservas No Show: {{totalNoshow}}<br></font>
+                </b>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <b>
+                    <font color="white">Total Reservas Pendientes: {{totalPendiente}}<br></font>
+                </b>
+            </div>
+            </div>
         </div>
 
-    </div>
+
     <div class="row">
         <div class="table-responsive py-2">
             <table class="table table-striped">
@@ -96,19 +118,16 @@
                         <th>
 
                         </th>
-                        <th>
+                        <th style="text-align: center;">
                             Hora:
                         </th>
-                        <th>
+                        <th style="text-align: center;">
                             Cliente:
                         </th>
                         <th>
                             Cantidad de Personas:
                         </th>
-                        <th>
-                            Origen:
-                        </th>
-                        <th>
+                        <th style="text-align: center;">
                             Observaciones:
                         </th>
                         <th>
@@ -116,9 +135,12 @@
                         </th>
                         <th>
                             Mesa:
+
                         </th>
 
-                        <th colspan="5"><a href='/exportarExcel/' class="btn btn-secondary">Exportar a Excel</a></th>
+
+                        <th style="text-align: center;" colspan="5"><a href='/exportarExcel'
+                                class="btn btn-secondary">Exportar a Excel</a></th>
 
 
                     </tr>
@@ -137,27 +159,32 @@
                         {% else %}
                     <tr>
                         {% endif %}
+
                         <td>
 
                         </td>
-                        </FONT>
+
                         <td>
-                            <FONT COLOR="white">{{c.hora}}
+                            {% if c.estado_id == 4 %}
+                            <FONT COLOR="black">{{c.hora}}</FONT>
+                            {% else %}
+                            <FONT COLOR="white">{{c.hora}}</FONT>
+                            {% endif %}
                         </td>
-                        </FONT>
+
                         <td>
-                            <FONT COLOR="white">{{c.nombre}}
+                            {% if c.estado_id == 4 %}
+                            <FONT COLOR="black">{{c.nombre}}</FONT>
+                            {% else %}
+                            <FONT COLOR="white">{{c.nombre}}</FONT>
+                            {% endif %}
                         </td>
-                        </FONT>
+
                         <td>
                             <FONT COLOR="white">{{c.cantidadPersonas}}
                         </td>
-                        </FONT>
-                        <td>
-                            <FONT COLOR="white">{{c.origen_reserva|default:" "}}
-                        </td>
-                        </FONT>
-                        <td>
+
+                        <td style="text-align: center;">
                             <h4>
                                 <FONT COLOR="white">{{c.observaciones}}
                             </h4>
