@@ -376,7 +376,7 @@ def muentraCena(request):
     cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
     cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
-    cuenta_pendiente = nuevaReserva.objects.filter(estado_id=1, fechaReserva=fecha_actual).count()
+    cuenta_pendiente = nuevaReserva.objects.filter(estado_id=1, fechaReserva=fecha_actual, hora__gt = '16:01').count()
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01' ).order_by('hora')
 
@@ -398,7 +398,7 @@ def muentraTarde(request):
     cuenta_atendido = nuevaReserva.objects.filter(estado_id = 2, fechaReserva = fecha_actual).count()
     cuenta_anulado = nuevaReserva.objects.filter(estado_id = 3, fechaReserva = fecha_actual).count()
     cuenta_noshow = nuevaReserva.objects.filter(estado_id = 4, fechaReserva = fecha_actual).count()
-    cuenta_pendiente = nuevaReserva.objects.filter(estado_id=1, fechaReserva=fecha_actual).count()
+    cuenta_pendiente = nuevaReserva.objects.filter(estado_id=1, fechaReserva=fecha_actual, hora__lt = '16:01').count()
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01' ).order_by('hora')
 
