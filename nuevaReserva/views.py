@@ -379,10 +379,10 @@ def muentraCena(request):
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01' ).order_by('hora')
 
-    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01').aggregate(Sum('cantidadPersonas'))
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01').exclude(estado_id__in=[3, 4]).aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
 
-    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01').count()
+    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__gt = '16:01').exclude(estado_id__in=[3, 4]).count()
 
     turno = "CENA"
 
@@ -400,10 +400,10 @@ def muentraTarde(request):
 
     deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01' ).order_by('hora')
 
-    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01').aggregate(Sum('cantidadPersonas'))
+    totalClientesAten = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01').exclude(estado_id__in=[3, 4]).aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
 
-    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01' ).count()
+    cuenta_deldia = nuevaReserva.objects.filter(fechaReserva = fecha_actual, hora__lt = '16:01' ).exclude(estado_id__in=[3, 4]).count()
 
     turno = "ALMUERZO"
 
