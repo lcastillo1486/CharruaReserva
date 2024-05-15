@@ -252,7 +252,7 @@ def listadoCompletado(request):
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
 
     if request.method == "POST":
-          nombre_cliente = request.POST.get('nombre')
+          nombre_cliente = request.POST.get('nombre').strip()
           if len(nombre_cliente) == 0:
                 return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
                                                      "totalClientes":totalpersonas})
