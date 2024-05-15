@@ -66,8 +66,7 @@ Su reserva ha sido confirmada.\n
 *Fecha de la reservación: {fecha_reserva}* 
 *Hora de la reservación: {hora_reserva}*
 *Cantidad de personas: {personas}*\n 
-Esperamos brindarle una experiencia gastronómica memorable en nuestro establecimiento.
-¡Estamos ansiosos por darle la bienvenida!
+Esperamos que nuestra atención sea de su expectativa.
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
@@ -143,7 +142,7 @@ def envioRecordatorio():
 Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n 
 *Hora de la reservación: {hora_reserva}*
 *Cantidad de personas: {personas}*\n 
-Esperamos brindarle una experiencia gastronómica memorable en nuestro establecimiento.
+Esperamos que nuestra atención sea de su mejor experiencia.
 ¡Estamos ansiosos por darle la bienvenida!
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
 Muchas gracias por elegirnos.
