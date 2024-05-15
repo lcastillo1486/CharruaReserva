@@ -250,7 +250,22 @@ def listadoCompletado(request):
     cuenta_completado_dia = nuevaReserva.objects.filter(estado_id=2, fechaReserva=fecha_actual).count()
     totalClientesAten = nuevaReserva.objects.filter(fechaReserva=fecha_actual).aggregate(Sum('cantidadPersonas'))
     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
-    return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
+
+    if request.method == "POST":
+          nombre_cliente = request.POST.get('nombre')
+          if len(nombre_cliente) == 0:
+                return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
+                                                     "totalClientes":totalpersonas})
+          else:
+                
+            busqueda_activa = 1
+            coindicenias = nuevaReserva.objects.filter(nombre__icontains = nombre_cliente).order_by('-fechaReserva','hora')
+            return render(request, 'listadoHistorico.html', {"listaCompletado": coindicenias, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
+                                                     "totalClientes":totalpersonas, 'busqueda_activa':busqueda_activa})
+          
+
+    else:
+        return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
                                                      "totalClientes":totalpersonas})
 
 @login_required

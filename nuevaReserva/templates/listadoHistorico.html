@@ -59,10 +59,15 @@
             Total General de reserva completadas: {{totalCompletado|default:0}}<br>
             Total de reserva completadas del dia: {{totalCompletadodia|default:0}}<br>
             Total de clientes del día: {{totalClientes|default:0}}
+            {% if busqueda_activa == 1%}
+            <h1><b>
+                    <font color="yellow">**Busqueda Activa**</font>
+                </b></h1>
+            {% endif %}
         </div>
 
         <div style="text-align: left;" class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-            <form action='/#/' method="POST">
+            <form action='/historico/' method="POST">
                 {% csrf_token %}
                 <h6>Buscar Cliente:</h6>
                 <input type="text" id="nombre-input" name="nombre">
