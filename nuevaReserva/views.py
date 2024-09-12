@@ -109,12 +109,10 @@ Te esperamos en *El Charrúa*"""
             cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
             #print(cuenta_listadia)
             if cuenta_listadia == 1:
-                envioRecordatorio()
-                       
-            return redirect('/reservasDelDia/')
-        else:
-
-            return render(request, 'nuevaReserva.html', {'form_reserva': form})
+                envioRecordatorio()          
+                return redirect('/reservasDelDia/')
+            else:
+                return render(request, 'nuevaReserva.html', {'form_reserva': form})
 
     return render(request, 'nuevaReserva.html', context)
 
