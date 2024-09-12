@@ -51,8 +51,8 @@ def creaNuevaReserva(request):
             personas = a.cantidadPersonas
             telwhat = a.telefono
 
-            # hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
-            # hora_limite = time(17, 30)
+            hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
+            hora_limite = time(17, 1)
 
             if not telwhat is None:
             ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
@@ -60,8 +60,8 @@ def creaNuevaReserva(request):
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
                 
-                # if hora_cena <= hora_limite:
-                mensaje = f"""Estimado/a: *{cliente}*. 
+                if hora_cena >= hora_limite:
+                    mensaje = f"""Estimado/a: *{cliente}*. 
 Su reserva ha sido confirmada.\n 
 *Fecha de la reservación: {fecha_reserva}* 
 *Hora de la reservación: {hora_reserva}*
@@ -70,20 +70,18 @@ Esperamos que nuestra atención sea de su expectativa.
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
-#                 else:
-#                     mensaje = f"""Estimado/a: *{cliente}*. 
-# Su reserva ha sido confirmada.\n 
-# *Fecha de la reservación: {fecha_reserva}* 
-# *Hora de la reservación: {hora_reserva}*
-# *Cantidad de personas: {personas}*\n 
-# Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
-# ¡Estamos ansiosos por darle la bienvenida!
-# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-# Muchas gracias por elegirnos.
-# Te esperamos en *El Charrúa*\n
-# *Hoy 31/12/2023, se cobrará el derecho de corcho para todos los licores.*\n
-# *Dicho monto va desde los S/50.*\n
-# *Así mismo, les deseamos un prospero año nuevo.*"""
+                else:
+                    mensaje = f"""Estimado/a: *{cliente}*. 
+Su reserva ha sido confirmada.\n 
+*Fecha de la reservación: {fecha_reserva}* 
+*Hora de la reservación: {hora_reserva}*
+*Cantidad de personas: {personas}*\n 
+Esperamos que nuestra atención sea de su expectativa.
+Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
+Agradecemos su comprensión.
+Muchas gracias por elegirnos.
+Te esperamos en *El Charrúa*"""
                 
 
                 letras = string.ascii_lowercase
@@ -133,12 +131,12 @@ def envioRecordatorio():
                 cliente = telefono.nombre 
                 hora_reserva = telefono.hora.strftime('%I:%M %p')
                 personas = telefono.cantidadPersonas
-                # hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
-                # hora_limite = time(17, 30)
+                hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
+                hora_limite = time(17, 1)
 
 
-                # if hora_cena <= hora_limite:
-                mensaje = f"""Estimado/a: *{cliente}*. 
+                if hora_cena >= hora_limite:
+                    mensaje = f"""Estimado/a: *{cliente}*. 
 Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n 
 *Hora de la reservación: {hora_reserva}*
 *Cantidad de personas: {personas}*\n 
@@ -147,19 +145,18 @@ Esperamos que nuestra atención sea de su mejor experiencia.
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
-#                 else:
-#                     mensaje = f"""Estimado/a: *{cliente}*. 
-# Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n 
-# *Hora de la reservación: {hora_reserva}*
-# *Cantidad de personas: {personas}*\n 
-# Esperamos brindarle una experiencia gastronómica memorable en nuestro establecimiento.
-# ¡Estamos ansiosos por darle la bienvenida!
-# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-# Muchas gracias por elegirnos.
-# Te esperamos en *El Charrúa*\n
-# *Hoy 31/12/2023, se cobrará el derecho de corcho para todos los licores.*\n
-# *Dicho monto va desde los S/50.*\n
-# *Así mismo, les deseamos un prospero año nuevo.*"""
+                else:
+                    mensaje = f"""Estimado/a: *{cliente}*. 
+Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n 
+*Hora de la reservación: {hora_reserva}*
+*Cantidad de personas: {personas}*\n 
+Esperamos que nuestra atención sea de su mejor experiencia.
+¡Estamos ansiosos por darle la bienvenida!
+Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
+Agradecemos su comprensión.
+Muchas gracias por elegirnos.
+Te esperamos en *El Charrúa*"""
                       
                 #mensaje = 'Su reserva ha sido confirmada, muchas gracias por elegirnos.Te esperamos en El Charrúa. '
 
