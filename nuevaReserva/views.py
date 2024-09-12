@@ -68,6 +68,8 @@ Su reserva ha sido confirmada.\n
 *Cantidad de personas: {personas}*\n 
 Esperamos que nuestra atención sea de su expectativa.
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
+Agradecemos su comprensión.
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
 #                 else:
@@ -145,6 +147,8 @@ Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n
 Esperamos que nuestra atención sea de su mejor experiencia.
 ¡Estamos ansiosos por darle la bienvenida!
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
+Agradecemos su comprensión.
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
 #                 else:
@@ -299,6 +303,8 @@ Agradecemos su solicitud y esperamos que esta nueva fecha sea aún más convenie
 Agradecemos su preferencia y le aseguramos que estamos trabajando arduamente para garantizar una 
 experiencia gastronómica memorable en su próxima visita. Si tiene alguna pregunta o inquietud, no
 dude en comunicarse con nosotros al *994 043 376*. \n
+Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
+Agradecemos su comprensión.
 Gracias por elegir *EL CHARRÚA*. \n
 Saludos cordiales"""
 
