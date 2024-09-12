@@ -52,7 +52,7 @@ def creaNuevaReserva(request):
             telwhat = a.telefono
 
             hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
-            hora_limite = time(17, 1)
+            hora_limite = time(17, 10)
 
             if not telwhat is None:
             ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
@@ -132,7 +132,7 @@ def envioRecordatorio():
                 hora_reserva = telefono.hora.strftime('%I:%M %p')
                 personas = telefono.cantidadPersonas
                 hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
-                hora_limite = time(17, 1)
+                hora_limite = time(17, 10)
 
 
                 if hora_cena >= hora_limite:
