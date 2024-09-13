@@ -119,7 +119,6 @@ Te esperamos en *El Charrúa*"""
             return render(request, 'nuevaReserva.html', {'form_reserva': form})
 
     return render(request, 'nuevaReserva.html', context)
-
 def envioRecordatorio():
     fecha_actual = datetime.now().date()
     listado_envio = nuevaReserva.objects.filter(fechaReserva=fecha_actual, estado_id=1)
@@ -176,8 +175,7 @@ Te esperamos en *El Charrúa*"""
                 }
             
                 response = requests.post(url, data = data)
-                time.sleep(3)
-                
+                time.sleep(3) 
 @login_required
 def listadoEnEspera(request):
 
@@ -233,7 +231,6 @@ def listadoDelDia(request):
     else:
         return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia": cuenta_deldia, 'fechaHoy': fecha_actual, 'totalAtendido': cuenta_atendido,
             'totalAnulado': cuenta_anulado, 'totalNoshow': cuenta_noshow, "totalPersonas": totalpersonas, 'totalPendiente':cuenta_pendiente})  
-  
 @login_required
 def listadoEnProceso(request):
     en_proceso = nuevaReserva.objects.filter(estado_id = 2)
@@ -263,7 +260,6 @@ def listadoCompletado(request):
     else:
         return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia, 
                                                      "totalClientes":totalpersonas})
-
 @login_required
 def editarReserva(request, id):
 
@@ -400,7 +396,6 @@ def muentraCena(request):
 
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
     'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas, "turno":turno, 'totalPendiente':cuenta_pendiente })
-
 @login_required
 def muentraTarde(request):
 
@@ -422,7 +417,6 @@ def muentraTarde(request):
 
     return render(request, 'reservasDelDia.html', {"listaEspera": deldia, "totalDia":cuenta_deldia, 'fechaHoy':fecha_actual, 'totalAtendido':cuenta_atendido,
     'totalAnulado':cuenta_anulado, 'totalNoshow':cuenta_noshow, "totalPersonas":totalpersonas, "turno":turno, 'totalPendiente':cuenta_pendiente })
-
 @login_required
 def exportaExcel(request):
 
@@ -520,7 +514,6 @@ def buscaHistoricoFecha(request):
                     totalpersonas = (totalClientesAten['cantidadPersonas__sum'])
                     return render(request, 'listadoHistorico.html', {"listaCompletado": completado, "totalCompletado": cuenta_completado, "formBusca": formBuscar, "totalCompletadodia":cuenta_completado_dia,
                                                                     "totalClientes":totalpersonas })
-
 @login_required
 def exportaExcelHistorico(request):
 
@@ -1603,7 +1596,6 @@ def guardaPlazaCena(request):
             return controlMesaManCenfds(request, 1)
         else:
             return controlMesaManCen(request, 1)
-
 @login_required
 def verHistoricoPlaza(request):
 
@@ -2653,7 +2645,7 @@ def guardarIncidenciaReserva(request):
             return render(request, 'incidencia.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
 
     return render(request, 'incidencia.html', {'form_inciden': form, 'formBuscarInciden': form_buscar, 'listadoInciden': bi})
-
+@login_required
 def calculardia(request):
     zona_horaria_peru = pytz.timezone('America/Lima')
     fecha_actual = datetime.now(zona_horaria_peru)
@@ -2663,7 +2655,7 @@ def calculardia(request):
         return redirect('verPlazasfds')
     else:
           return redirect('verPlaza')
-
+@login_required
 def verplazafds(request):
     fecha_actual = datetime.now().date()
 
@@ -3346,7 +3338,7 @@ def verplazafds(request):
                                           'mezajpc': mesajpc, 'mezaJPnc': resultnpJPc,'totalplaza9c': tota_plaza9c, 'mozoNombre9c': mozoplaza9c, 'totalnp9c':totalnp9c, 'totalplaza11c':tota_plaza11c,
                                           'mezabeluac': mesabeluac, 'mezaBELUAnc': resultnpBELUAc, 'totalplaza10c': tota_plaza10c, 'mozoNombre10c': mozoplaza10c, 
                                           'estadoc': estadoc, 'anfialmuerzoc': nombre_anfic, 'listaAnfitrionasc':anfitrionasc})
-
+@login_required
 def controlMesaManCenfds(request, nmesa):
      
     fecha_actual = datetime.now().date()
@@ -3647,7 +3639,7 @@ def controlMesaManCenfds(request, nmesa):
            guardan1.save()
    
     return redirect('calculadia')
-
+@login_required
 def controlMesaManAlmfds(request, nmesa):
 
     fecha_actual = datetime.now().date()
@@ -3951,8 +3943,9 @@ def controlMesaManAlmfds(request, nmesa):
            guardan1.n1 = int(guardan1.n1) + 1
            guardan1.save()
 
-    return redirect('calculadia')
 
+    return redirect('calculadia')
+@login_required
 def estadisticas(request):
         
         fecha_actual = datetime.now()
@@ -4101,7 +4094,7 @@ def estadisticas(request):
 
 
         return render(request, 'estadisticas.html', {'graf':grafico1,'graf6':grafico6, 'graf2':grafico2, 'graf4':grafico4, 'graf5':grafico5})
-
+@login_required
 def guardaPlazaAlmfds(request):
     fecha_actual = datetime.now().date()
     hora_actual = datetime.now().strftime('%H:%M')
@@ -4354,7 +4347,7 @@ def guardaPlazaAlmfds(request):
             return controlMesaManAlmfds(request, 1)
         else:
             return controlMesaManAlm(request, 1)
-
+@login_required
 def guardaPlazaCenafds(request):
     fecha_actual = datetime.now().date()
     hora_actual = datetime.now().strftime('%H:%M')
