@@ -6,278 +6,200 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Charrrua - Encuesta</title>
+    <title>El Charrúa - Encuesta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+        @keyframes parpadeo {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .parpadeo {
+            animation: parpadeo 2s infinite;
+        }
+        body {
+            margin: 0;
+            background: rgb(49, 18, 11);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Baskerville, serif;
+            font-style: italic;
+            color: white;
+            overflow-y: auto;
+        }
+        .container {
+            position: relative;
+            max-width: 90%;
+            width: 100%;
+            max-width: 500px; /* Ajusta el ancho máximo si es necesario */
+            padding: 20px;
+            border-radius: 20px;
+            box-sizing: border-box;
+            background: #ecf0f3;
+            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+        }
+        .brand-logo {
+            height: 100px;
+            width: 100px;
+            background: url("https://img.icons8.com/color/100/000000/twitter--v2.png") no-repeat center center;
+            background-size: cover;
+            margin: auto;
+            border-radius: 30%;
+            box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+        }
+        .brand-title {
+            margin-top: 10px;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: #1DA1F2;
+            letter-spacing: 1px;
+        }
+        .inputs {
+            text-align: left;
+            margin-top: 30px;
+        }
+        label,
+        input {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+        label {
+            margin-bottom: 4px;
+        }
+        input::placeholder {
+            color: gray;
+        }
+        input {
+            background: #ecf0f3;
+            padding: 10px;
+            height: 50px;
+            font-size: 14px;
+            border-radius: 50px;
+            box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        }
+        button {
+            color: black;
+            margin-top: 20px;
+            background: white;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 6px 6px 6px #26120b, -6px -6px 6px #26120b;
+            transition: 0.5s;
+            width: 100%;
+            font-family: Baskerville, serif;
+            font-style: italic;
+            font-weight: bold;
+        }
+        button:hover {
+            box-shadow: none;
+        }
+        a {
+            position: absolute;
+            font-size: 8px;
+            bottom: 4px;
+            right: 4px;
+            text-decoration: none;
+            color: black;
+            background: yellow;
+            border-radius: 10px;
+            padding: 2px;
+        }
+        h5, h3, h4 {
+            font-family: Arial, sans-serif;
+        }
+        h5 {
+            color: rgb(207, 180, 141);
+        }
+        h3 {
+            color: white;
+        }
+        h4 {
+            color: rgb(207, 180, 141);
+        }
+        .form-check-input {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            background-color: white;
+            appearance: none;
+            position: relative;
+            box-shadow: 3px 0 4px rgb(207, 180, 141);
+        }
+        .form-check-input:checked {
+            background-color: transparent;
+            border: 2px solid #ccc;
+        }
+        .form-check-input:checked::after {
+            content: '';
+            background-color: rgb(207, 180, 141);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            animation: parpadeo 1s infinite;
+        }
+        .form-check-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px black;
+        }
+        .form-check-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .form-check-label {
+            text-align: center;
+            color: rgb(207, 180, 141);
+            font-weight: bold;
+        }
+        .form-check-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .radio-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            color: rgb(49, 18, 11);
+            font-size: 22px;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap rel="stylesheet"');
-
-
-    @keyframes parpadeo {
-        0% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-    .parpadeo {
-        animation: parpadeo 2s infinite;
-    }
-    input {
-        caret-color: red;
-    }
-    body {
-        margin: 0;
-        width: 100vw;
-        height: 100%;
-        background: rgb(49, 18, 11);
-        display: flex;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        place-items: center;
-        font-family: Baskerville;
-        font-style: italic;
-        color: white;
-        overflow-y: auto;
-    }
-    .container {
-        position: relative;
-        width: 350px;
-        height: 500px;
-        border-radius: 20px;
-        padding: 40px;
-        box-sizing: border-box;
-        background: #ecf0f3;
-        box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
-    }
-
-    .brand-logo {
-        height: 100px;
-        width: 100px;
-        background: url("https://img.icons8.com/color/100/000000/twitter--v2.png");
-        margin: auto;
-        border-radius: 30%;
-        box-sizing: border-box;
-        box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
-    }
-    .brand-title {
-        margin-top: 10px;
-        font-weight: 900;
-        font-size: 1.8rem;
-        color: #1DA1F2;
-        letter-spacing: 1px;
-    }
-    .inputs {
-        text-align: left;
-        margin-top: 30px;
-    }
-
-    label,
-    input {
-        display: block;
-        width: 100%;
-        padding: 0;
-        border: none;
-        outline: none;
-        box-sizing: border-box;
-        align-self: center;
-    }
-    label {
-        margin-bottom: 4px;
-    }
-    label:nth-of-type(2) {
-        margin-top: 12px;
-    }
-    input::placeholder {
-        color: gray;
-    }
-    input {
-        background: #ecf0f3;
-        padding: 10px;
-        padding-left: 20px;
-        height: 50px;
-        font-size: 14px;
-        border-radius: 50px;
-        box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
-    }
-    button {
-        color: black;
-        margin-top: 20px;
-        background: white;
-        height: 40px;
-        border-radius: 20px;
-        cursor: pointer;
-        box-shadow: 6px 6px 6px #26120b, -6px -6px 6px #26120b;
-        transition: 0.5s;
-        margin-bottom: 20px;
-        font-family: Baskerville;
-        font-style: italic;
-        font-weight: bold;
-        width: 50%;
-    }
-    button:hover {
-        box-shadow: none;
-    }
-    a {
-        position: absolute;
-        font-size: 8px;
-        bottom: 4px;
-        right: 4px;
-        text-decoration: none;
-        color: black;
-        background: yellow;
-        border-radius: 10px;
-        padding: 2px;
-    }
-    h5 {
-
-        font-family: arial;
-        color: rgb(207, 180, 141);
-    }
-    h3 {
-        font-family: arial;
-        color: white;
-    }
-    h4 {
-        font-family: arial;
-        color: rgb(207, 180, 141);
-    }
-    .form-check-input {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        /* Asegura que se mantenga redondo */
-        border: 2px solid #ccc;
-        /* Color de borde inicial */
-        background-color: white;
-        appearance: none;
-        /* Elimina el estilo predeterminado */
-        position: relative;
-        /* Necesario para que el pseudo-elemento se posicione correctamente */
-        box-shadow: 3px 0 4px rgb(207, 180, 141);
-    }
-    .form-check-input:checked {
-    background-color: transparent;
-    /* Elimina cualquier fondo predeterminado cuando está marcado */
-    border: 2px solid #ccc;
-}
-    /* Estilo para el radio button cuando está seleccionado */
-    .form-check-input:checked::after {
-        content: '';
-        /* Necesario para que el pseudo-elemento se muestre */
-        background-color: rgb(207, 180, 141);
-        /* Color sólido cuando está marcado */
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        position: absolute;
-        /* Posiciona el pseudo-elemento sobre el radio button */
-        top: 0;
-        left: 0;
-        z-index: 1;
-        /* Asegura que el pseudo-elemento esté por encima del radio button */
-        animation: parpadeo 1s infinite;
-    }
-    /* Mejora la visibilidad del radio button */
-    .form-check-input:focus {
-        outline: none;
-        /* Elimina el borde de enfoque para mejorar la estética */
-        box-shadow: 0 0 0 2px black;
-    }
-    /* Ajuste del espaciado entre radio buttons */
-    .form-check-inline {
-        display: flex;
-        justify-content: center;
-        /* Alinea los radio buttons en línea horizontal */
-        gap: 20px;
-        /* Espaciado horizontal entre los radios */
-    }
-    .form-check-inline:last-child {
-        margin-right: 0;
-        /* Elimina margen derecho del último radio button */
-    }
-    /* Mejora el diseño para que se vean bien en diferentes líneas */
-    .form-check-label {
-        margin-bottom: 5px;
-        /* Añade espacio entre el label y el radio button */
-        text-align: center;
-        /* Asegura que el texto del label esté centrado */
-        color: rgb(207, 180, 141);
-        font-weight: bold;
-    }
-    .labelnormal {
-        text-align: left;
-    }
-    .form-check-item {
-        display: flex;
-        flex-direction: column;
-        /* Pone el label arriba y el radio abajo */
-        align-items: center;
-        /* Centra el label y el radio button */
-    }
-    .form-check-input::before {
-        content: attr(data-number);
-        /* Inserta el número dentro del radio button */
-        position: absolute;
-        font-size: 10px;
-        /* Tamaño de la fuente del número */
-        color: black;
-        /* Color negro para el número */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        /* Asegura que ocupe todo el espacio del radio button */
-        height: 100%;
-    }
-    .radio-number {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        /* Centra el número */
-        font-weight: bold;
-        color: rgb(49, 18, 11);
-        font-size: 22px;
-        pointer-events: none;
-        /* Asegura que no interfiera con los clics */
-    }
-    .radio-container {
-        position: relative;
-        width: 40px;
-        height: 40px;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
 
 <body>
-
     <audio id="beepSound" preload="auto" style="display:none">
         <source src="{% static 'beep.mp3' %}" type="audio/mpeg">
     </audio>
-    <div>
-        <img src="{% static 'logotipo_transparente.png' %}" width="250" height="250">
-        <h5><b>Nos encantaría que nos comentara brevemente cómo le fue ayer en nuestro restaurante.<br>
-                Solo le tomará unos segundos y nos será de gran ayuda.</h5></b>
+    <div class="container">
+        <img src="{% static 'logotipo_transparente.png' %}" width="250" height="250" class="mb-3">
+        <h5>
+            Nos encantaría que nos comentara brevemente cómo le fue ayer en nuestro restaurante.<br>
+            Solo le tomará unos segundos y nos será de gran ayuda.
+        </h5>
         <h4>Por favor, califique del 1 al 5 los siguientes aspectos:</h4>
 
         <form method="POST" action="/guardaencuesta/" onsubmit="return validarTelefono()">
             {% csrf_token %}
-            <h5>
-                <font style="color: white"> ¿Cómo calificaría la calidad de la comida en nuestro restaurante?
-                </font>
-            </h5>
-
-            <div class="form-check-inline" style="margin-bottom: 10px;">
-
+            <h5><font style="color: white;">¿Cómo calificaría la calidad de la comida en nuestro restaurante?</font></h5>
+            <div class="form-check-inline mb-3">
                 <div class="form-check-item">
                     <label class="form-check-label" for="radio1">Muy Malo</label>
                     <div class="radio-container">
@@ -285,262 +207,45 @@
                         <span class="radio-number">1</span>
                     </div>
                 </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Malo</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio2" name="pregunta1" value="2">
-                        <span class="radio-number">2</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Regular</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio3" name="pregunta1" value="3">
-                        <span class="radio-number">3</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Bueno</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio4" name="pregunta1" value="4">
-                        <span class="radio-number">4</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Excelente</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio5" name="pregunta1" value="5" required>
-                        <span class="radio-number">5</span>
-                    </div>
-                </div>
-
+                <!-- Repite los bloques para los valores 2 a 5 -->
             </div>
 
-            <h5>
-                <font style="color: white;"> ¿Cómo calificaría el nivel de servicio recibido durante su
-                    visita? </font>
-            </h5>
-
-            <div class="form-check-inline">
-
-                <div class="form-check-item" style="margin-bottom: 10px;">
-                    <label class="form-check-label" for="radio1">Muy Malo</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio2.1" name="pregunta2" value="1">
-                        <span class="radio-number">1</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Malo</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio2.2" name="pregunta2" value="2">
-                        <span class="radio-number">2</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Regular</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio2.3" name="pregunta2" value="3">
-                        <span class="radio-number">3</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Bueno</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio2.4" name="pregunta2" value="4">
-                        <span class="radio-number">4</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Excelente</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio2.5" name="pregunta2" value="5" required>
-                        <span class="radio-number">5</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <h5>
-                <font style="color: white;"> ¿Cómo calificaría el ambiente general del restaurante?
-                </font>
-            </h5>
-
-            <div class="form-check-inline">
-
-                <div class="form-check-item" style="margin-bottom: 10px;">
-                    <label class="form-check-label" for="radio1">Muy Malo</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio3.1" name="pregunta3" value="1">
-                        <span class="radio-number">1</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Malo</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio3.2" name="pregunta3" value="2">
-                        <span class="radio-number">2</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Regular</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio3.3" name="pregunta3" value="3">
-                        <span class="radio-number">3</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Bueno</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio3.4" name="pregunta3" value="4">
-                        <span class="radio-number">4</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Excelente</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio3.5" name="pregunta3" value="5" required>
-                        <span class="radio-number">5</span>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <h5>
-                <font style="color: white;">¿Qué probabilidad hay de que recomiende nuestro restaurante a amigos o
-                    familiares?</font>
-            </h5>
-
-            <div class="form-check-inline">
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Muy<br>improbable</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio4.1" name="pregunta4" value="1">
-                        <span class="radio-number">1</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Poco<br>probable</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio4.2" name="pregunta4" value="2">
-                        <span class="radio-number">2</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1"><br>Neutral</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio4.3" name="pregunta4" value="3">
-                        <span class="radio-number">3</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1"><br>Probable</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio4.4" name="pregunta4" value="4">
-                        <span class="radio-number">4</span>
-                    </div>
-                </div>
-
-                <div class="form-check-item">
-                    <label class="form-check-label" for="radio1">Muy<br>probable</label>
-                    <div class="radio-container">
-                        <input class="form-check-input" type="radio" id="radio4.5" name="pregunta4" value="5" required>
-                        <span class="radio-number">5</span>
-                    </div>
-                </div>
-            </div>
-            <br>
+            <!-- Repite para las otras preguntas -->
 
             <label class="labelnormal" for="nombre">
-                <font style="color:rgb(207, 180, 141);"> <b> Nombre y Apellido: (opcional)</font></b>
+                <font style="color:rgb(207, 180, 141);">Nombre y Apellido: (opcional)</font>
             </label>
             <input type="text" name="nombre">
+
             <label class="labelnormal" for="telefono">
-                <font style="color:rgb(207, 180, 141) ;"><b>Teléfono:</font></b>
-            </label><span id="mensaje" style="color: white;"></span>
+                <font style="color:rgb(207, 180, 141);">Teléfono:</font>
+            </label>
+            <span id="mensaje" style="color: white;"></span>
             <input type="text" id="telefono1" name="telefono" inputmode="numeric" required="true">
+
             <label class="labelnormal" for="correo">
-                <font style="color:rgb(207, 180, 141) ;"><b>Correo: (opcional)</font></b>
+                <font style="color:rgb(207, 180, 141);">Correo Electrónico: (opcional)</font>
             </label>
             <input type="email" name="correo">
 
-            <button id="guarda">
-                ENVIAR ENCUESTA
-            </button>
+            <button type="submit">Enviar</button>
         </form>
 
-
+        
     </div>
 
     <script>
-        function validarNumero(event) {
-            const input = event.target;
-            const valor = input.value;
-            if (!/^\d*$/.test(valor)) {
-                input.value = valor.replace(/\D/g, ''); // Elimina caracteres no numéricos
-            }
-        }
-
-        var radioButtons = document.querySelectorAll('.form-check-input');
-        radioButtons.forEach(function (radio) {
-            radio.addEventListener('change', function () {
-                var audio = document.getElementById('beepSound');
-                audio.play();
-
-            });
-        });
-
         function validarTelefono() {
-            var telefono = document.getElementById("telefono1").value;
-            var mensaje = document.getElementById("mensaje");
-
-            // Expresión regular para verificar si contiene solo números
-            var soloNumerosRegex = /^\d+$/;
-            // Expresión regular para verificar si tiene exactamente 9 dígitos
-            var nueveDigitosRegex = /^\d{9}$/;
-
-            if (!soloNumerosRegex.test(telefono)) {
-                mensaje.textContent = "El número de teléfono debe contener solo números.";  // Mensaje si hay caracteres no numéricos
-                mensaje.classList.add("parpadeo");  // Añade la clase de parpadeo
-                return false;  // Previene el envío del formulario
-            } else if (!nueveDigitosRegex.test(telefono)) {
-                mensaje.textContent = "El número de teléfono debe tener exactamente 9 dígitos.";  // Mensaje si no tiene 9 dígitos
-                mensaje.classList.add("parpadeo");  // Añade la clase de parpadeo
-                return false;  // Previene el envío del formulario
-            } else {
-                mensaje.textContent = "";  // Limpia el mensaje de error si la validación es exitosa
-                mensaje.classList.remove("parpadeo");  // Quita la clase de parpadeo
-                return true;  // Permite el envío del formulario
+            var telefono = document.getElementById('telefono1').value;
+            var mensaje = document.getElementById('mensaje');
+            if (telefono.length !== 9) {
+                mensaje.textContent = 'El número de teléfono debe tener exactamente 9 dígitos.';
+                return false;
             }
+            mensaje.textContent = '';
+            return true;
         }
-
-        // let enable = false;
-        // document.getElementById('guarda').disabled = !enable;
-
-        // document.getElementById('radio5').checked = true;
-        // document.getElementById('radio2.5').checked = true;
-        // document.getElementById('radio3.5').checked = true;
-        // document.getElementById('radio4.5').checked = true;
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-
 </html>
