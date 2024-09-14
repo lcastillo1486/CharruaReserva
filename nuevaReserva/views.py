@@ -175,7 +175,22 @@ Te esperamos en *El Charrúa*"""
                 }
             
                 response = requests.post(url, data = data)
-                time.sleep(3) 
+                time.sleep(3)
+def muestraencuesta(request):
+      
+      return render(request, 'encuesta.html')
+
+def muestragracias(request):
+      return render(request, 'graciasencuesta.html')
+
+def guardarencuesta(request):
+      
+      #recibir los campos y evaluarlos
+
+
+      
+      #verifica si la calificación fue mayor a 4 en todas las respuestas
+      return render(request, 'graciasencuesta.html') 
 @login_required
 def listadoEnEspera(request):
 
