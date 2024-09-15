@@ -37,7 +37,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        font-family: Baskerville, sans-serif;
+        font-family: Baskerville;
         font-style: italic;
         color: white;
         overflow-y: auto;
@@ -128,11 +128,11 @@
         padding: 2px;
     }
     h5 {
-        font-family: Arial, sans-serif;
+        font-family: Baskerville;;
         color: rgb(207, 180, 141);
     }
     h3, h4 {
-        font-family: Arial, sans-serif;
+        font-family: Baskerville;;
         color: rgb(207, 180, 141);
     }
     .form-check-input {
@@ -211,41 +211,54 @@
         align-items: center;
     }
 
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-        .container {
-            padding: 20px;
-            width: 100%;
-            height: auto;
-        }
-        .brand-title {
-            font-size: 1.5rem;
-        }
-        button {
-            width: 100%;
-        }
-        .inputs {
-            margin-top: 20px;
-        }
+    /* Estilos Responsivos */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box; /* Asegura que el padding se incluya en el ancho */
     }
-    @media (max-width: 480px) {
-        .container {
-            padding: 15px;
-            width: 90%;
-        }
-        .brand-title {
-            font-size: 1.2rem;
-        }
-        .inputs {
-            margin-top: 15px;
-        }
-        input {
-            padding: 8px 15px;
-        }
-        button {
-            height: 35px;
-        }
+    .brand-title {
+        font-size: 1.5rem;
+        text-align: center; /* Centra el título para una mejor presentación en móviles */
     }
+    button {
+        width: 100%;
+    }
+    .inputs {
+        margin-top: 20px;
+    }
+    input, textarea {
+        width: 100%; /* Asegura que los elementos del formulario ocupen todo el ancho */
+        box-sizing: border-box; /* Evita el desbordamiento por el padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        width: 100%; /* Cambiado a 100% para evitar el desbordamiento innecesario */
+        box-sizing: border-box; /* Asegura que el ancho incluya el padding */
+    }
+    .brand-title {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    .inputs {
+        margin-top: 15px;
+    }
+    input, textarea {
+        padding: 8px 15px;
+        width: 100%; /* Asegura que los elementos del formulario sean completamente responsivos */
+        box-sizing: border-box;
+    }
+    button {
+        height: 35px;
+        width: 100%; /* Hace que los botones ocupen todo el ancho */
+    }
+}
+
 </style>
 
 <body>
