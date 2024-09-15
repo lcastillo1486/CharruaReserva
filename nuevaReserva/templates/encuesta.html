@@ -233,6 +233,12 @@
         width: 100%; /* Asegura que los elementos del formulario ocupen todo el ancho */
         box-sizing: border-box; /* Evita el desbordamiento por el padding */
     }
+    .form-check-inline {
+        display: flex;
+        flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
+        justify-content: center; /* Alinea verticalmente en pantallas pequeñas */
+        gap: 10px; /* Ajusta el espaciado entre elementos */
+    }
 }
 
 @media (max-width: 480px) {
@@ -256,6 +262,12 @@
     button {
         height: 35px;
         width: 100%; /* Hace que los botones ocupen todo el ancho */
+    }
+    .form-check-inline {
+        display: flex;
+        flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
+        justify-content: center; /* Alinea verticalmente en pantallas pequeñas */
+        gap: 10px; /* Ajusta el espaciado entre elementos */
     }
 }
 
