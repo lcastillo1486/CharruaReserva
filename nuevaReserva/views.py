@@ -51,7 +51,8 @@ def creaNuevaReserva(request):
             personas = a.cantidadPersonas
             telwhat = a.telefono
 
-            # hora_comparar = a.hora
+            hora_comparar = a.hora
+            hora_entero = int(hora_comparar.strftime('%H'))
 
             # hora_diferencia = datetime.strptime(hora_comparar, '%H:%M').time()
             # hora_limite = time(17, 00)
