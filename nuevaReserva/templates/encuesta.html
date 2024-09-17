@@ -32,7 +32,7 @@
         margin: 0;
         width: 100vw;
         height: 100%;
-        background: #242021;
+        background: rgb(207, 180, 141);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -51,8 +51,7 @@
         border-radius: 20px;
         padding: 20px;
         box-sizing: border-box;
-        background: transparent;
-        
+        background: rgb(49, 18, 11); 
     }
     .brand-logo {
         height: 100px;
@@ -73,6 +72,7 @@
     .inputs {
         text-align: left;
         margin-top: 30px;
+        color: rgb(49, 18, 11);
     }
     label,
     input {
@@ -82,12 +82,13 @@
         border: none;
         outline: none;
         box-sizing: border-box;
+        color: rgb(49, 18, 11);
     }
     label {
         margin-bottom: 4px;
     }
     input::placeholder {
-        color: gray;
+        color: rgb(49, 18, 11);
     }
     input {
         background: #ecf0f3;
@@ -96,6 +97,7 @@
         font-size: 14px;
         border-radius: 50px;
         box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        color: rgb(49, 18, 11);
     }
     button {
         color: black;
@@ -117,23 +119,33 @@
         box-shadow: none;
     }
     a {
-        position: absolute;
-        font-size: 8px;
+        position: relative;
+        font-size: 20px;
         bottom: 4px;
         right: 4px;
         text-decoration: none;
         color: black;
-        background: yellow;
+        background: white;
         border-radius: 10px;
         padding: 2px;
+        font-family: Baskerville;
     }
-    h5 {
+    h2, h5 {
         font-family: Baskerville;;
         color: rgb(207, 180, 141);
+        font-style: italic;
+        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.9); 
     }
+
     h3, h4 {
         font-family: Baskerville;;
         color: rgb(207, 180, 141);
+        border: 1px solid rgb(207, 180, 141);
+        display: inline-block;
+        border-radius: 10px;
+        padding: 8px 8px;
+        width: auto;
+        box-shadow: 4px 4px 4px rgb(207, 180, 141);
     }
     .form-check-input {
         width: 40px;
@@ -173,7 +185,7 @@
     .form-check-label {
         margin-bottom: 5px;
         text-align: center;
-        color: rgb(207, 180, 141);
+        color: white;
         font-weight: bold;
     }
     .form-check-item {
@@ -209,6 +221,12 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
+    }
+    .labelnormal {
+        text-align: left;
+        margin-left: 40px;
+        font-style: italic;
+        font-weight: bold;
     }
 
     /* Estilos Responsivos */
@@ -269,6 +287,7 @@
         justify-content: center; /* Alinea verticalmente en pantallas pequeñas */
         gap: 10px; /* Ajusta el espaciado entre elementos */
     }
+    
 }
 
 </style>
@@ -277,17 +296,18 @@
     <audio id="beepSound" preload="auto" style="display:none">
     <source src="{% static 'beep.mp3' %}" type="audio/mpeg"></audio>
     <div class="container">
-        <img src="{% static 'logotipo_transparente.png' %}" width="250" height="250">
-        <h3><b>Nos encantaría que nos comentara brevemente cómo le fue ayer en nuestro restaurante.<br>
-                Solo le tomará unos segundos y nos será de gran ayuda.</h3></b>
+        <img src="{% static 'logotipo_transparente.png' %}" width="150" height="130">
+        <div style="background-color: white; text-align: right; color: rgb(49, 18, 11); margin-right: 0px; height: 1px;">.</div>
+        <h2><b>Nos encantaría que nos comentara brevemente cómo le fue en nuestro restaurante.</h2></b>
         <h2>Por favor, califique del 1 al 5 los siguientes aspectos:</h2>
+        <div style="background-color: white; text-align: right; color: rgb(49, 18, 11); margin-right: 0px; height: 1px;">.</div>
 
-        <form method="POST" class="form-group" action="/#guardaencuesta/" onsubmit="return validarTelefono()">
+        <form method="POST" class="form-group" action="/guardaencuesta/" onsubmit="return validarTelefono()">
             {% csrf_token %}
-            <h4>
-                <font style="color: white"> ¿Cómo calificaría la calidad de la comida en nuestro restaurante?
+            <h3>
+                <font style="color: #F2F2F2"> ¿Cómo calificaría la calidad de la comida en nuestro restaurante?
                 </font>
-            </h4>
+            </h3>
 
             <div class="form-check-inline" style="margin-bottom: 10px;">
 
@@ -333,10 +353,10 @@
 
             </div>
 
-            <h4>
+            <h3>
                 <font style="color: white;"> ¿Cómo calificaría el nivel de servicio recibido durante su
                     visita? </font>
-            </h4>
+            </h3>
 
             <div class="form-check-inline">
 
@@ -382,10 +402,10 @@
 
             </div>
 
-            <h4>
+            <h3>
                 <font style="color: white;"> ¿Cómo calificaría el ambiente general del restaurante?
                 </font>
-            </h4>
+            </h3>
 
             <div class="form-check-inline">
 
@@ -432,10 +452,9 @@
             </div>
 
 
-            <h4>
-                <font style="color: white;">¿Qué probabilidad hay de que recomiende nuestro restaurante a amigos o
-                    familiares?</font>
-            </h4>
+            <h3>
+                <font style="color: white;">¿Qué probabilidad hay de que recomiende nuestro restaurante a sus amigos?</font>
+            </h3>
 
             <div class="form-check-inline">
 
@@ -484,7 +503,7 @@
             <label class="labelnormal" for="nombre">
                 <font style="color:rgb(207, 180, 141);"> <b> Nombre y Apellido: (opcional)</font></b>
             </label>
-            <input type="text" name="nombre">
+            <input type="text" name="nombre" placeholder="hhhhhh">
             <label class="labelnormal" for="telefono">
                 <font style="color:rgb(207, 180, 141) ;"><b>Teléfono:</font></b>
             </label><span id="mensaje" style="color: white;"></span>
@@ -495,9 +514,12 @@
             <input type="email" name="correo">
 
             <button id="guarda">
-                ENVIAR ENCUESTA
+                ENVIAR
             </button>
         </form>
+        {% if user.username %}
+            <a style="color: black; font-family: Baskerville;" href='/logout/'>Cerrar Sesión</a>
+        {% endif %}
 
         
 
