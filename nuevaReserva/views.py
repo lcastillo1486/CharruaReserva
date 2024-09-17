@@ -38,8 +38,9 @@ def creaNuevaReserva(request):
             hora_reserva = a.hora
             personas = a.cantidadPersonas
             
-            if nuevaReserva.objects.filter(nombre = cliente, fechaReserva = fecha_reserva, hora = hora_reserva, cantidadPersonas = personas).exists():
-                  return redirect('delDia')
+            if nuevaReserva.objects.filter(nombre__iexact = cliente, fechaReserva = fecha_reserva, hora = hora_reserva, cantidadPersonas = personas).exists():
+                messages.error(request, '¡Esta reserva ya ha sido registrada!')
+                return redirect('nuevareserva')
             else:
                 a.save()
             

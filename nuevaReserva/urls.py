@@ -2,7 +2,7 @@ from django.urls import path
 from nuevaReserva import views
 
 urlpatterns = [
-    path('nuevaReserva/', views.creaNuevaReserva),
+    path('nuevaReserva/', views.creaNuevaReserva, name='nuevareserva'),
     path('enEspera/', views.listadoEnEspera, name ='enespera'),
     #path('enProceso/', views.listadoEnProceso),
     path('historico/', views.listadoCompletado),

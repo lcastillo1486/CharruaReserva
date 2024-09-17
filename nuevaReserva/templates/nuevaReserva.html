@@ -18,7 +18,7 @@
 
   body {
     background: black;
-    
+
     color: white;
   }
 
@@ -70,6 +70,18 @@
     box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
     transition: 0.5s;
   }
+
+  .alert-success {
+    background-color: #eef5f2;
+    color: #08ee08;
+  }
+
+  .alert-error {
+    background-color: white;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+  }
 </style>
 
 <body>
@@ -91,6 +103,20 @@
     </form>
   </div> -->
 
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == 'success' %}
+  <div class=" alert alert-success">
+    {{ message }}
+  </div>
+  {% else %}
+  <div class=" alert alert-error">
+    {{ message }}
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
   <form method="post">
     {% csrf_token %}
     <div class="form-row">
@@ -98,7 +124,7 @@
         <label class="campo-label">{{ form_reserva.nombre.label_tag }}</label>
         {{ form_reserva.nombre }}
       </div>
-    
+
       <div class="form-group col-md-3">
         <label class="campo-label">{{ form_reserva.fechaReserva.label_tag }}</label>
         {{ form_reserva.fechaReserva }}
@@ -113,14 +139,14 @@
         <label class="campo-label">{{ form_reserva.cantidadPersonas.label_tag }}</label>
         {{ form_reserva.cantidadPersonas }}
       </div>
-        <div class="form-group col-md-3">
-          <label class="campo-label">{{ form_reserva.telefono.label_tag }}</label>
-          {{ form_reserva.telefono }}
-        </div>
-          <div class="form-group col-md-3">
-            <label class="campo-label">{{ form_reserva.emailr.label_tag }}</label>
-            {{ form_reserva.emailr }}
-          </div>
+      <div class="form-group col-md-3">
+        <label class="campo-label">{{ form_reserva.telefono.label_tag }}</label>
+        {{ form_reserva.telefono }}
+      </div>
+      <div class="form-group col-md-3">
+        <label class="campo-label">{{ form_reserva.emailr.label_tag }}</label>
+        {{ form_reserva.emailr }}
+      </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-3">
@@ -139,7 +165,7 @@
       </div>
       <div class="form-group col-md-4">
         <button style="width: 50%;">
-          Guardar 
+          Guardar
         </button>
       </div>
       <div class="form-group col-md-4">
@@ -147,8 +173,17 @@
       </div>
 
     </div>
-  
+
   </form>
+
+  <script>
+    setTimeout(function () {
+        var messages = document.getElementsByClassName('alert');
+        for (var i = 0; i < messages.length; i++) {
+            messages[i].style.display = 'none';
+        }
+    }, 4000);
+  </script>
 
 </body>
 {% endblock %}
