@@ -54,17 +54,14 @@ def creaNuevaReserva(request):
             hora_comparar = a.hora
             hora_entero = int(hora_comparar.strftime('%H'))
 
-            # hora_diferencia = datetime.strptime(hora_comparar, '%H:%M').time()
-            # hora_limite = time(17, 00)
-
             if not telwhat is None:
             ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
             ## y se gana el sueldo facilmente. 
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
                 
-                # if hora_diferencia < hora_limite:
-                mensaje = f"""Estimado/a: *{cliente}*. 
+                if hora_entero < 17:
+                    mensaje = f"""Estimado/a: *{cliente}*. 
 Su reserva ha sido confirmada.\n 
 *Fecha de la reservación: {fecha_reserva}* 
 *Hora de la reservación: {hora_reserva}*
@@ -75,17 +72,17 @@ Para garantizar la disponibilidad de reservas para la cena, le solicitamos que d
 Agradecemos su comprensión.
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
-#                 else:
-#                      mensaje = f"""Estimado/a: *{cliente}*. 
-# Su reserva ha sido confirmada.\n 
-# *Fecha de la reservación: {fecha_reserva}* 
-# *Hora de la reservación: {hora_reserva}*
-# *Cantidad de personas: {personas}*\n 
-# Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
-# ¡Estamos ansiosos por darle la bienvenida!
-#  Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-# Muchas gracias por elegirnos.
-# Te esperamos en *El Charrúa*"""
+                else:
+                      mensaje = f"""Estimado/a: *{cliente}*. 
+Su reserva ha sido confirmada.\n 
+*Fecha de la reservación: {fecha_reserva}* 
+*Hora de la reservación: {hora_reserva}*
+*Cantidad de personas: {personas}*\n 
+Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
+¡Estamos ansiosos por darle la bienvenida!
+Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Muchas gracias por elegirnos.
+Te esperamos en *El Charrúa*"""
                 
 
                 letras = string.ascii_lowercase
