@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,19 +16,24 @@
         0% {
             opacity: 1;
         }
+
         50% {
             opacity: 0;
         }
+
         100% {
             opacity: 1;
         }
     }
+
     .parpadeo {
         animation: parpadeo 2s infinite;
     }
+
     input {
         caret-color: red;
     }
+
     body {
         margin: 0;
         width: 100vw;
@@ -43,6 +49,7 @@
         overflow-y: auto;
         padding: 20px;
     }
+
     .container {
         position: relative;
         width: 100%;
@@ -51,8 +58,9 @@
         border-radius: 20px;
         padding: 20px;
         box-sizing: border-box;
-        background: rgb(49, 18, 11); 
+        background: rgb(49, 18, 11);
     }
+
     .brand-logo {
         height: 100px;
         width: 100px;
@@ -62,6 +70,7 @@
         box-sizing: border-box;
         box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
     }
+
     .brand-title {
         margin-top: 10px;
         font-weight: 900;
@@ -69,11 +78,13 @@
         color: #1DA1F2;
         letter-spacing: 1px;
     }
+
     .inputs {
         text-align: left;
         margin-top: 30px;
         color: rgb(49, 18, 11);
     }
+
     label,
     input {
         display: block;
@@ -84,12 +95,15 @@
         box-sizing: border-box;
         color: rgb(49, 18, 11);
     }
+
     label {
         margin-bottom: 4px;
     }
+
     input::placeholder {
         color: rgb(49, 18, 11);
     }
+
     input {
         background: #ecf0f3;
         padding: 10px 20px;
@@ -100,6 +114,7 @@
         color: rgb(49, 18, 11);
         margin-bottom: 3px;
     }
+
     button {
         color: black;
         margin-top: 20px;
@@ -116,9 +131,11 @@
         width: 100%;
         max-width: 200px;
     }
+
     button:hover {
         box-shadow: none;
     }
+
     a {
         position: relative;
         font-size: 20px;
@@ -131,15 +148,20 @@
         padding: 2px;
         font-family: Baskerville;
     }
-    h2, h5 {
-        font-family: Baskerville;;
+
+    h2,
+    h5 {
+        font-family: Baskerville;
+        ;
         color: rgb(207, 180, 141);
         font-style: italic;
-        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.9); 
+        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.9);
     }
 
-    h3, h4 {
-        font-family: Baskerville;;
+    h3,
+    h4 {
+        font-family: Baskerville;
+        ;
         color: rgb(207, 180, 141);
         border: 1px solid rgb(207, 180, 141);
         display: inline-block;
@@ -148,6 +170,7 @@
         width: auto;
         box-shadow: 4px 4px 4px rgb(207, 180, 141);
     }
+
     .form-check-input {
         width: 40px;
         height: 40px;
@@ -158,10 +181,12 @@
         position: relative;
         box-shadow: 3px 0 4px rgb(207, 180, 141);
     }
+
     .form-check-input:checked {
         background-color: transparent;
         border: 2px solid #ccc;
     }
+
     .form-check-input:checked::after {
         content: '';
         background-color: rgb(207, 180, 141);
@@ -174,26 +199,31 @@
         z-index: 1;
         animation: parpadeo 1s infinite;
     }
+
     .form-check-input:focus {
         outline: none;
         box-shadow: 0 0 0 2px black;
     }
+
     .form-check-inline {
         display: flex;
         justify-content: center;
         gap: 20px;
     }
+
     .form-check-label {
         margin-bottom: 5px;
         text-align: center;
         color: white;
         font-weight: bold;
     }
+
     .form-check-item {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .form-check-input::before {
         content: attr(data-number);
         position: absolute;
@@ -205,6 +235,7 @@
         width: 100%;
         height: 100%;
     }
+
     .radio-number {
         position: absolute;
         top: 50%;
@@ -215,6 +246,7 @@
         font-size: 22px;
         pointer-events: none;
     }
+
     .radio-container {
         position: relative;
         width: 40px;
@@ -223,6 +255,7 @@
         justify-content: center;
         align-items: center;
     }
+
     .labelnormal {
         text-align: left;
         margin-left: 40px;
@@ -231,77 +264,108 @@
     }
 
     /* Estilos Responsivos */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-        width: 100%;
-        height: auto;
-        box-sizing: border-box; /* Asegura que el padding se incluya en el ancho */
-    }
-    .brand-title {
-        font-size: 1.5rem;
-        text-align: center; /* Centra el título para una mejor presentación en móviles */
-    }
-    button {
-        width: 100%;
-    }
-    .inputs {
-        margin-top: 20px;
-    }
-    input, textarea {
-        width: 100%; /* Asegura que los elementos del formulario ocupen todo el ancho */
-        box-sizing: border-box; /* Evita el desbordamiento por el padding */
-    }
-    .form-check-inline {
-        display: flex;
-        flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
-        justify-content: center; /* Alinea verticalmente en pantallas pequeñas */
-        gap: 10px; /* Ajusta el espaciado entre elementos */
-    }
-}
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            /* Asegura que el padding se incluya en el ancho */
+        }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 15px;
-        width: 100%; /* Cambiado a 100% para evitar el desbordamiento innecesario */
-        box-sizing: border-box; /* Asegura que el ancho incluya el padding */
-    }
-    .brand-title {
-        font-size: 1.2rem;
-        text-align: center;
-    }
-    .inputs {
-        margin-top: 15px;
-    }
-    input, textarea {
-        padding: 8px 15px;
-        width: 100%; /* Asegura que los elementos del formulario sean completamente responsivos */
-        box-sizing: border-box;
-    }
-    button {
-        height: 35px;
-        width: 100%; /* Hace que los botones ocupen todo el ancho */
-    }
-    .form-check-inline {
-        display: flex;
-        flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
-        justify-content: center; /* Alinea verticalmente en pantallas pequeñas */
-        gap: 10px; /* Ajusta el espaciado entre elementos */
-    }
-    
-}
+        .brand-title {
+            font-size: 1.5rem;
+            text-align: center;
+            /* Centra el título para una mejor presentación en móviles */
+        }
 
+        button {
+            width: 100%;
+        }
+
+        .inputs {
+            margin-top: 20px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            /* Asegura que los elementos del formulario ocupen todo el ancho */
+            box-sizing: border-box;
+            /* Evita el desbordamiento por el padding */
+        }
+
+        .form-check-inline {
+            display: flex;
+            flex-direction: column;
+            /* Cambia la dirección a columna en pantallas pequeñas */
+            justify-content: center;
+            /* Alinea verticalmente en pantallas pequeñas */
+            gap: 10px;
+            /* Ajusta el espaciado entre elementos */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 15px;
+            width: 100%;
+            /* Cambiado a 100% para evitar el desbordamiento innecesario */
+            box-sizing: border-box;
+            /* Asegura que el ancho incluya el padding */
+        }
+
+        .brand-title {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .inputs {
+            margin-top: 15px;
+        }
+
+        input,
+        textarea {
+            padding: 8px 15px;
+            width: 100%;
+            /* Asegura que los elementos del formulario sean completamente responsivos */
+            box-sizing: border-box;
+        }
+
+        button {
+            height: 35px;
+            width: 100%;
+            /* Hace que los botones ocupen todo el ancho */
+        }
+
+        .form-check-inline {
+            display: flex;
+            flex-direction: column;
+            /* Cambia la dirección a columna en pantallas pequeñas */
+            justify-content: center;
+            /* Alinea verticalmente en pantallas pequeñas */
+            gap: 10px;
+            /* Ajusta el espaciado entre elementos */
+        }
+
+    }
 </style>
 
 <body>
     <audio id="beepSound" preload="auto" style="display:none">
-    <source src="{% static 'beep.mp3' %}" type="audio/mpeg"></audio>
+        <source src="{% static 'beep.mp3' %}" type="audio/mpeg">
+    </audio>
     <div class="container">
         <img src="{% static 'logotipo_transparente.png' %}" width="150" height="130">
-        <div style="background-color: white; text-align: right; color: rgb(49, 18, 11); margin-right: 0px; height: 1px;">.</div>
-        <h2><b>Nos encantaría que nos comentara brevemente cómo le fue en nuestro restaurante.</h2></b>
+        <div
+            style="background-color: white; text-align: right; color: rgb(49, 18, 11); margin-right: 0px; height: 1px;">
+            .</div>
+        <h2><b>Nos encantaría conocer su experiencia en nuestro restaurante.<br>
+                Le agradeceríamos que nos dedicara unos momentos para compartir sus impresiones.</h2></b>
         <h2>Por favor, califique del 1 al 5 los siguientes aspectos:</h2>
-        <div style="background-color: white; text-align: right; color: rgb(49, 18, 11); margin-right: 0px; height: 1px;">.</div>
+        <div
+            style="background-color: white; text-align: right; color: rgb(49, 18, 11); margin-right: 0px; height: 1px;">
+            .</div>
 
         <form method="POST" class="form-group" action="/guardaencuesta/" onsubmit="return validarTelefono()">
             {% csrf_token %}
@@ -454,7 +518,8 @@
 
 
             <h3>
-                <font style="color: white;">¿Qué probabilidad hay de que recomiende nuestro restaurante a sus amigos?</font>
+                <font style="color: white;">¿Qué probabilidad hay de que recomiende nuestro restaurante a sus amigos?
+                </font>
             </h3>
 
             <div class="form-check-inline">
@@ -508,7 +573,8 @@
             <!-- <label class="labelnormal" for="telefono">
                 <font style="color:rgb(207, 180, 141) ;"><b>Teléfono:</font></b> -->
             </label><span id="mensaje" style="color: white;"></span>
-            <input type="text" id="telefono1" name="telefono" inputmode="numeric" required="true" placeholder="Teléfono:">
+            <input type="text" id="telefono1" name="telefono" inputmode="numeric" required="true"
+                placeholder="Teléfono:">
             <!-- <label class="labelnormal" for="correo">
                 <font style="color:rgb(207, 180, 141) ;"><b>Correo: (opcional)</font></b>
             </label> -->
@@ -519,10 +585,10 @@
             </button>
         </form>
         {% if user.username %}
-            <a style="color: black; font-family: Baskerville;" href='/logout/'>Cerrar Sesión</a>
+        <a style="color: black; font-family: Baskerville;" href='/logout/'>Cerrar Sesión</a>
         {% endif %}
 
-        
+
 
     </div>
     <script>
@@ -575,6 +641,7 @@
         // document.getElementById('radio3.5').checked = true;
         // document.getElementById('radio4.5').checked = true;
     </script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
