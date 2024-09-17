@@ -3,7 +3,7 @@ from .forms import nuevaReservaFoms, editReservaFoms, asignaMesaForm, formBuscar
 from django.contrib import messages
 from .models import nuevaReserva, incidencia,  mozosPlaza, plazaAlmuerzo, anfitriona, plazaCena, plazaAlmuerzoMan, plazaCenaMan, incidenciaLog, controlmensaje
 from django.db import models
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta, date, time
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 import openpyxl
@@ -62,7 +62,7 @@ def creaNuevaReserva(request):
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
                 
-                if 1 == 1:
+                if hora_comparar < hora_limite:
                     mensaje = f"""Estimado/a: *{cliente}*. 
 Su reserva ha sido confirmada.\n 
 *Fecha de la reservación: {fecha_reserva}* 
