@@ -98,6 +98,7 @@
         border-radius: 50px;
         box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
         color: rgb(49, 18, 11);
+        margin-bottom: 3px;
     }
     button {
         color: black;
@@ -500,18 +501,18 @@
             </div>
             <br>
 
-            <label class="labelnormal" for="nombre">
+            <!-- <label class="labelnormal" for="nombre">
                 <font style="color:rgb(207, 180, 141);"> <b> Nombre y Apellido: (opcional)</font></b>
-            </label>
-            <input type="text" name="nombre" placeholder="hhhhhh">
-            <label class="labelnormal" for="telefono">
-                <font style="color:rgb(207, 180, 141) ;"><b>Teléfono:</font></b>
+            </label> -->
+            <input type="text" name="nombre" placeholder="Nombre y Apellido: (opcional)">
+            <!-- <label class="labelnormal" for="telefono">
+                <font style="color:rgb(207, 180, 141) ;"><b>Teléfono:</font></b> -->
             </label><span id="mensaje" style="color: white;"></span>
-            <input type="text" id="telefono1" name="telefono" inputmode="numeric" required="true">
-            <label class="labelnormal" for="correo">
+            <input type="text" id="telefono1" name="telefono" inputmode="numeric" required="true" placeholder="Teléfono:">
+            <!-- <label class="labelnormal" for="correo">
                 <font style="color:rgb(207, 180, 141) ;"><b>Correo: (opcional)</font></b>
-            </label>
-            <input type="email" name="correo">
+            </label> -->
+            <input type="email" name="correo" placeholder="Correo: (opcional)">
 
             <button id="guarda">
                 ENVIAR
