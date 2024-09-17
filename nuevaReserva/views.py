@@ -53,8 +53,8 @@ def creaNuevaReserva(request):
 
             hora_comparar = a.hora
 
-            # hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
-            hora_limite = time(17, 00, 0)
+            hora_diferencia = datetime.strptime(hora_comparar, '%H:%M').time()
+            hora_limite = time(17, 00)
 
             if not telwhat is None:
             ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
@@ -62,7 +62,7 @@ def creaNuevaReserva(request):
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
                 
-                if hora_comparar < hora_limite:
+                if hora_diferencia < hora_limite:
                     mensaje = f"""Estimado/a: *{cliente}*. 
 Su reserva ha sido confirmada.\n 
 *Fecha de la reservación: {fecha_reserva}* 
