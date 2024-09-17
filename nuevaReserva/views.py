@@ -51,8 +51,8 @@ def creaNuevaReserva(request):
             personas = a.cantidadPersonas
             telwhat = a.telefono
 
-            # hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
-            # hora_limite = time(17, 30)
+            hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
+            hora_limite = time(17, 30)
 
             if not telwhat is None:
             ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
@@ -60,30 +60,29 @@ def creaNuevaReserva(request):
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
                 
-                # if hora_cena <= hora_limite:
-                mensaje = f"""Estimado/a: *{cliente}*. 
+                if hora_cena <= hora_limite:
+                    mensaje = f"""Estimado/a: *{cliente}*. 
 Su reserva ha sido confirmada.\n 
 *Fecha de la reservación: {fecha_reserva}* 
 *Hora de la reservación: {hora_reserva}*
 *Cantidad de personas: {personas}*\n 
 Esperamos que nuestra atención sea de su expectativa.
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
+Agradecemos su comprensión.
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
-#                 else:
-#                     mensaje = f"""Estimado/a: *{cliente}*. 
-# Su reserva ha sido confirmada.\n 
-# *Fecha de la reservación: {fecha_reserva}* 
-# *Hora de la reservación: {hora_reserva}*
-# *Cantidad de personas: {personas}*\n 
-# Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
-# ¡Estamos ansiosos por darle la bienvenida!
-# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-# Muchas gracias por elegirnos.
-# Te esperamos en *El Charrúa*\n
-# *Hoy 31/12/2023, se cobrará el derecho de corcho para todos los licores.*\n
-# *Dicho monto va desde los S/50.*\n
-# *Así mismo, les deseamos un prospero año nuevo.*"""
+                else:
+                     mensaje = f"""Estimado/a: *{cliente}*. 
+Su reserva ha sido confirmada.\n 
+*Fecha de la reservación: {fecha_reserva}* 
+*Hora de la reservación: {hora_reserva}*
+*Cantidad de personas: {personas}*\n 
+Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
+¡Estamos ansiosos por darle la bienvenida!
+ Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+Muchas gracias por elegirnos.
+Te esperamos en *El Charrúa*"""
                 
 
                 letras = string.ascii_lowercase
@@ -101,23 +100,22 @@ Te esperamos en *El Charrúa*"""
                 # comprobar si existe el id de reserva en la tabla de control de mensaje, si esta y enviado es 1 pasar por alto
                 if not controlmensaje.objects.filter(id_reservacion = id_reserva, enviado = 1).exists():
                       
-                      response = requests.post(url, data = data)
-                      #print("what enviado")
-                      guarda_control = controlmensaje(id_reservacion = id_reserva, enviado = 1)
-                      guarda_control.save()
+                    response = requests.post(url, data = data)
+                    #print("what enviado")
+                    guarda_control = controlmensaje(id_reservacion = id_reserva, enviado = 1)
+                    guarda_control.save()
                 
                 #print(response.content)
 
-            cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
+                cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
             #print(cuenta_listadia)
-            if cuenta_listadia == 1:
-                envioRecordatorio()
+                if cuenta_listadia == 1:
+                    envioRecordatorio()
                        
-            return redirect('/reservasDelDia/')
-        else:
-
-            return render(request, 'nuevaReserva.html', {'form_reserva': form})
-
+                return redirect('/reservasDelDia/')
+    else:
+        return render(request, 'nuevaReserva.html', {'form_reserva': form})
+        
     return render(request, 'nuevaReserva.html', context)
 def envioRecordatorio():
     fecha_actual = datetime.now().date()
