@@ -51,10 +51,10 @@ def creaNuevaReserva(request):
             personas = a.cantidadPersonas
             telwhat = a.telefono
 
-            hora_comparar = a.hora
+            # hora_comparar = a.hora
 
-            hora_diferencia = datetime.strptime(hora_comparar, '%H:%M').time()
-            hora_limite = time(17, 00)
+            # hora_diferencia = datetime.strptime(hora_comparar, '%H:%M').time()
+            # hora_limite = time(17, 00)
 
             if not telwhat is None:
             ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
@@ -62,8 +62,8 @@ def creaNuevaReserva(request):
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
                 
-                if hora_diferencia < hora_limite:
-                    mensaje = f"""Estimado/a: *{cliente}*. 
+                # if hora_diferencia < hora_limite:
+                mensaje = f"""Estimado/a: *{cliente}*. 
 Su reserva ha sido confirmada.\n 
 *Fecha de la reservación: {fecha_reserva}* 
 *Hora de la reservación: {hora_reserva}*
@@ -74,17 +74,17 @@ Para garantizar la disponibilidad de reservas para la cena, le solicitamos que d
 Agradecemos su comprensión.
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*"""
-                else:
-                     mensaje = f"""Estimado/a: *{cliente}*. 
-Su reserva ha sido confirmada.\n 
-*Fecha de la reservación: {fecha_reserva}* 
-*Hora de la reservación: {hora_reserva}*
-*Cantidad de personas: {personas}*\n 
-Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
-¡Estamos ansiosos por darle la bienvenida!
- Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-Muchas gracias por elegirnos.
-Te esperamos en *El Charrúa*"""
+#                 else:
+#                      mensaje = f"""Estimado/a: *{cliente}*. 
+# Su reserva ha sido confirmada.\n 
+# *Fecha de la reservación: {fecha_reserva}* 
+# *Hora de la reservación: {hora_reserva}*
+# *Cantidad de personas: {personas}*\n 
+# Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
+# ¡Estamos ansiosos por darle la bienvenida!
+#  Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+# Muchas gracias por elegirnos.
+# Te esperamos en *El Charrúa*"""
                 
 
                 letras = string.ascii_lowercase
@@ -109,12 +109,12 @@ Te esperamos en *El Charrúa*"""
                 
                 #print(response.content)
 
-                cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
+            cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
             #print(cuenta_listadia)
-                if cuenta_listadia == 1:
-                    envioRecordatorio()
+            if cuenta_listadia == 1:
+                envioRecordatorio()
                        
-                return redirect('/reservasDelDia/')
+            return redirect('/reservasDelDia/')
     else:
         return render(request, 'nuevaReserva.html', {'form_reserva': form})
         
