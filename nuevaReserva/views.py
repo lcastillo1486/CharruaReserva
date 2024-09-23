@@ -20,6 +20,7 @@ import base64
 from django.db.models.functions import Extract, TruncDay
 from django.db.models import Case, When, Value, IntegerField, CharField
 from django.db.models import Count
+from collections import defaultdict
 # Create your views here.
 
 @login_required
@@ -531,40 +532,56 @@ def buscaHistoricoFecha(request):
 @login_required
 def exportaExcelHistorico(request):
 
-    completado = nuevaReserva.objects.all().order_by('-fechaReserva')[:5000]
-    
-    #crea nuevo libro
+    # Obtiene todas las reservas ordenadas por fecha
+    completado = nuevaReserva.objects.all().order_by('-fechaReserva')
+
+    # Crea un diccionario para agrupar las reservas por mes
+    reservas_por_mes = defaultdict(list)
+    for reserva in completado:
+        mes = reserva.fechaReserva.strftime('%Y-%m')  # Agrupa por año-mes (ej: "2024-09")
+        reservas_por_mes[mes].append(reserva)
+
+    # Crea un nuevo libro de Excel
     wb1 = openpyxl.Workbook()
 
-    hoja = wb1.active
+    # Elimina la hoja activa por defecto si no es necesaria
+    wb1.remove(wb1.active)
 
-    hoja['A1'] = 'Cliente'
-    hoja['B1'] = 'Teléfono'
-    hoja['C1'] = 'Correo'
-    hoja['D1'] = 'Fecha de Reserva'
-    hoja['E1'] = 'Hora'
-    hoja['F1'] = 'Cantidad de Personas'
-    hoja['G1'] = 'Observaciones'
-    hoja['H1'] = 'Estado'
-    hoja['I1'] = 'Origen Reserva'
+    # Itera por cada mes y sus reservas correspondientes
+    for mes, reservas in reservas_por_mes.items():
+        # Crea una nueva hoja para cada mes
+        hoja = wb1.create_sheet(title=mes)
 
-    row = 2
+        # Establece los encabezados
+        hoja['A1'] = 'Cliente'
+        hoja['B1'] = 'Teléfono'
+        hoja['C1'] = 'Correo'
+        hoja['D1'] = 'Fecha de Reserva'
+        hoja['E1'] = 'Hora'
+        hoja['F1'] = 'Cantidad de Personas'
+        hoja['G1'] = 'Observaciones'
+        hoja['H1'] = 'Estado'
+        hoja['I1'] = 'Origen Reserva'
 
-    for i in completado:
-        hoja.cell(row, 1, i.nombre)
-        hoja.cell(row, 2, i.telefono)
-        hoja.cell(row, 3, i.emailr)
-        hoja.cell(row, 4, i.fechaReserva)
-        hoja.cell(row, 5, i.hora)
-        hoja.cell(row, 6, i.cantidadPersonas)
-        hoja.cell(row, 7, i.observaciones)
-        hoja.cell(row, 8, str(i.estado))
-        hoja.cell(row,9, str(i.origen_reserva))
-        row += 1
-    
-    response = HttpResponse(content_type = 'application/vnd.ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="HistoricoReservas.xlsx"'
+        # Escribe las reservas en la hoja correspondiente al mes
+        row = 2
+        for reserva in reservas:
+            hoja.cell(row, 1, reserva.nombre)
+            hoja.cell(row, 2, reserva.telefono)
+            hoja.cell(row, 3, reserva.emailr)
+            hoja.cell(row, 4, reserva.fechaReserva)
+            hoja.cell(row, 5, reserva.hora)
+            hoja.cell(row, 6, reserva.cantidadPersonas)
+            hoja.cell(row, 7, reserva.observaciones)
+            hoja.cell(row, 8, str(reserva.estado))
+            hoja.cell(row, 9, str(reserva.origen_reserva))
+            row += 1
 
+    # Configura la respuesta HTTP para la descarga del archivo
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="HistoricoReservasPorMes.xlsx"'
+
+    # Guarda el libro de Excel en la respuesta
     wb1.save(response)
 
     return response
