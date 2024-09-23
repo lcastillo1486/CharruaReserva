@@ -533,7 +533,7 @@ def buscaHistoricoFecha(request):
 def exportaExcelHistorico(request):
 
     # Obtiene todas las reservas ordenadas por fecha
-    completado = nuevaReserva.objects.filter(fechaReserva__year=2023).order_by('-fechaReserva')[:10000]
+    completado = nuevaReserva.objects.filter(fechaReserva__year=2024).order_by('-fechaReserva')
 
     # Crea un diccionario para agrupar las reservas por mes
     reservas_por_mes = defaultdict(list)
