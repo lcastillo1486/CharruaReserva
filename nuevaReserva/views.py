@@ -34,16 +34,23 @@ def creaNuevaReserva(request):
         if form.is_valid():
             a = form.save(commit=False)
             a.estado_id = 1
-            cliente = a.nombre
+            a.nombre = re.sub(r'[^a-zA-ZñÑ ]', '', re.sub(r'[áÁ]', 'a', re.sub(r'[éÉ]', 'e', re.sub(r'[íÍ]', 'i', re.sub(r'[óÓ]', 'o', re.sub(r'[úÚ]', 'u', a.nombre)))))).strip()
+            cliente = re.sub(r'[^a-zA-ZñÑ ]', '', re.sub(r'[áÁ]', 'a', re.sub(r'[éÉ]', 'e', re.sub(r'[íÍ]', 'i', re.sub(r'[óÓ]', 'o', re.sub(r'[úÚ]', 'u', a.nombre)))))).strip()
             fecha_reserva = a.fechaReserva
             hora_reserva = a.hora
             personas = a.cantidadPersonas
             
-            if nuevaReserva.objects.filter(nombre__iexact = cliente, fechaReserva = fecha_reserva, hora = hora_reserva, cantidadPersonas = personas).exists():
-                messages.error(request, '¡Esta reserva ya ha sido registrada!')
-                return redirect('nuevareserva')
-            else:
-                a.save()
+            if nuevaReserva.objects.filter(nombre__iexact = cliente, fechaReserva = fecha_reserva).exists() and not request.POST.get('confirmar'):
+                if request.POST.get('no_confirmar'):
+                    return render(request, 'nuevaReserva.html', context)
+                messages.error(request, '¡Esta reserva ya ha sido registrada! ¿Desea guardarla?')
+                return render (request, 'nuevaReserva.html',{
+                      'form_reserva': form,
+                      'confirmar': True,
+                      'no_confirmar':True
+                })
+            
+            a.save()
             
             ## Preparar envío por whatsapp al cliente
             id_reserva = a.id

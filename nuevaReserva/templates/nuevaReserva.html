@@ -112,6 +112,7 @@
   {% else %}
   <div class=" alert alert-error">
     {{ message }}
+    <h2 id="countdown">8</h2>
   </div>
   {% endif %}
   {% endfor %}
@@ -119,6 +120,19 @@
 
   <form method="post">
     {% csrf_token %}
+    {% if confirmar %}
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <button type="submit" class="alert" style="background-color: green;" name="confirmar" value="1">Sí, quiero
+          guardarla</button>
+        <button type="submit" class="alert" style="background-color: red;" name="no_confirmar" value="1">No guardar</button>
+      </div>
+      <div class="form-group col-md-4">
+      </div>
+      <div class="form-group col-md-4">
+      </div>
+    </div>
+    {% endif %}
     <div class="form-row">
       <div class="form-group col-md-3">
         <label class="campo-label">{{ form_reserva.nombre.label_tag }}</label>
@@ -177,12 +191,32 @@
   </form>
 
   <script>
-    setTimeout(function () {
-        var messages = document.getElementsByClassName('alert');
-        for (var i = 0; i < messages.length; i++) {
-            messages[i].style.display = 'none';
-        }
-    }, 4000);
+    let countdown = 8; // Tiempo en segundos
+
+function updateCountdown() {
+  // Actualiza el texto del contador en el HTML
+  document.getElementById('countdown').innerText = countdown;
+
+  if (countdown > 0) {
+    countdown--;
+  } else {
+    clearInterval(interval); // Detiene el contador
+    document.getElementById('countdown').innerText = '¡Tiempo terminado!';
+
+    // Ocultar mensajes de alerta
+    const messages = document.getElementsByClassName('alert');
+    for (let i = 0; i < messages.length; i++) {
+      messages[i].style.display = 'none';
+    }
+  }
+}
+
+// Inicia el contador
+const interval = setInterval(updateCountdown, 1000);
+window.onload = function() {
+        const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+        inputs.forEach(input => input.disabled = false); // Habilita todos los inputs al cargar la página
+    };
   </script>
 
 </body>
