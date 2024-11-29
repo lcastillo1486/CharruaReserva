@@ -80,7 +80,8 @@ Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
 Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
 Agradecemos su comprensión.
 Muchas gracias por elegirnos.
-Te esperamos en *El Charrúa*"""
+Te esperamos en *El Charrúa*
+*Estacionamiento limitado*"""
                 else:
                       mensaje = f"""Estimado/a: *{cliente}*. 
 Su reserva ha sido confirmada.\n 
@@ -91,7 +92,8 @@ Esperamos brindarle una experiencia gastonómica memorable en nuestro establecim
 ¡Estamos ansiosos por darle la bienvenida!
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
 Muchas gracias por elegirnos.
-Te esperamos en *El Charrúa*"""
+Te esperamos en *El Charrúa*
+*Estacionamiento limitado*"""
                 
 
                 letras = string.ascii_lowercase
