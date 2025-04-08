@@ -21,6 +21,7 @@ from django.db.models.functions import Extract, TruncDay
 from django.db.models import Case, When, Value, IntegerField, CharField
 from django.db.models import Count
 from collections import defaultdict
+import urllib.parse
 # Create your views here.
 
 @login_required
@@ -96,22 +97,32 @@ Te esperamos en *El Charrúa*
 *Estacionamiento limitado*"""
                 
 
-                letras = string.ascii_lowercase
-                uid_custom = ''.join(random.choice(letras) for i in range(6))  
+                # letras = string.ascii_lowercase
+                # uid_custom = ''.join(random.choice(letras) for i in range(6))  
 
-                url = 'https://www.waboxapp.com/api/send/chat'
-                data = {
-                    'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
-                    'uid': '51994043376',
-                    'to': telwhat,
-                    'custom_uid':uid_custom,
-                    'text': mensaje
-                }
+                # url = 'https://www.waboxapp.com/api/send/chat'
+                # data = {
+                #     'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
+                #     'uid': '51994043376',
+                #     'to': telwhat,
+                #     'custom_uid':uid_custom,
+                #     'text': mensaje
+                # }
+
+                mensaje_codificado = urllib.parse.quote(mensaje)
+                # url = "https://api.ultramsg.com/instance108729/messages/chat"
+                url = "https://api.ultramsg.com/instance112994/messages/chat"
+                payload = f"token=jy1mehv3shux3zjy&to=%2B{telwhat}&body={mensaje_codificado}"
+                headers = {'content-type': 'application/x-www-form-urlencoded'}
+                
+
+
 
                 # comprobar si existe el id de reserva en la tabla de control de mensaje, si esta y enviado es 1 pasar por alto
                 if not controlmensaje.objects.filter(id_reservacion = id_reserva, enviado = 1).exists():
                       
-                    response = requests.post(url, data = data)
+                    # response = requests.post(url, data = data)
+                    response = requests.request("POST", url, data=payload, headers=headers)
                     #print("what enviado")
                     guarda_control = controlmensaje(id_reservacion = id_reserva, enviado = 1)
                     guarda_control.save()
@@ -171,19 +182,26 @@ Te esperamos en *El Charrúa*"""
                       
                 #mensaje = 'Su reserva ha sido confirmada, muchas gracias por elegirnos.Te esperamos en El Charrúa. '
 
-                letras = string.ascii_lowercase
-                uid_custom = ''.join(random.choice(letras) for i in range(6))  
+                # letras = string.ascii_lowercase
+                # uid_custom = ''.join(random.choice(letras) for i in range(6))  
 
-                url = 'https://www.waboxapp.com/api/send/chat'
-                data = {
-                    'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
-                    'uid': '51994043376',
-                    'to': telwhat,
-                    'custom_uid':uid_custom,
-                    'text': mensaje
-                }
+                # url = 'https://www.waboxapp.com/api/send/chat'
+                # data = {
+                #     'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
+                #     'uid': '51994043376',
+                #     'to': telwhat,
+                #     'custom_uid':uid_custom,
+                #     'text': mensaje
+                # }
+
+                mensaje_codificado = urllib.parse.quote(mensaje)
+                # url = "https://api.ultramsg.com/instance108729/messages/chat"
+                url = "https://api.ultramsg.com/instance112994/messages/chat"
+                payload = f"token=jy1mehv3shux3zjy&to=%2B{telwhat}&body={mensaje_codificado}"
+                headers = {'content-type': 'application/x-www-form-urlencoded'}
+                response = requests.request("POST", url, data=payload, headers=headers)
             
-                response = requests.post(url, data = data)
+                # response = requests.post(url, data = data)
                 time.sleep(3)
 def muestraencuesta(request):
       
