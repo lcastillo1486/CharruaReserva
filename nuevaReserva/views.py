@@ -78,8 +78,6 @@ Su reserva ha sido confirmada.\n
 *Cantidad de personas: {personas}*\n 
 Esperamos que nuestra atención sea de su expectativa.
 Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-Para garantizar la disponibilidad de reservas para la cena, le solicitamos que disfrute de su almuerzo hasta las 17:00 horas.\n
-Agradecemos su comprensión.
 Muchas gracias por elegirnos.
 Te esperamos en *El Charrúa*
 *Estacionamiento limitado*"""
