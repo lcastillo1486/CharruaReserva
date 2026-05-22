@@ -70,29 +70,29 @@ def creaNuevaReserva(request):
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
                 
-                if hora_entero < 17:
-                    mensaje = f"""Estimado/a: *{cliente}*. 
-Su reserva ha sido confirmada.\n 
-*Fecha de la reservación: {fecha_reserva}* 
-*Hora de la reservación: {hora_reserva}*
-*Cantidad de personas: {personas}*\n 
-Esperamos que nuestra atención sea de su expectativa.
-Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-Muchas gracias por elegirnos.
-Te esperamos en *El Charrúa*
-*Estacionamiento limitado*"""
-                else:
-                      mensaje = f"""Estimado/a: *{cliente}*. 
-Su reserva ha sido confirmada.\n 
-*Fecha de la reservación: {fecha_reserva}* 
-*Hora de la reservación: {hora_reserva}*
-*Cantidad de personas: {personas}*\n 
-Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
-¡Estamos ansiosos por darle la bienvenida!
-Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-Muchas gracias por elegirnos.
-Te esperamos en *El Charrúa*
-*Estacionamiento limitado*"""
+#                 if hora_entero < 17:
+#                     mensaje = f"""Estimado/a: *{cliente}*. 
+# Su reserva ha sido confirmada.\n 
+# *Fecha de la reservación: {fecha_reserva}* 
+# *Hora de la reservación: {hora_reserva}*
+# *Cantidad de personas: {personas}*\n 
+# Esperamos que nuestra atención sea de su expectativa.
+# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+# Muchas gracias por elegirnos.
+# Te esperamos en *El Charrúa*
+# *Estacionamiento limitado*"""
+#                 else:
+#                       mensaje = f"""Estimado/a: *{cliente}*. 
+# Su reserva ha sido confirmada.\n 
+# *Fecha de la reservación: {fecha_reserva}* 
+# *Hora de la reservación: {hora_reserva}*
+# *Cantidad de personas: {personas}*\n 
+# Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
+# ¡Estamos ansiosos por darle la bienvenida!
+# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
+# Muchas gracias por elegirnos.
+# Te esperamos en *El Charrúa*
+# *Estacionamiento limitado*"""
                 
 
                 # letras = string.ascii_lowercase
@@ -107,23 +107,21 @@ Te esperamos en *El Charrúa*
                 #     'text': mensaje
                 # }
 
-                mensaje_codificado = urllib.parse.quote(mensaje)
-                # url = "https://api.ultramsg.com/instance108729/messages/chat"
-                url = "https://api.ultramsg.com/instance112994/messages/chat"
-                payload = f"token=jy1mehv3shux3zjy&to=%2B{telwhat}&body={mensaje_codificado}"
-                headers = {'content-type': 'application/x-www-form-urlencoded'}
+                # mensaje_codificado = urllib.parse.quote(mensaje)
+                # # url = "https://api.ultramsg.com/instance108729/messages/chat"
+                # url = "https://api.ultramsg.com/instance112994/messages/chat"
+                # payload = f"token=jy1mehv3shux3zjy&to=%2B{telwhat}&body={mensaje_codificado}"
+                # headers = {'content-type': 'application/x-www-form-urlencoded'}
                 
-
-
-
                 # comprobar si existe el id de reserva en la tabla de control de mensaje, si esta y enviado es 1 pasar por alto
-                if not controlmensaje.objects.filter(id_reservacion = id_reserva, enviado = 1).exists():
+                
+                # if not controlmensaje.objects.filter(id_reservacion = id_reserva, enviado = 1).exists():
                       
-                    # response = requests.post(url, data = data)
-                    response = requests.request("POST", url, data=payload, headers=headers)
-                    #print("what enviado")
-                    guarda_control = controlmensaje(id_reservacion = id_reserva, enviado = 1)
-                    guarda_control.save()
+                #     # response = requests.post(url, data = data)
+                #     response = requests.request("POST", url, data=payload, headers=headers)
+                #     #print("what enviado")
+                #     guarda_control = controlmensaje(id_reservacion = id_reserva, enviado = 1)
+                #     guarda_control.save()
                 
                 #print(response.content)
 
@@ -4656,3 +4654,44 @@ def guardaPlazaCenafds(request):
             return controlMesaManCenfds(request, 1)
         else:
             return controlMesaManAlm(request, 1)
+
+
+def enviar_whatsapp_confirmacion(cliente, fecha_reserva, hora_reserva, personas, telwhat):
+    
+    # Limpiar y formatear teléfono (ya lo tienes hecho antes de llamar esta función)
+    url = "https://api.ycloud.com/v2/whatsapp/messages"
+    
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "X-API-Key": "21c1bd8497d6872678a5c5c6baf29273"
+    }
+    
+    payload = {
+        "from": "51994043376",
+        "to": telwhat,
+        "type": "template",
+        "template": {
+            "name": "confirmacion_reserva",
+            "languageCode": "es",
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {"type": "text", "text": cliente},
+                        {"type": "text", "text": fecha_reserva},
+                        {"type": "text", "text": hora_reserva},
+                        {"type": "text", "text": str(personas)}
+                    ]
+                }
+            ]
+        }
+    }
+    
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        response.raise_for_status()
+        return True
+    except requests.exceptions.RequestException as e:
+        print(f"Error enviando WhatsApp: {e}")
+        return False
