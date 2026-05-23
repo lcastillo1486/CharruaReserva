@@ -69,13 +69,16 @@ def creaNuevaReserva(request):
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
 
-                enviar_whatsapp_confirmacion(
+                try:
+                    enviar_whatsapp_confirmacion(
                     cliente=cliente,
                     fecha_reserva=fecha_reserva,
                     hora_reserva=hora_reserva,
                     personas=personas,
                     telwhat=telwhat
-                ) 
+                    )
+                except Exception as e:
+                    print(f"ERROR EN ENVIO WHATSAPP: {e}")
             # cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
             # #print(cuenta_listadia)
             # if cuenta_listadia == 5:
