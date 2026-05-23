@@ -79,11 +79,10 @@ def creaNuevaReserva(request):
                     )
                 except Exception as e:
                     print(f"ERROR EN ENVIO WHATSAPP: {e}")
-            # cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
-            # #print(cuenta_listadia)
-            # if cuenta_listadia == 5:
-            #     envioRecordatorio()
-            return render(request, 'nuevaReserva.html', {'form_reserva': form})
+            cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
+            #print(cuenta_listadia)
+            if cuenta_listadia == 5:
+                envioRecordatorio()
     else:
         return render(request, 'nuevaReserva.html', {'form_reserva': form})
         
@@ -4541,46 +4540,6 @@ def guardaPlazaCenafds(request):
         else:
             return controlMesaManAlm(request, 1)
 
-
-def enviar_whatsapp_confirmacion(cliente, fecha_reserva, hora_reserva, personas, telwhat):
-    
-    # Limpiar y formatear teléfono (ya lo tienes hecho antes de llamar esta función)
-    url = "https://api.ycloud.com/v2/whatsapp/messages"
-    
-    headers = {
-        "accept": "application/json",
-        "content-type": "application/json",
-        "X-API-Key": "21c1bd8497d6872678a5c5c6baf29273"
-    }
-    
-    payload = {
-        "from": "51994043376",
-        "to": telwhat,
-        "type": "template",
-        "template": {
-            "name": "confirmacion_reserva",
-            "languageCode": "es",
-            "components": [
-                {
-                    "type": "body",
-                    "parameters": [
-                        {"type": "text", "text": cliente},
-                        {"type": "text", "text": fecha_reserva},
-                        {"type": "text", "text": hora_reserva},
-                        {"type": "text", "text": str(personas)}
-                    ]
-                }
-            ]
-        }
-    }
-    
-    try:
-        response = requests.post(url, json=payload, headers=headers)
-        response.raise_for_status()
-        return True
-    except requests.exceptions.RequestException as e:
-        print(f"Error enviando WhatsApp: {e}")
-        return False
 
 def enviar_whatsapp_confirmacion(cliente, fecha_reserva, hora_reserva, personas, telwhat):
 
