@@ -4548,7 +4548,7 @@ def enviar_whatsapp_confirmacion(cliente, fecha_reserva, hora_reserva, personas,
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "X-API-Key": settings.X_API_Key
+        "X-API-Key": "21c1bd8497d6872678a5c5c6baf29273"
     }
 
     payload = {
@@ -4605,7 +4605,7 @@ def enviar_whatsapp_recordatorio(cliente, hora_reserva, personas, telwhat):
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "X-API-Key": settings.X_API_Key
+        "X-API-Key": "21c1bd8497d6872678a5c5c6baf29273"
     }
     payload = {
         "from": "51994043376",
@@ -4653,7 +4653,7 @@ def enviar_whatsapp_modificacion(cliente, fecha_nueva, hora_reserva, telwhat):
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "X-API-Key": settings.X_API_Key
+        "X-API-Key": "21c1bd8497d6872678a5c5c6baf29273"
     }
     payload = {
         "from": "51994043376",
