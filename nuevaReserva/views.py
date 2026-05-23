@@ -22,6 +22,7 @@ from django.db.models import Case, When, Value, IntegerField, CharField
 from django.db.models import Count
 from collections import defaultdict
 import urllib.parse
+from django.conf import settings
 # Create your views here.
 
 @login_required
@@ -68,69 +69,19 @@ def creaNuevaReserva(request):
             ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
             ## y se gana el sueldo facilmente. 
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
-                telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat 
-                
-#                 if hora_entero < 17:
-#                     mensaje = f"""Estimado/a: *{cliente}*. 
-# Su reserva ha sido confirmada.\n 
-# *Fecha de la reservación: {fecha_reserva}* 
-# *Hora de la reservación: {hora_reserva}*
-# *Cantidad de personas: {personas}*\n 
-# Esperamos que nuestra atención sea de su expectativa.
-# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-# Muchas gracias por elegirnos.
-# Te esperamos en *El Charrúa*
-# *Estacionamiento limitado*"""
-#                 else:
-#                       mensaje = f"""Estimado/a: *{cliente}*. 
-# Su reserva ha sido confirmada.\n 
-# *Fecha de la reservación: {fecha_reserva}* 
-# *Hora de la reservación: {hora_reserva}*
-# *Cantidad de personas: {personas}*\n 
-# Esperamos brindarle una experiencia gastonómica memorable en nuestro establecimiento.
-# ¡Estamos ansiosos por darle la bienvenida!
-# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-# Muchas gracias por elegirnos.
-# Te esperamos en *El Charrúa*
-# *Estacionamiento limitado*"""
-                
+                telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
 
-                # letras = string.ascii_lowercase
-                # uid_custom = ''.join(random.choice(letras) for i in range(6))  
-
-                # url = 'https://www.waboxapp.com/api/send/chat'
-                # data = {
-                #     'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
-                #     'uid': '51994043376',
-                #     'to': telwhat,
-                #     'custom_uid':uid_custom,
-                #     'text': mensaje
-                # }
-
-                # mensaje_codificado = urllib.parse.quote(mensaje)
-                # # url = "https://api.ultramsg.com/instance108729/messages/chat"
-                # url = "https://api.ultramsg.com/instance112994/messages/chat"
-                # payload = f"token=jy1mehv3shux3zjy&to=%2B{telwhat}&body={mensaje_codificado}"
-                # headers = {'content-type': 'application/x-www-form-urlencoded'}
-                
-                # comprobar si existe el id de reserva en la tabla de control de mensaje, si esta y enviado es 1 pasar por alto
-                
-                # if not controlmensaje.objects.filter(id_reservacion = id_reserva, enviado = 1).exists():
-                      
-                #     # response = requests.post(url, data = data)
-                #     response = requests.request("POST", url, data=payload, headers=headers)
-                #     #print("what enviado")
-                #     guarda_control = controlmensaje(id_reservacion = id_reserva, enviado = 1)
-                #     guarda_control.save()
-                
-                #print(response.content)
-
+                enviar_whatsapp_confirmacion(
+                    cliente=cliente,
+                    fecha_reserva=fecha_reserva,
+                    hora_reserva=hora_reserva,
+                    personas=personas,
+                    telwhat=telwhat
+                ) 
             cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
             #print(cuenta_listadia)
-            if cuenta_listadia == 1:
+            if cuenta_listadia == 5:
                 envioRecordatorio()
-                       
-            return redirect('/reservasDelDia/')
     else:
         return render(request, 'nuevaReserva.html', {'form_reserva': form})
         
@@ -139,66 +90,15 @@ def envioRecordatorio():
     fecha_actual = datetime.now().date()
     listado_envio = nuevaReserva.objects.filter(fechaReserva=fecha_actual, estado_id=1)
     for telefono in listado_envio:
-      telwhat = telefono.telefono
-      if not telwhat is None:
-            ## Quitar de las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
-            ## y se gana el sueldo facilmente. 
-                telwhat = re.sub(r'[^\d]+', '', telwhat)
-                telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
-                cliente = telefono.nombre 
-                hora_reserva = telefono.hora.strftime('%I:%M %p')
-                personas = telefono.cantidadPersonas
-                # hora_cena = datetime.strptime(hora_reserva, '%I:%M %p').time()
-                # hora_limite = time(17, 30)
+        telwhat = telefono.telefono
+        if not telwhat is None:
+            telwhat = re.sub(r'[^\d]+', '', telwhat)
+            telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
+            cliente = telefono.nombre 
+            hora_reserva = telefono.hora.strftime('%I:%M %p')
+            personas = telefono.cantidadPersonas
+            enviar_whatsapp_recordatorio(cliente, hora_reserva, personas, telwhat)
 
-
-                # if hora_cena <= hora_limite:
-                mensaje = f"""Estimado/a: *{cliente}*. 
-Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n 
-*Hora de la reservación: {hora_reserva}*
-*Cantidad de personas: {personas}*\n 
-Esperamos que nuestra atención sea de su mejor experiencia.
-¡Estamos ansiosos por darle la bienvenida!
-Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-Muchas gracias por elegirnos.
-Te esperamos en *El Charrúa*"""
-#                 else:
-#                     mensaje = f"""Estimado/a: *{cliente}*. 
-# Le recordamos que tiene una reserva para el día de hoy en El Charrúa.\n 
-# *Hora de la reservación: {hora_reserva}*
-# *Cantidad de personas: {personas}*\n 
-# Esperamos brindarle una experiencia gastronómica memorable en nuestro establecimiento.
-# ¡Estamos ansiosos por darle la bienvenida!
-# Puede consultar nuestra carta en https://www.elcharrua.com/carta \n
-# Muchas gracias por elegirnos.
-# Te esperamos en *El Charrúa*\n
-# *Hoy 31/12/2023, se cobrará el derecho de corcho para todos los licores.*\n
-# *Dicho monto va desde los S/50.*\n
-# *Así mismo, les deseamos un prospero año nuevo.*"""
-                      
-                #mensaje = 'Su reserva ha sido confirmada, muchas gracias por elegirnos.Te esperamos en El Charrúa. '
-
-                # letras = string.ascii_lowercase
-                # uid_custom = ''.join(random.choice(letras) for i in range(6))  
-
-                # url = 'https://www.waboxapp.com/api/send/chat'
-                # data = {
-                #     'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
-                #     'uid': '51994043376',
-                #     'to': telwhat,
-                #     'custom_uid':uid_custom,
-                #     'text': mensaje
-                # }
-
-                mensaje_codificado = urllib.parse.quote(mensaje)
-                # url = "https://api.ultramsg.com/instance108729/messages/chat"
-                url = "https://api.ultramsg.com/instance112994/messages/chat"
-                payload = f"token=jy1mehv3shux3zjy&to=%2B{telwhat}&body={mensaje_codificado}"
-                headers = {'content-type': 'application/x-www-form-urlencoded'}
-                response = requests.request("POST", url, data=payload, headers=headers)
-            
-                # response = requests.post(url, data = data)
-                time.sleep(3)
 def muestraencuesta(request):
       
       return render(request, 'encuesta.html')
@@ -325,30 +225,14 @@ def editarReserva(request, id):
                         ## y se gana el sueldo facilmente. 
                     telwhat = re.sub(r'[^\d]+', '', telwhat)
                     telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
-                    mensaje = f"""Estimado/a: *{cliente}*. 
-Esperamos que esté teniendo un excelente día. Nos complace informarle que su solicitud de cambiar la
-fecha de su reserva en nuestro restaurante ha sido atendida. 
-Su nueva fecha de reserva es el día *{fecha_nueva}* a las *{hora_reserva}*. \n
-Agradecemos su solicitud y esperamos que esta nueva fecha sea aún más conveniente para usted y su grupo.
-Agradecemos su preferencia y le aseguramos que estamos trabajando arduamente para garantizar una 
-experiencia gastronómica memorable en su próxima visita. Si tiene alguna pregunta o inquietud, no
-dude en comunicarse con nosotros al *994 043 376*. \n
-Gracias por elegir *EL CHARRÚA*. \n
-Saludos cordiales"""
 
-                    letras = string.ascii_lowercase
-                    uid_custom = ''.join(random.choice(letras) for i in range(6))  
+                    enviar_whatsapp_modificacion(
+                        cliente=cliente,
+                        fecha_nueva=fecha_nueva,
+                        hora_reserva=hora_reserva,
+                        telwhat=telwhat
+                    )
 
-                    url = 'https://www.waboxapp.com/api/send/chat'
-                    data = {
-                        'token':'8f9a42d9ebc4392cca61ffd6fa13d3a6644336f382f95',
-                        'uid': '51994043376',
-                        'to': telwhat,
-                        'custom_uid':uid_custom,
-                        'text': mensaje
-                    }
-                        
-                    response = requests.post(url, data = data) 
             form.save()
             return redirect('/reservasDelDia/') 
 
@@ -4690,6 +4574,160 @@ def enviar_whatsapp_confirmacion(cliente, fecha_reserva, hora_reserva, personas,
     
     try:
         response = requests.post(url, json=payload, headers=headers)
+        response.raise_for_status()
+        return True
+    except requests.exceptions.RequestException as e:
+        print(f"Error enviando WhatsApp: {e}")
+        return False
+
+def enviar_whatsapp_confirmacion(cliente, fecha_reserva, hora_reserva, personas, telwhat):
+
+    url = "https://api.ycloud.com/v2/whatsapp/messages"
+
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "X-API-Key": settings.X_API_Key
+    }
+
+    payload = {
+        "from": "51994043376",  # o el sender ID exacto de YCloud
+        "to": telwhat,
+        "type": "template",
+        "template": {
+            "name": "confirmacion_reserva",
+            "language": {
+                "code": "es"
+            },
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "text",
+                            "text": str(cliente)
+                        },
+                        {
+                            "type": "text",
+                            "text": str(fecha_reserva)
+                        },
+                        {
+                            "type": "text",
+                            "text": str(hora_reserva)
+                        },
+                        {
+                            "type": "text",
+                            "text": str(personas)
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+
+        print("STATUS:", response.status_code)
+        print("RESPUESTA:", response.text)
+
+        response.raise_for_status()
+
+        return True
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error enviando WhatsApp: {e}")
+        return False
+
+def enviar_whatsapp_recordatorio(cliente, hora_reserva, personas, telwhat):
+    url = "https://api.ycloud.com/v2/whatsapp/messages"
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "X-API-Key": settings.X_API_Key
+    }
+    payload = {
+        "from": "51994043376",
+        "to": telwhat,
+        "type": "template",
+        "template": {
+            "name": "recordatorio_reserva",
+            "language": {
+                "code": "es"
+            },
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "text", 
+                            "text": str(cliente)
+                        },
+                        {
+                            "type": "text", 
+                            "text": str(hora_reserva)
+                        },
+                        {
+                            "type": "text", 
+                            "text": str(personas)
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        print("STATUS:", response.status_code)
+        print("RESPUESTA:", response.text)
+        response.raise_for_status()
+        return True
+    except requests.exceptions.RequestException as e:
+        print(f"Error enviando WhatsApp: {e}")
+        return False
+
+
+def enviar_whatsapp_modificacion(cliente, fecha_nueva, hora_reserva, telwhat):
+    url = "https://api.ycloud.com/v2/whatsapp/messages"
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "X-API-Key": settings.X_API_Key
+    }
+    payload = {
+        "from": "51994043376",
+        "to": telwhat,
+        "type": "template",
+        "template": {
+            "name": "modificacion_reserva",
+            "language": {
+                "code": "es"
+            },
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                              "type": "text", 
+                              "text": str(cliente)
+                        },
+                        {
+                              "type": "text", 
+                              "text": str(fecha_nueva)
+                        },
+                        {
+                              "type": "text", 
+                              "text": str(hora_reserva)
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        print("STATUS:", response.status_code)
+        print("RESPUESTA:", response.text)
         response.raise_for_status()
         return True
     except requests.exceptions.RequestException as e:
