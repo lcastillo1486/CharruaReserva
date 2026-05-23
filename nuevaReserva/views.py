@@ -66,8 +66,6 @@ def creaNuevaReserva(request):
             hora_entero = int(hora_comparar.strftime('%H'))
 
             if not telwhat is None:
-            ## Quitar las estupideces que agrega EVA CRISSEL al telefono, porque es floja, no le gusta escribir bien
-            ## y se gana el sueldo facilmente. 
                 telwhat = re.sub(r'[^\d]+', '', telwhat)
                 telwhat = "51" + telwhat if not telwhat.startswith("51") else telwhat
 
@@ -78,10 +76,11 @@ def creaNuevaReserva(request):
                     personas=personas,
                     telwhat=telwhat
                 ) 
-            cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
-            #print(cuenta_listadia)
-            if cuenta_listadia == 5:
-                envioRecordatorio()
+            # cuenta_listadia = nuevaReserva.objects.filter(estado_id=1, fecha_creacion__date=fecha_actual).count()
+            # #print(cuenta_listadia)
+            # if cuenta_listadia == 5:
+            #     envioRecordatorio()
+            return render(request, 'nuevaReserva.html', {'form_reserva': form})
     else:
         return render(request, 'nuevaReserva.html', {'form_reserva': form})
         
